@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IvoryHook - Premium Minecraft Client</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">. 
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">IvoryHook</div>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="features">Features</a></li>
+                    <li><a href="#" class="nav-link" id="downloads-link" data-page="downloads">Downloads</a></li>
+                    <li><a href="#" class="nav-link" data-page="support">Support</a></li>
+                </ul>
+                <button class="login-btn" id="login-dashboard-btn">Login</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <section id="home" class="page-content active">
+        <div class="hero">
+            <div class="container">
+                <h1>IvoryHook Client</h1>
+                <p>Experience Minecraft With Premium Client With Ghost And Balant Modules.</p>
+                <div class="hero-btns">
+                    <a href="#" class="btn btn-primary" data-page="features">Explore Features</a>
+                    <a href="#" class="btn btn-secondary" id="downloads-hero-btn">Download Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="container">
+                <h2 class="section-title">Why Choose IvoryHook?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>High Performance</h3>
+                        <p>Optimized code ensures minimal impact on your game performance while providing all the features you need.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Undetectable</h3>
+                        <p>Advanced obfuscation techniques and regular updates keep you safe from detection systems.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3>Regular Updates</h3>
+                        <p>Our team works constantly to provide updates for the latest Minecraft versions and new features.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Page -->
+    <section id="features" class="page-content">
+        <div class="container">
+            <h1>Features</h1>
+            <p>IvoryHook offers a comprehensive set of features designed to enhance your Minecraft experience.</p>
+            
+            <div class="features-grid" style="margin-top: 50px;">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Combat Modules</h3>
+                    <p>Advanced PVP utilities including KillAura, AutoClicker, Reach, and Velocity.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚶</div>
+                    <h3>Movement Enhancements</h3>
+                    <p>Fly, Speed, NoSlow, and other movement modules.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👁️</div>
+                    <h3>Visual Improvements</h3>
+                    <p>ESP, Tracers, Nametags, and other visual aids.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Utility Modules</h3>
+                    <p>Inventory management, AutoTool, ChestStealer, and other.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>World Exploration</h3>
+                    <p>X-Ray, CaveFinder, and other modules.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Customization</h3>
+                    <p>Fully customizable GUI, keybinds, and settings to tailor the client to your preferences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Downloads Page (Restricted) -->
+    <section id="downloads" class="page-content">
+        <div class="container">
+            <div class="restricted-message">
+                <div class="restricted-icon">🔒</div>
+                <h1>Downloads Restricted</h1>
+                <p>You need to be logged in to access the downloads section.</p>
+                <p>Please log in to download IvoryHook and access all premium features.</p>
+                <button class="btn btn-primary" style="margin-top: 30px;" id="downloads-login-btn">Login to Access Downloads</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Downloads Page (After Login) -->
+    <section id="downloads-authenticated" class="page-content">
+        <div class="container">
+            <h1>Downloads</h1>
+            <p>Download the latest version of IvoryHook for your Minecraft version.</p>
+            
+            <div class="features-grid" style="margin-top: 50px;">
+                <div class="feature-card">
+                    <div class="feature-icon">⬇️</div>
+                    <h3>IvoryHook v2.1.4</h3>
+                    <p>Compatible with Minecraft 1.8.9</p>
+                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">Download</button>
+                </div>     
+                <div class="feature-card">
+                    <div class="feature-icon">⬇️</div>
+                    <h3>IvoryHook v2.0.9</h3>
+                    <p>Compatible with Minecraft 1.21.9</p>
+                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">Download</button>
+                </div>
+            </div>
+            
+            <div style="margin-top: 50px; background-color: var(--bg-card); padding: 30px; border-radius: 10px;">
+                <h3>Installation Guide</h3>
+                <p style="margin-top: 15px;">1. Download the IvoryHook client for your Minecraft version</p>
+                <p>2. Make sure you have Java 8 or higher installed</p>
+                <p>3. Run the installer and follow the on-screen instructions</p>
+                <p>4. Launch Minecraft and select the IvoryHook profile</p>
+                <p>5. Log in with your credentials and enjoy!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Page -->
+    <section id="support" class="page-content">
+        <div class="container">
+            <h1>Support</h1>
+            <p>Need help with IvoryHook? Check out our resources below or contact our support team.</p>
+            
+            <div class="features-grid" style="margin-top: 50px;">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Documentation</h3>
+                    <p>Comprehensive guides and tutorials for all IvoryHook features and settings.</p>
+                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">View Documentation</button>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">❓</div>
+                    <h3>FAQ</h3>
+                    <p>Answers to frequently asked questions about installation, usage, and troubleshooting.</p>
+                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">View FAQ</button>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Contact Support</h3>
+                    <p>Can't find what you're looking for? Contact our support team for assistance.</p>
+                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">Contact Us</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section id="dashboard" class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Welcome, <span id="username-display">User</span></h1>
+                <p>IvoryHook Loader Dashboard</p>
+            </div>
+            
+            <!-- Quick Stats Section -->
+            <div class="quick-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="online-users">1,247</span>
+                        <span class="stat-label">Users Online</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="loads-today">892</span>
+                        <span class="stat-label">Loads Today</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="status-panel">
+                <h2 style="margin-bottom: 20px;">Status Panel</h2>
+                <div class="status-item">
+                    <span class="status-label">Loader Status:</span>
+                    <span class="status-value status-ready">Ready</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Last Update:</span>
+                    <span class="status-value" id="last-update">Loading...</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Detection Status:</span>
+                    <span class="status-value status-clean">Clean</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Subscription:</span>
+                    <span class="status-value status-ready">Active</span>
+                </div>
+            </div>
+            
+            <div class="loader-actions">
+                <button class="btn btn-primary">Launch Loader</button>
+                <button class="btn btn-secondary">Check for Updates</button>
+                <button class="btn btn-secondary" id="logout-btn">Logout</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-login">&times;</span>
+            <h2>Login to IvoryHook</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="form-control" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+                <div class="error-message" id="login-error">Invalid username or password</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#" data-page="home">Home</a>
+                <a href="#" data-page="features">Features</a>
+                <a href="#" data-page="downloads">Downloads</a>
+                <a href="#" data-page="support">Support</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <p class="copyright">© 2025 IvoryHook. All rights reserved. This is a fictional website for testing purposes only.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Animated counter for stats
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 30);
+        }
+
+        // Initialize counters when dashboard is shown
+        function initializeDashboardStats() {
+            // Simulate random online users and loads
+            const onlineUsers = Math.floor(Math.random() * 2000) + 1000;
+            const loadsToday = Math.floor(Math.random() * 1000) + 500;
+            
+            animateCounter(document.getElementById('online-users'), onlineUsers);
+            animateCounter(document.getElementById('loads-today'), loadsToday);
+        }
+
+        // Authentication state
+        let isLoggedIn = false;
+        let currentUsername = '';
+
+        // Check if user is already logged in from localStorage
+        function checkLoginStatus() {
+            const savedLogin = localStorage.getItem('ivoryhook-login');
+            if (savedLogin) {
+                const loginData = JSON.parse(savedLogin);
+                // In a real app, you would verify the token with the server
+                // For this demo, we'll just check if it exists and is not expired
+                if (loginData.username && loginData.timestamp) {
+                    const loginTime = new Date(loginData.timestamp);
+                    const now = new Date();
+                    const hoursSinceLogin = (now - loginTime) / (1000 * 60 * 60);
+                    
+                    // Auto-logout after 24 hours for security
+                    if (hoursSinceLogin < 24) {
+                        isLoggedIn = true;
+                        currentUsername = loginData.username;
+                        updateUIForLoggedInUser();
+                        return true;
+                    } else {
+                        // Session expired
+                        localStorage.removeItem('ivoryhook-login');
+                    }
+                }
+            }
+            return false;
+        }
+
+        // Save login to localStorage
+        function saveLogin(username) {
+            const loginData = {
+                username: username,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('ivoryhook-login', JSON.stringify(loginData));
+        }
+
+        // Remove login from localStorage
+        function clearLogin() {
+            localStorage.removeItem('ivoryhook-login');
+        }
+
+        // Update UI for logged in user
+        function updateUIForLoggedInUser() {
+            document.getElementById('username-display').textContent = currentUsername;
+            document.getElementById('login-dashboard-btn').textContent = 'Dashboard';
+            
+            // Update last update date
+            const now = new Date();
+            document.getElementById('last-update').textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+        }
+
+        // Page Navigation
+        document.querySelectorAll('.nav-link, .footer-links a, .hero-btns a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const page = this.getAttribute('data-page');
+                if (page) {
+                    showPage(page);
+                }
+            });
+        });
+
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-content, .dashboard').forEach(page => {
+                page.style.display = 'none';
+                page.classList.remove('active');
+            });
+            
+            // Handle downloads page based on authentication
+            if (pageId === 'downloads') {
+                if (isLoggedIn) {
+                    pageId = 'downloads-authenticated';
+                }
+            }
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.style.display = 'block';
+                targetPage.classList.add('active');
+                
+                // Initialize dashboard stats when dashboard is shown
+                if (pageId === 'dashboard' || (pageId === 'downloads' && isLoggedIn)) {
+                    setTimeout(initializeDashboardStats, 500);
+                }
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Login Modal
+        const loginModal = document.getElementById('login-modal');
+        const loginDashboardBtn = document.getElementById('login-dashboard-btn');
+        const closeLoginBtn = document.getElementById('close-login');
+        const loginForm = document.getElementById('login-form');
+        const loginError = document.getElementById('login-error');
+        const logoutBtn = document.getElementById('logout-btn');
+        const downloadsLink = document.getElementById('downloads-link');
+        const downloadsHeroBtn = document.getElementById('downloads-hero-btn');
+        const downloadsLoginBtn = document.getElementById('downloads-login-btn');
+
+        // Login/Dashboard button behavior
+        loginDashboardBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (isLoggedIn) {
+                // If already logged in, go to dashboard
+                showPage('dashboard');
+            } else {
+                // If not logged in, show login modal
+                loginModal.style.display = 'flex';
+            }
+        });
+
+        closeLoginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+            loginError.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+                loginError.style.display = 'none';
+            }
+        });
+
+        // Downloads buttons behavior
+        downloadsHeroBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (isLoggedIn) {
+                showPage('downloads');
+            } else {
+                loginModal.style.display = 'flex';
+            }
+        });
+
+        downloadsLoginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+        });
+
+        // Login Form Submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple authentication (for demo purposes)
+            if (username === 'admin' && password === 'admin') {
+                // Successful login
+                isLoggedIn = true;
+                currentUsername = username;
+                saveLogin(username);
+                updateUIForLoggedInUser();
+                showPage('dashboard');
+                loginModal.style.display = 'none';
+                loginError.style.display = 'none';
+            } else {
+                // Failed login
+                loginError.style.display = 'block';
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            isLoggedIn = false;
+            currentUsername = '';
+            clearLogin();
+            showPage('home');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            loginDashboardBtn.textContent = 'Login';
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if user is already logged in
+            if (checkLoginStatus()) {
+                // If logged in, show dashboard by default
+                showPage('dashboard');
+            } else {
+                // If not logged in, show home page
+                showPage('home');
+            }
+        });
+    </script>
+</body>
+</html>
