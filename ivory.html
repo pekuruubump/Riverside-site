@@ -178,7 +178,7 @@
                      <!--Fix this someday,minor issue-->
 
     <!-- Dashboard -->
-    <section id="dashboard" class="dashboard">
+    <section id="dashboard" class="page-content dashboard"> <!-- HA! the one fix strat! -->
         <div class="container">
             <div class="dashboard-header">
                 <h1>Welcome, <span id="username-display">User</span></h1>
@@ -368,7 +368,7 @@
         page.style.display = 'none';
         page.classList.remove('active');
     });
-    document.querySelector('.dashboard').style.display = 'none';
+    // document.querySelector('.dashboard').style.display = 'none'; maybe remove ts
     
     // Handle downloads page based on authentication
     if (pageId === 'downloads') {
@@ -500,6 +500,7 @@
 </body>
 
 </html>
+
 
 
 
