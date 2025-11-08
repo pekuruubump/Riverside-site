@@ -18,6 +18,7 @@
                     <li><a href="#" class="nav-link" data-page="features">Features</a></li>
                     <li><a href="#" class="nav-link" id="downloads-link" data-page="downloads">Downloads</a></li>
                     <li><a href="#" class="nav-link" data-page="support">Support</a></li>
+                    <li><a href="#" class="nav-link" data-page="dashboard">Dashboard</a></li>
                 </ul>
                 <button class="login-btn" id="login-dashboard-btn">Login</button>
             </nav>
@@ -102,22 +103,20 @@
         </div>
     </section>
 
-    <!-- Downloads Page (Restricted) -->
-    <section id="downloads" class="page-content">
-        <div class="container">
-            <div class="restricted-message">
-                <div class="restricted-icon">🔒</div>
-                <h1>Downloads Restricted</h1>
-                <p>You need to be logged in to access the downloads section.</p>
-                <p>Please log in to download IvoryHook and access all premium features.</p>
-                <button class="btn btn-primary" style="margin-top: 30px;" id="downloads-login-btn">Login to Access Downloads</button>
-            </div>
+   <!-- Downloads Page-->
+<section id="downloads" class="page-content">
+    <div class="container">
+        <!-- Stuff when not logged in -->
+        <div id="downloads-restricted" class="restricted-message">
+            <div class="restricted-icon">🔒</div>
+            <h1>Downloads Restricted</h1>
+            <p>You need to be logged in to access the downloads section.</p>
+            <p>Please log in to download IvoryHook and access all premium features.</p>
+            <button class="btn btn-primary" style="margin-top: 30px;" id="downloads-login-btn">Login to Access Downloads</button>
         </div>
-    </section>
-
-    <!-- Downloads Page (After Login) -->
-    <section id="downloads-authenticated" class="page-content">
-        <div class="container">
+        
+        <!-- Content for logged in users (initially hidden) -->
+        <div id="downloads-authenticated" style="display: none;">
             <h1>Downloads</h1>
             <p>Download the latest version of IvoryHook for your Minecraft version.</p>
             
@@ -131,7 +130,7 @@
                 <div class="feature-card">
                     <div class="feature-icon">⬇️</div>
                     <h3>IvoryHook v2.0.9</h3>
-                    <p>Compatible with Minecraft 1.21.9</p>
+                    <p>Compatible with Minecraft 1.20.1</p>
                     <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">Download</button>
                 </div>
             </div>
@@ -145,7 +144,8 @@
                 <p>5. Log in with your credentials and enjoy!</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Support Page -->
     <section id="support" class="page-content">
@@ -174,7 +174,8 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>      <!--note to self, emojis are kinda not showing up over the purple thing so its just..flat purple,-->
+                     <!--Fix this someday,minor issue-->
 
     <!-- Dashboard -->
     <section id="dashboard" class="dashboard">
@@ -230,25 +231,25 @@
         </div>
     </section>
 
-    <!-- Login Modal -->
-    <div class="modal" id="login-modal">
-        <div class="modal-content">
-            <span class="close-modal" id="close-login">&times;</span>
-            <h2>Login to IvoryHook</h2>
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" class="form-control" placeholder="Enter your username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
-                </div>
-                <button type="submit" class="submit-btn">Login</button>
-                <div class="error-message" id="login-error">Invalid username or password</div>
-            </form>
-        </div>
+   <!-- Login Modal -->
+<div class="modal" id="login-modal" aria-hidden="true" aria-labelledby="login-title">
+    <div class="modal-content" role="dialog" aria-modal="true">
+        <span class="close-modal" id="close-login" aria-label="Close login modal">&times;</span>
+        <h2 id="login-title">Login to IvoryHook</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="form-control" placeholder="Enter your username" required autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="submit-btn">Login</button>
+            <div class="error-message" id="login-error" style="display: none;">Invalid username or password</div>
+        </form>
     </div>
+</div>
 
     <!-- Footer -->
     <footer>
@@ -362,35 +363,46 @@
         });
 
         function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page-content, .dashboard').forEach(page => {
-                page.style.display = 'none';
-                page.classList.remove('active');
-            });
-            
-            // Handle downloads page based on authentication
-            if (pageId === 'downloads') {
-                if (isLoggedIn) {
-                    pageId = 'downloads-authenticated';
-                }
-            }
-            
-            // Show selected page
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.style.display = 'block';
-                targetPage.classList.add('active');
-                
-                // Initialize dashboard stats when dashboard is shown
-                if (pageId === 'dashboard' || pageId === 'downloads-authenticated') {
-                setTimeout(initializeDashboardStats, 500);
-                }
-            }
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
+    // Hide all pages and dashboard
+    document.querySelectorAll('.page-content').forEach(page => {
+        page.style.display = 'none';
+        page.classList.remove('active');
+    });
+    document.querySelector('.dashboard').style.display = 'none';
+    
+    // Handle downloads page based on authentication
+    if (pageId === 'downloads') {
+        const downloadsSection = document.getElementById('downloads');
+        const restrictedContent = document.getElementById('downloads-restricted');
+        const authenticatedContent = document.getElementById('downloads-authenticated');
+        
+        if (isLoggedIn) {
+            restrictedContent.style.display = 'none';
+            authenticatedContent.style.display = 'block';
+        } else {
+            restrictedContent.style.display = 'block';
+            authenticatedContent.style.display = 'none';
         }
-
+        
+        downloadsSection.style.display = 'block';
+        downloadsSection.classList.add('active');
+    } else {
+        // Show selected page
+        const targetPage = document.getElementById(pageId);
+        if (targetPage) {
+            targetPage.style.display = 'block';
+            targetPage.classList.add('active');
+            
+            // Initialize dashboard stats when dashboard is shown
+            if (pageId === 'dashboard') {
+                setTimeout(initializeDashboardStats, 500);
+            }
+        }
+    } // GOD THE ESLSE IS COMING AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
         // Login Modal
         const loginModal = document.getElementById('login-modal');
         const loginDashboardBtn = document.getElementById('login-dashboard-btn');
@@ -488,5 +500,6 @@
 </body>
 
 </html>
+
 
 
