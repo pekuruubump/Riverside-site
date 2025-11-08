@@ -10,7 +10,7 @@ If you fork, remix or use significant portion of  this repo, please credit me so
 
 
 <!-- BEGIN LATEST DOWNLOAD BUTTON -->
-[![Download ZIP](https://github.com/pekuruubump/ivoryhook-site/archive/refs/tags/site.zip)
+[Download ZIP](https://github.com/pekuruubump/ivoryhook-site/archive/refs/tags/site.zip)
 
 
 <!-- END LATEST DOWNLOAD BUTTON -->
