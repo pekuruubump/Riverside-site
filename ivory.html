@@ -1,1141 +1,817 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>IvoryHook - Premium Minecraft Client</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #1a0a1a;
-            --bg-card: #151015;
-            --accent-primary: #6a0dad;
-            --accent-secondary: #8a2be2;
-            --text-primary: #f0f0f0;
-            --text-secondary: #b0b0b0;
-            --danger: #d32f2f;
-            --success: #2e7d32;
-        }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header & Navigation */
-        header {
-            background-color: var(--bg-secondary);
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(106, 13, 173, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-secondary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .login-btn {
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 100px 0;
-            text-align: center;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(106, 13, 173, 0.1) 0%, transparent 70%);
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 30px;
-        }
-
-        .hero-btns {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            color: white;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--accent-primary);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(106, 13, 173, 0.1);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 100px 0;
-            background-color: var(--bg-primary);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 60px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-card {
-            background-color: var(--bg-card);
-            border-radius: 10px;
-            padding: 30px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .feature-icon {
-            font-size: 40px;
-            margin-bottom: 20px;
-        }
-
-        .feature-card h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-        }
-
-        .feature-card p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--bg-secondary);
-            padding: 40px 0;
-            text-align: center;
-            border-top: 1px solid rgba(106, 13, 173, 0.3);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-secondary);
-        }
-
-        .copyright {
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-
-        /* Login Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: var(--bg-card);
-            border-radius: 10px;
-            width: 100%;
-            max-width: 400px;
-            padding: 40px;
-            position: relative;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: color 0.3s;
-        }
-
-        .close-modal:hover {
-            color: var(--text-primary);
-        }
-
-        .modal h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 28px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-            color: var(--text-primary);
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            margin-top: 10px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
-        }
-
-        .error-message {
-            color: var(--danger);
-            text-align: center;
-            margin-top: 15px;
-            display: none;
-        }
-
-        /* Dashboard */
-        .dashboard {
-            display: none;
-            padding: 50px 0;
-            min-height: 80vh;
-        }
-
-        .dashboard-header {
-            margin-bottom: 40px;
-        }
-
-        .dashboard-header h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-
-        /* Quick Stats */
-        .quick-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            padding: 25px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid rgba(106, 13, 173, 0.2);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(106, 13, 173, 0.2);
-        }
-
-        .stat-icon {
-            font-size: 32px;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border-radius: 12px;
-        }
-
-        .stat-info {
-            flex: 1;
-        }
-
-        .stat-value {
-            display: block;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--accent-primary);
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            font-size: 14px;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        .status-panel {
-            background-color: var(--bg-card);
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-
-        .status-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .status-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .status-label {
-            font-weight: 500;
-        }
-
-        .status-value {
-            font-weight: 600;
-        }
-
-        .status-ready {
-            color: var(--success);
-        }
-
-        .status-clean {
-            color: var(--success);
-        }
-
-        .loader-actions {
-            display: flex;
-            gap: 15px;
-        }
-
-        /* Page Content */
-        .page-content {
-            display: none;
-            padding: 80px 0;
-            min-height: 70vh;
-        }
-
-        .page-content h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        .page-content p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        /* Downloads Restricted Message */
-        .restricted-message {
-            text-align: center;
-            padding: 60px 0;
-        }
-
-        .restricted-icon {
-            font-size: 64px;
-            margin-bottom: 20px;
-            color: var(--accent-primary);
-        }
-
-        /* FAQ Section */
-        .faq-section {
-            margin-top: 60px;
-        }
-
-        .faq-section h2 {
-            font-size: 28px;
-            margin-bottom: 30px;
-            color: var(--text-primary);
-            text-align: center;
-        }
-
-        .faq-list {
-            margin-top: 30px;
-        }
-
-        .faq-item {
-            background: var(--bg-card);
-            border-radius: 8px;
-            margin-bottom: 15px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .faq-item:hover {
-            border-color: rgba(106, 13, 173, 0.3);
-        }
-
-        .faq-question {
-            padding: 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            transition: background-color 0.3s;
-        }
-
-        .faq-question:hover {
-            background-color: rgba(106, 13, 173, 0.1);
-        }
-
-        .faq-toggle {
-            font-size: 20px;
-            font-weight: 300;
-            transition: transform 0.3s ease;
-            color: var(--accent-primary);
-            min-width: 20px;
-            text-align: center;
-        }
-
-        .faq-item.active .faq-toggle {
-            transform: rotate(45deg);
-        }
-
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            background-color: rgba(255, 255, 255, 0.02);
-        }
-
-        .faq-item.active .faq-answer {
-            padding: 0 20px 20px;
-            max-height: 500px;
-        }
-
-        .faq-answer p {
-            margin: 0;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-    </style>
 </head>
+
 <body>
+
     <!-- Header -->
+
     <header>
+
         <div class="container">
+
             <nav class="navbar">
+
                 <div class="logo">IvoryHook</div>
+
                 <ul class="nav-links">
+
                     <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+
                     <li><a href="#" class="nav-link" data-page="features">Features</a></li>
+
                     <li><a href="#" class="nav-link" id="downloads-link" data-page="downloads">Downloads</a></li>
+
                     <li><a href="#" class="nav-link" data-page="support">Support</a></li>
+
                     <li><a href="#" class="nav-link" data-page="dashboard">Dashboard</a></li>
+
                 </ul>
+
                 <button class="login-btn" id="login-dashboard-btn">Login</button>
+
             </nav>
+
         </div>
+
     </header>
 
+
+
     <!-- Home Page -->
+
     <section id="home" class="page-content active">
+
         <div class="hero">
+
             <div class="container">
+
                 <h1>IvoryHook Client</h1>
+
                 <p>Experience Minecraft With Premium Client With Ghost And Balant Modules.</p>
+
                 <div class="hero-btns">
+
                     <a href="#" class="btn btn-primary" data-page="features">Explore Features</a>
+
                     <a href="#" class="btn btn-secondary" id="downloads-hero-btn">Download Now</a>
+
                 </div>
+
             </div>
+
         </div>
+
+
 
         <div class="features">
+
             <div class="container">
+
                 <h2 class="section-title">Why Choose IvoryHook?</h2>
+
                 <div class="features-grid">
+
                     <div class="feature-card">
+
                         <div class="feature-icon">⚡</div>
+
                         <h3>High Performance</h3>
+
                         <p>Optimized code ensures minimal impact on your game performance while providing all the features you need.</p>
+
                     </div>
+
                     <div class="feature-card">
+
                         <div class="feature-icon">🛡️</div>
+
                         <h3>Undetectable</h3>
+
                         <p>Advanced obfuscation techniques and regular updates keep you safe from detection systems.</p>
+
                     </div>
+
                     <div class="feature-card">
+
                         <div class="feature-icon">🔄</div>
+
                         <h3>Regular Updates</h3>
+
                         <p>Our team works constantly to provide updates for the latest Minecraft versions and new features.</p>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
+
     </section>
+
+
 
     <!-- Features Page -->
+
     <section id="features" class="page-content">
+
         <div class="container">
+
             <h1>Features</h1>
+
             <p>IvoryHook offers a comprehensive set of features designed to enhance your Minecraft experience.</p>
+
             
+
             <div class="features-grid" style="margin-top: 50px;">
+
                 <div class="feature-card">
+
                     <div class="feature-icon">🎯</div>
+
                     <h3>Combat Modules</h3>
+
                     <p>Advanced PVP utilities including KillAura, AutoClicker, Reach, and Velocity.</p>
+
                 </div>
+
                 <div class="feature-card">
+
                     <div class="feature-icon">🚶</div>
+
                     <h3>Movement Enhancements</h3>
+
                     <p>Fly, Speed, NoSlow, and other movement modules.</p>
+
                 </div>
+
                 <div class="feature-card">
+
                     <div class="feature-icon">👁️</div>
+
                     <h3>Visual Improvements</h3>
+
                     <p>ESP, Tracers, Nametags, and other visual aids.</p>
+
                 </div>
+
                 <div class="feature-card">
+
                     <div class="feature-icon">⚙️</div>
+
                     <h3>Utility Modules</h3>
+
                     <p>Inventory management, AutoTool, ChestStealer, and other.</p>
+
                 </div>
+
                 <div class="feature-card">
+
                     <div class="feature-icon">🌍</div>
+
                     <h3>World Exploration</h3>
+
                     <p>X-Ray, CaveFinder, and other modules.</p>
+
                 </div>
+
                 <div class="feature-card">
+
                     <div class="feature-icon">🔧</div>
+
                     <h3>Customization</h3>
+
                     <p>Fully customizable GUI, keybinds, and settings to tailor the client to your preferences.</p>
+
                 </div>
+
             </div>
+
         </div>
+
     </section>
+
+
 
    <!-- Downloads Page-->
+
 <section id="downloads" class="page-content">
+
     <div class="container">
+
         <!-- Stuff when not logged in -->
+
         <div id="downloads-restricted" class="restricted-message">
+
             <div class="restricted-icon">🔒</div>
+
             <h1>Downloads Restricted</h1>
+
             <p>You need to be logged in to access the downloads section.</p>
+
             <p>Please log in to download IvoryHook and access all premium features.</p>
+
             <button class="btn btn-primary" style="margin-top: 30px;" id="downloads-login-btn">Login to Access Downloads</button>
-        </div>
-        
+
+               
+
         <!-- Content for logged in users (initially hidden) -->
+
         <div id="downloads-authenticated" style="display: none;">
+
             <h1>Downloads</h1>
+
             <p>Download the latest version of IvoryHook for your Minecraft version.</p>
+
             
+
             <div class="features-grid" style="margin-top: 50px;">
+
                 <div class="feature-card">
+
                     <div class="feature-icon">⬇️</div>
+
                     <h3>IvoryHook v2.1.4</h3>
+
                     <p>Compatible with Minecraft 1.8.9</p>
+
                     <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">Download</button>
+
                 </div>     
+
                 <div class="feature-card">
+
                     <div class="feature-icon">⬇️</div>
+
                     <h3>IvoryHook v2.0.9</h3>
+
                     <p>Compatible with Minecraft 1.20.1</p>
+
                     <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">Download</button>
+
                 </div>
+
             </div>
+
             
+
             <div style="margin-top: 50px; background-color: var(--bg-card); padding: 30px; border-radius: 10px;">
+
                 <h3>Installation Guide</h3>
+
                 <p style="margin-top: 15px;">1. Download the IvoryHook client for your Minecraft version</p>
+
                 <p>2. Make sure you have Java 8 or higher installed</p>
+
                 <p>3. Run the installer and follow the on-screen instructions</p>
+
                 <p>4. Launch Minecraft and select the IvoryHook profile</p>
+
                 <p>5. Log in with your credentials and enjoy!</p>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
+
+
     <!-- Support Page -->
+
     <section id="support" class="page-content">
+
         <div class="container">
+
             <h1>Support</h1>
+
             <p>Need help with IvoryHook? Check out our resources below or contact our support team.</p>
+
             
+
             <div class="features-grid" style="margin-top: 50px;">
+
                 <div class="feature-card">
+
                     <div class="feature-icon">📚</div>
+
                     <h3>Documentation</h3>
+
                     <p>Comprehensive guides and tutorials for all IvoryHook features and settings.</p>
+
                     <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">View Documentation</button>
+
                 </div>
+
                 <div class="feature-card">
+
                     <div class="feature-icon">❓</div>
+
                     <h3>FAQ</h3>
+
                     <p>Answers to frequently asked questions about installation, usage, and troubleshooting.</p>
+
                     <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">View FAQ</button>
+
                 </div>
+
                 <div class="feature-card">
+
                     <div class="feature-icon">💬</div>
+
                     <h3>Contact Support</h3>
+
                     <p>Can't find what you're looking for? Contact our support team for assistance.</p>
+
                     <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">Contact Us</button>
+
                 </div>
+
             </div>
+
+
 
             <!-- FAQ Section - MOVED INSIDE SUPPORT PAGE -->
+
             <div class="faq-section">
+
                 <h2>Frequently Asked Questions</h2>
+
                 <div class="faq-list">
+
                     <div class="faq-item">
+
                         <div class="faq-question">
+
                             <span>Is IvoryHook detectable by server anti-cheats?</span>
+
                             <span class="faq-toggle">+</span>
+
                         </div>
+
                         <div class="faq-answer">
+
                             <p>IvoryHook uses advanced obfuscation techniques to avoid detection. However, no client can guarantee 100% undetectability on all servers. We recommend using our ghost modules on servers with strict anti-cheat systems.</p>
+
                         </div>
+
                     </div>
+
                     <div class="faq-item">
+
                         <div class="faq-question">
+
                             <span>What Minecraft versions are supported?</span>
+
                             <span class="faq-toggle">+</span>
+
                         </div>
+
                         <div class="faq-answer">
+
                             <p>We currently support Minecraft 1.7.10, 1.8.9, 1.12.2, 1.16.5, 1.18.2, 1.19.4, and 1.20.1. Check our downloads page for the latest supported versions.</p>
+
                         </div>
+
                     </div>
+
                     <div class="faq-item">
+
                         <div class="faq-question">
+
                             <span>How often is IvoryHook updated?</span>
+
                             <span class="faq-toggle">+</span>
+
                         </div>
+
                         <div class="faq-answer">
+
                             <p>We release updates regularly to add new features, improve performance, and maintain compatibility with the latest Minecraft versions. Major updates typically occur every 2-4 weeks.</p>
+
                         </div>
+
                     </div>
+
                     <div class="faq-item">
+
                         <div class="faq-question">
+
                             <span>Is there a free trial available?</span>
+
                             <span class="faq-toggle">+</span>
+
                         </div>
+
                         <div class="faq-answer">
+
                             <p>Yes! We offer a 3-day free trial for new users. You can access all premium features during the trial period to test if IvoryHook meets your needs.</p>
+
                         </div>
+
                     </div>
+
                     <div class="faq-item">
+
                         <div class="faq-question">
+
                             <span>Can I use IvoryHook on multiple computers?</span>
+
                             <span class="faq-toggle">+</span>
+
                         </div>
+
                         <div class="faq-answer">
+
                             <p>Your subscription allows you to use IvoryHook on up to 2 devices simultaneously. If you need more devices, please contact our support team.</p>
+
                         </div>
+
                     </div>
+
                     <div class="faq-item">
+
                         <div class="faq-question">
+
                             <span>What payment methods do you accept?</span>
+
                             <span class="faq-toggle">+</span>
+
                         </div>
+
                         <div class="faq-answer">
+
                             <p>We accept credit/debit cards, PayPal, and various cryptocurrencies. All payments are processed securely through our payment partners.</p>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
+
     </section>
+
+
 
     <!-- Dashboard -->
+
     <section id="dashboard" class="page-content dashboard">
+
         <div class="container">
+
             <div class="dashboard-header">
+
                 <h1>Welcome, <span id="username-display">User</span></h1>
+
                 <p>IvoryHook Loader Dashboard</p>
+
             </div>
+
             
+
             <!-- Quick Stats Section -->
+
             <div class="quick-stats">
+
                 <div class="stat-card">
+
                     <div class="stat-icon">👥</div>
+
                     <div class="stat-info">
+
                         <span class="stat-value" id="online-users">1,247</span>
+
                         <span class="stat-label">Users Online</span>
+
                     </div>
+
                 </div>
+
                 <div class="stat-card">
+
                     <div class="stat-icon">⚡</div>
+
                     <div class="stat-info">
+
                         <span class="stat-value" id="loads-today">892</span>
+
                         <span class="stat-label">Loads Today</span>
+
                     </div>
+
                 </div>
+
             </div>
+
             
+
             <div class="status-panel">
+
                 <h2 style="margin-bottom: 20px;">Status Panel</h2>
+
                 <div class="status-item">
+
                     <span class="status-label">Loader Status:</span>
+
                     <span class="status-value status-ready">Ready</span>
+
                 </div>
+
                 <div class="status-item">
+
                     <span class="status-label">Last Update:</span>
+
                     <span class="status-value" id="last-update">Loading...</span>
+
                 </div>
+
                 <div class="status-item">
+
                     <span class="status-label">Detection Status:</span>
+
                     <span class="status-value status-clean">Clean</span>
+
                 </div>
+
                 <div class="status-item">
+
                     <span class="status-label">Subscription:</span>
+
                     <span class="status-value status-ready">Active</span>
+
                 </div>
+
             </div>
+
             
+
             <div class="loader-actions">
+
                 <button class="btn btn-primary">Launch Loader</button>
+
                 <button class="btn btn-secondary">Check for Updates</button>
+
                 <button class="btn btn-secondary" id="logout-btn">Logout</button>
+
             </div>
+
         </div>
+
     </section>
 
+
+
    <!-- Login Modal -->
+
 <div class="modal" id="login-modal" aria-hidden="true" aria-labelledby="login-title">
+
     <div class="modal-content" role="dialog" aria-modal="true">
+
         <span class="close-modal" id="close-login" aria-label="Close login modal">&times;</span>
+
         <h2 id="login-title">Login to IvoryHook</h2>
+
         <form id="login-form">
+
             <div class="form-group">
+
                 <label for="username">Username</label>
+
                 <input type="text" id="username" class="form-control" placeholder="Enter your username" required autocomplete="username">
+
             </div>
+
             <div class="form-group">
+
                 <label for="password">Password</label>
+
                 <input type="password" id="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+
             </div>
+
             <button type="submit" class="submit-btn">Login</button>
+
             <div class="error-message" id="login-error" style="display: none;">Invalid username or password</div>
+
         </form>
+
     </div>
+
 </div>
 
+
+
     <!-- Footer -->
+
     <footer>
+
         <div class="container">
+
             <div class="footer-links">
+
                 <a href="#" data-page="home">Home</a>
+
                 <a href="#" data-page="features">Features</a>
+
                 <a href="#" data-page="downloads">Downloads</a>
+
                 <a href="#" data-page="support">Support</a>
+
                 <a href="#">Privacy Policy</a>
+
                 <a href="#">Terms of Service</a>
+
             </div>
+
             <p class="copyright">© 2025 IvoryHook. All rights reserved. This is a fictional website for testing purposes only.</p>
+
         </div>
+
     </footer>
 
+
+
     <script>
+
         // Animated counter for stats
+
         function animateCounter(element, target) {
+
             let current = 0;
+
             const increment = target / 50;
+
             const timer = setInterval(() => {
+
                 current += increment;
+
                 if (current >= target) {
+
                     element.textContent = target.toLocaleString();
+
                     clearInterval(timer);
+
                 } else {
+
                     element.textContent = Math.floor(current).toLocaleString();
+
                 }
+
             }, 30);
+
         }
+
+
 
         // FAQ Toggle Functionality
+
         function initializeFAQ() {
+
             const faqItems = document.querySelectorAll('.faq-item');
+
             faqItems.forEach(item => {
+
                 const question = item.querySelector('.faq-question');
+
                 question.addEventListener('click', () => {
+
                     const isActive = item.classList.contains('active');
+
                     
+
                     // Close all FAQ items
+
                     faqItems.forEach(faqItem => {
+
                         faqItem.classList.remove('active');
+
                     });
+
                     
+
                     // Open clicked item if it wasn't active
+
                     if (!isActive) {
+
                         item.classList.add('active');
+
                     }
+
                 });
+
             });
+
         }
+
+
 
         // Initialize counters when dashboard is shown
+
         function initializeDashboardStats() {
+
             // Simulate random online users and loads
+
             const onlineUsers = Math.floor(Math.random() * 2000) + 1000;
+
             const loadsToday = Math.floor(Math.random() * 1000) + 500;
+
             
+
             animateCounter(document.getElementById('online-users'), onlineUsers);
+
             animateCounter(document.getElementById('loads-today'), loadsToday);
+
         }
+
+
 
         // Authentication state
+
         let isLoggedIn = false;
+
         let currentUsername = '';
 
+
+
         // Check if user is already logged in from localStorage
+
         function checkLoginStatus() {
+
             const savedLogin = localStorage.getItem('ivoryhook-login');
+
             if (savedLogin) {
+
                 const loginData = JSON.parse(savedLogin);
+
                 if (loginData.username && loginData.timestamp) {
+
                     const loginTime = new Date(loginData.timestamp);
+
                     const now = new Date();
+
                     const hoursSinceLogin = (now - loginTime) / (1000 * 60 * 60);
+
                     
+
                     // Auto-logout after 24 hours for security
+
                     if (hoursSinceLogin < 24) {
+
                         isLoggedIn = true;
+
                         currentUsername = loginData.username;
+
                         updateUIForLoggedInUser();
+
                         return true;
+
                     } else {
+
                         // Session expired
+
                         localStorage.removeItem('ivoryhook-login');
+
                     }
+
                 }
+
             }
+
             return false;
+
         }
+
+
 
         // Save login to localStorage
+
         function saveLogin(username) {
+
             const loginData = {
+
                 username: username,
+
                 timestamp: new Date().toISOString()
+
             };
-            localStorage.setItem('ivoryhook-login', JSON.stringify(loginData));
-        }
 
-        // Remove login from localStorage
-        function clearLogin() {
-            localStorage.removeItem('ivoryhook-login');
-        }
-
-        // Update UI for logged in user
-        function updateUIForLoggedInUser() {
-            document.getElementById('username-display').textContent = currentUsername;
-            document.getElementById('login-dashboard-btn').textContent = 'Dashboard';
-            
-            // Update last update date
-            const now = new Date();
-            document.getElementById('last-update').textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
-        }
-
-        // Page Navigation
-        document.querySelectorAll('.nav-link, .footer-links a, .hero-btns a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const page = this.getAttribute('data-page');
-                if (page) {
-                    showPage(page);
-                }
-            });
-        });
-
-        function showPage(pageId) {
-            
-            // Hide all pages
-            document.querySelectorAll('.page-content').forEach(page => {
-                page.style.display = 'none';
-                page.classList.remove('active');
-            });
-            
-            // Handle downloads page based on authentication
-            if (pageId === 'downloads') {
-                const downloadsSection = document.getElementById('downloads');
-                const restrictedContent = document.getElementById('downloads-restricted');
-                const authenticatedContent = document.getElementById('downloads-authenticated');
-                
-                if (isLoggedIn) {
-                    restrictedContent.style.display = 'none';
-                    authenticatedContent.style.display = 'block';
-                } else {
-                    restrictedContent.style.display = 'block';
-                    authenticatedContent.style.display = 'none';
-                }
-                
-                downloadsSection.style.display = 'block';
-                downloadsSection.classList.add('active');
-            } else {
-                // Show selected page
-                const targetPage = document.getElementById(pageId);
-                if (targetPage) {
-                    targetPage.style.display = 'block';
-                    targetPage.classList.add('active');
-                    
-                    // Initialize dashboard stats when dashboard is shown
-                    if (pageId === 'dashboard') {
-                        setTimeout(initializeDashboardStats, 500);
-                    }
-                    
-                    // Initialize FAQ when support page is shown
-                    if (pageId === 'support') {
-                        setTimeout(initializeFAQ, 100);
-                    }
-                }
-            }
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
-        }
-
-        // Login Modal
-        const loginModal = document.getElementById('login-modal');
-        const loginDashboardBtn = document.getElementById('login-dashboard-btn');
-        const closeLoginBtn = document.getElementById('close-login');
-        const loginForm = document.getElementById('login-form');
-        const loginError = document.getElementById('login-error');
-        const logoutBtn = document.getElementById('logout-btn');
-        const downloadsLink = document.getElementById('downloads-link');
-        const downloadsHeroBtn = document.getElementById('downloads-hero-btn');
-        const downloadsLoginBtn = document.getElementById('downloads-login-btn');
-
-        // Login/Dashboard button behavior
-        loginDashboardBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (isLoggedIn) {
-                // If already logged in, go to dashboard
-                showPage('dashboard');
-            } else {
-                // If not logged in, show login modal
-                loginModal.style.display = 'flex';
-            }
-        });
-
-        closeLoginBtn.addEventListener('click', () => {
-            loginModal.style.display = 'none';
-            loginError.style.display = 'none';
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === loginModal) {
-                loginModal.style.display = 'none';
-                loginError.style.display = 'none';
-            }
-        });
-
-        // Downloads buttons behavior
-        downloadsHeroBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (isLoggedIn) {
-                showPage('downloads');
-            } else {
-                loginModal.style.display = 'flex';
-            }
-        });
-
-        downloadsLoginBtn.addEventListener('click', () => {
-            loginModal.style.display = 'flex';
-        });
-
-        // Login Form Submission
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            // Simple authentication (for demo purposes)
-            if (username === 'admin' && password === 'admin') {
-                // Successful login
-                isLoggedIn = true;
-                currentUsername = username;
-                saveLogin(username);
-                updateUIForLoggedInUser();
-                showPage('dashboard');
-                loginModal.style.display = 'none';
-                loginError.style.display = 'none';
-            } else {
-                // Failed login
-                loginError.style.display = 'block';
-            }
-        });
-
-        // Logout
-        logoutBtn.addEventListener('click', () => {
-            isLoggedIn = false;
-            currentUsername = '';
-            clearLogin();
-            showPage('home');
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-            loginDashboardBtn.textContent = 'Login';
-        });
-
-        // Initialize page
-        document.addEventListener('DOMContentLoaded', () => {
-            // Check if user is already logged in
-            if (checkLoginStatus()) {
-                // If logged in, show dashboard by default
-                showPage('dashboard');
-            } else {
-                // If not logged in, show home page
-                showPage('home');
-            }
-        });
-    </script>
-</body>
-</html>
+           
