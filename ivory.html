@@ -525,6 +525,7 @@
                 const downloadsSection = document.getElementById('downloads');
                 const restrictedContent = document.getElementById('downloads-restricted');
                 const authenticatedContent = document.getElementById('downloads-authenticated');
+                if (!downloadsSection || !restrictedContent || !authenticatedContent) return;
                 
                 if (isLoggedIn) {
                     restrictedContent.style.display = 'none';
@@ -712,11 +713,11 @@
             }
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-        initializeFAQ();
+      
     
     </script>
 </body>
 </html>
+
 
 
