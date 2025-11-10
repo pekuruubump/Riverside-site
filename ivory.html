@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IvoryHook - Premium Minecraft Client</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Header -->
@@ -85,7 +86,7 @@
                 IvoryHook offers a comprehensive set of features designed to enhance your Minecraft experience.
             </p>
 
-            <div class="features-grid">
+            <div class="features-grid" style="margin-top: 50px;">
                 <div class="feature-card">
                     <div class="feature-icon">
                         🎯
@@ -153,42 +154,42 @@
                     🔒
                 </div>
                 <h1>Downloads Restricted</h1>
-                <p>You need to be logged in to access the downloads section.</p>
-                <p>Please log in to download IvoryHook and access all premium features.</p>
-                <button class="btn btn-primary" id="downloads-login-btn">Login to Access Downloads</button>
+           <p>You need to be logged in to access the downloads section.</p>
+            <p>Please log in to download IvoryHook and access all premium features.</p>
+            <button class="btn btn-primary" style="margin-top: 30px;" id="downloads-login-btn">Login to Access Downloads</button>
+        </div>
+        
+        <!-- Content for logged in users (initially hidden) -->
+        <div id="downloads-authenticated" style="display: none;">
+            <h1>Downloads</h1>
+            <p>Download the latest version of IvoryHook for your Minecraft version.</p>
+            
+            <div class="features-grid" style="margin-top: 50px;">
+                <div class="feature-card">
+                    <div class="feature-icon">⬇️</div>
+                    <h3>IvoryHook v2.1.4</h3>
+                    <p>Compatible with Minecraft 1.8.9</p>
+                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">Download</button>
+                </div>     
+                <div class="feature-card">
+                    <div class="feature-icon">⬇️</div>
+                    <h3>IvoryHook v2.0.9</h3>
+                    <p>Compatible with Minecraft 1.20.1</p>
+                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">Download</button>
+                </div>
             </div>
             
-            <!-- Content for logged in users (initially hidden) -->
-            <div id="downloads-authenticated">
-                <h1>Downloads</h1>
-                <p>Download the latest version of IvoryHook for your Minecraft version.</p>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">⬇️</div>
-                        <h3>IvoryHook v2.1.4</h3>
-                        <p>Compatible with Minecraft 1.8.9</p>
-                        <button class="btn btn-primary">Download</button>
-                    </div>     
-                    <div class="feature-card">
-                        <div class="feature-icon">⬇️</div>
-                        <h3>IvoryHook v2.0.9</h3>
-                        <p>Compatible with Minecraft 1.20.1</p>
-                        <button class="btn btn-primary">Download</button>
-                    </div>
-                </div>
-                
-                <div class="installation-guide">
-                    <h3>Installation Guide</h3>
-                    <p>1. Download the IvoryHook client for your Minecraft version</p>
-                    <p>2. Make sure you have Java 8 or higher installed</p>
-                    <p>3. Run the installer and follow the on-screen instructions</p>
-                    <p>4. Launch Minecraft and select the IvoryHook profile</p>
-                    <p>5. Log in with your credentials and enjoy!</p>
-                </div>
+            <div style="margin-top: 50px; background-color: var(--bg-card); padding: 30px; border-radius: 10px;">
+                <h3>Installation Guide</h3>
+                <p style="margin-top: 15px;">1. Download the IvoryHook client for your Minecraft version</p>
+                <p>2. Make sure you have Java 8 or higher installed</p>
+                <p>3. Run the installer and follow the on-screen instructions</p>
+                <p>4. Launch Minecraft and select the IvoryHook profile</p>
+                <p>5. Log in with your credentials and enjoy!</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Support Page -->
     <section id="support" class="page-content">
@@ -196,28 +197,28 @@
             <h1>Support</h1>
             <p>Need help with IvoryHook? Check out our resources below or contact our support team.</p>
             
-            <div class="features-grid">
+            <div class="features-grid" style="margin-top: 50px;">
                 <div class="feature-card">
                     <div class="feature-icon">📚</div>
                     <h3>Documentation</h3>
                     <p>Comprehensive guides and tutorials for all IvoryHook features and settings.</p>
-                    <button class="btn btn-primary">View Documentation</button>
+                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">View Documentation</button>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">❓</div>
                     <h3>FAQ</h3>
                     <p>Answers to frequently asked questions about installation, usage, and troubleshooting.</p>
-                    <button class="btn btn-primary">View FAQ</button>
+                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">View FAQ</button>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">💬</div>
                     <h3>Contact Support</h3>
                     <p>Can't find what you're looking for? Contact our support team for assistance.</p>
-                    <button class="btn btn-primary">Contact Us</button>
+                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">Contact Us</button>
                 </div>
             </div>
 
-            <!-- FAQ Section -->
+            <!-- FAQ Section - MOVED INSIDE SUPPORT PAGE -->
             <div class="faq-section">
                 <h2>Frequently Asked Questions</h2>
                 <div class="faq-list">
@@ -307,7 +308,7 @@
             </div>
             
             <div class="status-panel">
-                <h2>Status Panel</h2>
+                <h2 style="margin-bottom: 20px;">Status Panel</h2>
                 <div class="status-item">
                     <span class="status-label">Loader Status:</span>
                     <span class="status-value status-ready">Ready</span>
@@ -334,25 +335,25 @@
         </div>
     </section>
 
-    <!-- Login Modal -->
-    <div class="modal" id="login-modal">
-        <div class="modal-content">
-            <span class="close-modal" id="close-login">&times;</span>
-            <h2>Login to IvoryHook</h2>
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" class="form-control" placeholder="Enter your username" required autocomplete="username">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
-                </div>
-                <button type="submit" class="submit-btn">Login</button>
-                <div class="error-message" id="login-error">Invalid username or password</div>
-            </form>
-        </div>
+   <!-- Login Modal -->
+<div class="modal" id="login-modal" aria-hidden="true" aria-labelledby="login-title">
+    <div class="modal-content" role="dialog" aria-modal="true">
+        <span class="close-modal" id="close-login" aria-label="Close login modal">&times;</span>
+        <h2 id="login-title">Login to IvoryHook</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="form-control" placeholder="Enter your username" required autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="submit-btn">Login</button>
+            <div class="error-message" id="login-error" style="display: none;">Invalid username or password</div>
+        </form>
     </div>
+</div>
 
     <!-- Footer -->
     <footer>
@@ -386,26 +387,27 @@
         }
 
         // FAQ Toggle Functionality
-        function initializeFAQ() {
-            const faqItems = document.querySelectorAll('.faq-item');
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
-                question.addEventListener('click', () => {
-                    const isActive = item.classList.contains('active');
-                    
-                    // Close all FAQ items
-                    faqItems.forEach(faqItem => {
-                        faqItem.classList.remove('active');
-                    });
-                    
-                    // Open clicked item if it wasn't active
-                    if (!isActive) {
-                        item.classList.add('active');
-                    }
+       function initializeFAQ() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            
+            // Close the clicked item if it's already active
+            if (isActive) {
+                item.classList.remove('active');
+            } else {
+                // Close all other FAQ items
+                faqItems.forEach(faqItem => {
+                    faqItem.classList.remove('active');
                 });
-            });
-        }
-
+                // Open the clicked item
+                item.classList.add('active');
+            }
+        });
+    });
+}
         // Initialize counters when dashboard is shown
         function initializeDashboardStats() {
             // Simulate random online users and loads
@@ -481,8 +483,10 @@
         });
 
         function showPage(pageId) {
+            
             // Hide all pages
             document.querySelectorAll('.page-content').forEach(page => {
+                page.style.display = 'none';
                 page.classList.remove('active');
             });
             
@@ -493,18 +497,20 @@
                 const authenticatedContent = document.getElementById('downloads-authenticated');
                 
                 if (isLoggedIn) {
-                    restrictedContent.classList.add('hidden');
-                    authenticatedContent.classList.remove('hidden');
+                    restrictedContent.style.display = 'none';
+                    authenticatedContent.style.display = 'block';
                 } else {
-                    restrictedContent.classList.remove('hidden');
-                    authenticatedContent.classList.add('hidden');
+                    restrictedContent.style.display = 'block';
+                    authenticatedContent.style.display = 'none';
                 }
                 
+                downloadsSection.style.display = 'block';
                 downloadsSection.classList.add('active');
             } else {
                 // Show selected page
                 const targetPage = document.getElementById(pageId);
                 if (targetPage) {
+                    targetPage.style.display = 'block';
                     targetPage.classList.add('active');
                     
                     // Initialize dashboard stats when dashboard is shown
@@ -542,19 +548,19 @@
                 showPage('dashboard');
             } else {
                 // If not logged in, show login modal
-                loginModal.classList.add('active');
+                loginModal.style.display = 'flex';
             }
         });
 
         closeLoginBtn.addEventListener('click', () => {
-            loginModal.classList.remove('active');
-            loginError.classList.add('hidden');
+            loginModal.style.display = 'none';
+            loginError.style.display = 'none';
         });
 
         window.addEventListener('click', (e) => {
             if (e.target === loginModal) {
-                loginModal.classList.remove('active');
-                loginError.classList.add('hidden');
+                loginModal.style.display = 'none';
+                loginError.style.display = 'none';
             }
         });
 
@@ -564,12 +570,12 @@
             if (isLoggedIn) {
                 showPage('downloads');
             } else {
-                loginModal.classList.add('active');
+                loginModal.style.display = 'flex';
             }
         });
 
         downloadsLoginBtn.addEventListener('click', () => {
-            loginModal.classList.add('active');
+            loginModal.style.display = 'flex';
         });
 
         // Login Form Submission
@@ -586,11 +592,11 @@
                 saveLogin(username);
                 updateUIForLoggedInUser();
                 showPage('dashboard');
-                loginModal.classList.remove('active');
-                loginError.classList.add('hidden');
+                loginModal.style.display = 'none';
+                loginError.style.display = 'none';
             } else {
                 // Failed login
-                loginError.classList.remove('hidden');
+                loginError.style.display = 'block';
             }
         });
 
@@ -615,9 +621,6 @@
                 // If not logged in, show home page
                 showPage('home');
             }
-            
-            // Hide error message initially
-            loginError.classList.add('hidden');
         });
     </script>
 </body>
