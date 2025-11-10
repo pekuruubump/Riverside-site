@@ -16,3 +16,14 @@ changes pushed to this repo are provisional not final and stable version, until 
 
 
 <!-- END LATEST DOWNLOAD BUTTON -->
+
+**OR**
+
+```git clone https://github.com/pekuruubump/ivoryhook-site.git
+cd ivoryhook-site
+```
+
+
+**OR**
+
+just download from relase page
