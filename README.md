@@ -8,6 +8,8 @@ If you fork, remix or use significant portion of  this repo, please credit me so
 
 *you also may use this as a* **cheat-site template (kinda)**, *meaning: it's great for demos, mock cheat-sheets, or learning how to code yourself.*
 
+changes pushed to this repo are provisional not final and stable version, until I publish an official release, that means features, UI, and text may be tweaked, removed, or replaced while I test ideas. I advise you to wait until I post to releases for the stable, “finished” version.
+
 
 <!-- BEGIN LATEST DOWNLOAD BUTTON -->
 [Download ZIP](https://github.com/pekuruubump/ivoryhook-site/archive/refs/tags/site.zip)
