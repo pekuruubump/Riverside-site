@@ -218,7 +218,7 @@
                 </div>
             </div>
 
-            <!-- FAQ Section - MOVED INSIDE SUPPORT PAGE -->
+            <!-- FAQ Section-->
             <div class="faq-section">
                 <h2>Frequently Asked Questions</h2>
                 <div class="faq-list">
@@ -281,7 +281,7 @@
         </div>
     </section>
 
-    <!-- Dashboard - FIXED: Added display: none to fix visibility bug -->
+    <!-- Dashboard -->
     <section id="dashboard" class="page-content dashboard" style="display: none;">
         <div class="container">
             <div class="dashboard-header">
@@ -335,7 +335,7 @@
         </div>
     </section>
 
-   <!-- Login Modal - FIXED: Added better accessibility and focus management -->
+   <!-- Login Modal -->
 <div class="modal" id="login-modal" aria-hidden="true" aria-labelledby="login-title" style="display: none;">
     <div class="modal-content" role="dialog" aria-modal="true">
         <span class="close-modal" id="close-login" aria-label="Close login modal" tabindex="0">&times;</span>
@@ -389,7 +389,7 @@
             }, 30);
         }
 
-        // FAQ Toggle Functionality - FIXED: Made globally available
+        // FAQ Toggle Functionality 
         function initializeFAQ() {
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
@@ -430,7 +430,7 @@
         let isLoggedIn = false;
         let currentUsername = '';
 
-        // Check if user is already logged in from localStorage - FIXED: Added error handling
+        // Check if user is already logged in from localStorage 
         function checkLoginStatus() {
             try {
                 const savedLogin = localStorage.getItem('ivoryhook-login');
@@ -476,7 +476,7 @@
             }
         }
 
-        // Remove login from localStorage - FIXED: Added error handling
+        // Remove login from localStorage 
         function clearLogin() {
             try {
                 localStorage.removeItem('ivoryhook-login');
@@ -497,7 +497,7 @@
             document.getElementById('last-update').textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
         }
 
-        // Page Navigation - FIXED: Added cleanup for event listeners
+        // Page Navigation 
         function setupNavigation() {
             const navigationHandler = function(e) {
                 e.preventDefault();
@@ -559,7 +559,7 @@
             window.scrollTo(0, 0);
         }
 
-        // Login Modal - FIXED: Added focus management
+        // Login Modal 
         const loginModal = document.getElementById('login-modal');
         const loginDashboardBtn = document.getElementById('login-dashboard-btn');
         const closeLoginBtn = document.getElementById('close-login');
@@ -645,7 +645,7 @@
 
         downloadsLoginBtn.addEventListener('click', openLoginModal);
 
-        // Login Form Submission - FIXED: Added input sanitization
+        // Login Form Submission 
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const username = document.getElementById('username').value.trim();
@@ -694,7 +694,7 @@
             }
         });
 
-        // Initialize page - FIXED: Initialize FAQ on DOM load
+        // Initialize page 
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize FAQ functionality
             initializeFAQ();
@@ -714,3 +714,4 @@
     </script>
 </body>
 </html>
+
