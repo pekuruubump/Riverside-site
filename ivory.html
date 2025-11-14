@@ -544,8 +544,8 @@
                     targetPage.classList.add('active');
                     
                     // Initialize dashboard stats when dashboard is shown
-                    if (pageId === 'dashboard') {
-                        setTimeout(initializeDashboardStats, 500);
+                    if (pageId === 'dashboard' && isLoggedIn) {
+    setTimeout      (initializeDashboardStats, 500);
                     }
                     
                     // Initialize FAQ when support page is shown
@@ -715,5 +715,6 @@
     </script>
 </body>
 </html>
+
 
 
