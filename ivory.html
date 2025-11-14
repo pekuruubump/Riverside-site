@@ -674,10 +674,11 @@
                     loginError.style.display = 'block';
                 }
             } else {
-                // Failed login
-                loginError.textContent = 'Invalid username or password';
-                loginError.style.display = 'block';
-            }
+    loginError.textContent = 'Invalid username or password';
+    loginError.style.display = 'block';
+    document.getElementById('password').value = '';
+    document.getElementById('password').focus();
+                    }
         });
 
         // Logout
@@ -715,6 +716,7 @@
     </script>
 </body>
 </html>
+
 
 
 
