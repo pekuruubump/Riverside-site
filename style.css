@@ -26,6 +26,7 @@ body {
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Account for fixed header */
 }
 
 .container {
@@ -217,6 +218,7 @@ header {
 .feature-card {
     position: relative;
     overflow: hidden;
+    will-change: transform;
     border-radius: 10px;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid rgba(106, 13, 173, 0.1);
@@ -881,7 +883,7 @@ body.modal-open {
         0 5px 15px rgba(0, 0, 0, 0.3);
     border-color: rgba(106, 13, 173, 0.3);
     border-radius: 10px; 
-    
+   }
     .feature-card:hover .feature-icon {
         transform: scale(1.1);
     }
