@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header -->
+    <!-- the thing at the top with navigation -->
     <header>
         <div class="container">
             <nav class="navbar">
@@ -27,7 +27,7 @@
         </div>
     </header>
 
-    <!-- Home Page -->
+    <!-- first page people see -->
     <section id="home" class="page-content active">
         <div class="hero">
             <div class="container">
@@ -78,7 +78,7 @@
         </div>
     </section>
 
-    <!-- Features Page -->
+    <!--  list all the hacks -->
     <section id="features" class="page-content">
         <div class="container">
             <h1>Features</h1>
@@ -145,7 +145,7 @@
         </div>
     </section>
 
-    <!-- Downloads Page-->
+    <!-- you're not logged in, go do it -->
     <section id="downloads" class="page-content">
         <div class="container">
             <!-- Stuff when not logged in -->
@@ -159,7 +159,7 @@
             <button class="btn btn-primary" style="margin-top: 30px;" id="downloads-login-btn">Login to Access Downloads</button>
         </div>
         
-        <!-- Content for logged in users (initially hidden) -->
+        <!-- logged in users (initially hidden) -->
         <div id="downloads-authenticated" style="display: none;">
             <h1>Downloads</h1>
             <p>Download the latest version of IvoryHook for your Minecraft version.</p>
@@ -191,7 +191,7 @@
     </div>
 </section>
 
-    <!-- Support Page -->
+    <!-- where people go when they can't figure things out (not irl problems)  -->
     <section id="support" class="page-content">
         <div class="container">
             <h1>Support</h1>
@@ -218,7 +218,7 @@
                 </div>
             </div>
 
-            <!-- FAQ Section-->
+            <!-- faq  -->
             <div class="faq-section">
                 <h2>Frequently Asked Questions</h2>
                 <div class="faq-list">
@@ -281,7 +281,7 @@
         </div>
     </section>
 
-    <!-- Dashboard -->
+    <!--place you get to after logging in -->
     <section id="dashboard" class="page-content dashboard" style="display: none;">
         <div class="container">
             <div class="dashboard-header">
@@ -289,7 +289,7 @@
                 <p>IvoryHook Loader Dashboard</p>
             </div>
             
-            <!-- Quick Stats Section -->
+            <!-- stats mostly made up numbers -->
             <div class="quick-stats">
                 <div class="stat-card">
                     <div class="stat-icon">👥</div>
@@ -335,7 +335,7 @@
         </div>
     </section>
 
-   <!-- Login Modal -->
+   <!-- popup that asks for your credentials -->
 <div class="modal" id="login-modal" aria-hidden="true" aria-labelledby="login-title" style="display: none;">
     <div class="modal-content" role="dialog" aria-modal="true">
         <span class="close-modal" id="close-login" aria-label="Close login modal" tabindex="0">&times;</span>
@@ -358,7 +358,7 @@
     </div>
 </div>
 
-    <!-- Footer -->
+    <!--  thing at the bottom nobody reads -->
     <footer>
         <div class="container">
             <div class="footer-links">
@@ -374,7 +374,7 @@
     </footer>
 
     <script>
-        // Animated counter for stats
+        // makes numbers go up like they're counting looks fancy
         function animateCounter(element, target) {
             let current = 0;
             const increment = target / 50;
@@ -389,23 +389,23 @@
             }, 30);
         }
 
-        // FAQ Toggle Functionality 
+        // makes faq questions clickable so they show answers
         function initializeFAQ() {
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
                 const question = item.querySelector('.faq-question');
-                // Remove any existing listeners to prevent duplicates
+                // remove any existing listeners to prevent duplicates
                 const newQuestion = question.cloneNode(true);
                 question.parentNode.replaceChild(newQuestion, question);
                 
                 newQuestion.addEventListener('click', () => {
                     const isActive = item.classList.contains('active');
                     
-                    // Close the clicked item if it's already active
+                    // close the clicked item if it's already active
                     if (isActive) {
                         item.classList.remove('active');
                     } else {
-                        // Close all other FAQ items
+                        // close all other faq items
                         faqItems.forEach(faqItem => {
                             faqItem.classList.remove('active');
                         });
@@ -416,9 +416,9 @@
             });
         }
 
-        // Initialize counters when dashboard is shown
+        // sets up fake stats for the dashboard
         function initializeDashboardStats() {
-            // Simulate random online users and loads
+            // make random online users and loads
             const onlineUsers = Math.floor(Math.random() * 2000) + 1000;
             const loadsToday = Math.floor(Math.random() * 1000) + 500;
             
@@ -426,11 +426,11 @@
             animateCounter(document.getElementById('loads-today'), loadsToday);
         }
 
-        // Authentication state
+        // tracks if someone is logged in
         let isLoggedIn = false;
         let currentUsername = '';
 
-        // Check if user is already logged in from localStorage 
+        // checks if user is already logged in from localStorage 
         function checkLoginStatus() {
             try {
                 const savedLogin = localStorage.getItem('ivoryhook-login');
@@ -441,27 +441,27 @@
                         const now = new Date();
                         const hoursSinceLogin = (now - loginTime) / (1000 * 60 * 60);
                         
-                        // Auto-logout after 24 hours for security
+                        // auto-logout after 24 hours for somewhat of security
                         if (hoursSinceLogin < 24) {
                             isLoggedIn = true;
                             currentUsername = loginData.username;
                             updateUIForLoggedInUser();
                             return true;
                         } else {
-                            // Session expired
+                            // session expired
                             localStorage.removeItem('ivoryhook-login');
                         }
                     }
                 }
             } catch (e) {
                 console.error('Error checking login status:', e);
-                // Clear potentially corrupted data
+                // clear potentially corrupted data
                 localStorage.removeItem('ivoryhook-login');
             }
             return false;
         }
 
-        // Save login to localStorage - FIXED: Added error handling
+        // saves login to localstorage so you don't have to login every time
         function saveLogin(username) {
             try {
                 const loginData = {
@@ -476,7 +476,7 @@
             }
         }
 
-        // Remove login from localStorage 
+        // removes login from localStorage when you logout
         function clearLogin() {
             try {
                 localStorage.removeItem('ivoryhook-login');
@@ -487,17 +487,17 @@
             }
         }
 
-        // Update UI for logged in user
+        // updates the ui to show you're logged in
         function updateUIForLoggedInUser() {
             document.getElementById('username-display').textContent = currentUsername;
             document.getElementById('login-dashboard-btn').textContent = 'Dashboard';
             
-            // Update last update date
+            // update last update date up to date
             const now = new Date();
             document.getElementById('last-update').textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
         }
 
-        // Page Navigation 
+        // makes navigation links actually work
         function setupNavigation() {
             const navigationHandler = function(e) {
                 e.preventDefault();
@@ -513,14 +513,15 @@
             });
         }
 
+        // shows the right page and hides the others
         function showPage(pageId) {
-            // Hide all pages
+            // hide all pages
             document.querySelectorAll('.page-content').forEach(page => {
                 page.style.display = 'none';
                 page.classList.remove('active');
             });
             
-            // Handle downloads page based on authentication
+            // handle downloads page based on authentication
             if (pageId === 'downloads') {
                 const downloadsSection = document.getElementById('downloads');
                 const restrictedContent = document.getElementById('downloads-restricted');
@@ -537,29 +538,28 @@
                 downloadsSection.style.display = 'block';
                 downloadsSection.classList.add('active');
             } else {
-                // Show selected page
+                // show page
                 const targetPage = document.getElementById(pageId);
                 if (targetPage) {
                     targetPage.style.display = 'block';
                     targetPage.classList.add('active');
                     
-                    // Initialize dashboard stats when dashboard is shown
+                    // dashboard stats when dashboard is shown
                     if (pageId === 'dashboard' && isLoggedIn) {
-    setTimeout      (initializeDashboardStats, 500);
-                    }
-                    
-                    // Initialize FAQ when support page is shown
+                   setTimeout(initializeDashboardStats, 500);
+}
+                    // faq when support page is shown
                     if (pageId === 'support') {
                         setTimeout(initializeFAQ, 100);
                     }
                 }
             }
             
-            // Scroll to top
+            // scroll to top 
             window.scrollTo(0, 0);
         }
 
-        // Login Modal 
+        // login modal stuff
         const loginModal = document.getElementById('login-modal');
         const loginDashboardBtn = document.getElementById('login-dashboard-btn');
         const closeLoginBtn = document.getElementById('close-login');
@@ -571,26 +571,30 @@
         const downloadsLoginBtn = document.getElementById('downloads-login-btn');
         let lastFocusedElement = null;
 
+
+        // opens the login popup
         function openLoginModal() {
-            lastFocusedElement = document.activeElement;
-            loginModal.style.display = 'flex';
-            document.body.classList.add('modal-open');
-            document.getElementById('username').focus();
-            // Trap focus inside modal
-            document.addEventListener('keydown', trapTabKey);
-        }
+        lastFocusedElement = document.activeElement;
+        loginModal.style.display = 'flex';
+        loginModal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        document.getElementById('username').focus();
+        document.addEventListener('keydown', trapTabKey);
+}
 
+        // closes the login popup
         function closeLoginModal() {
-            loginModal.style.display = 'none';
-            loginError.style.display = 'none';
-            document.body.classList.remove('modal-open');
-            document.removeEventListener('keydown', trapTabKey);
-            // Return focus to the element that opened the modal
-            if (lastFocusedElement) {
-                lastFocusedElement.focus();
-            }
-        }
+        loginModal.style.display = 'none';
+         loginModal.setAttribute('aria-hidden', 'true');
+         loginError.style.display = 'none';
+         document.body.classList.remove('modal-open');
+         document.removeEventListener('keydown', trapTabKey);
+          if (lastFocusedElement) {
+          lastFocusedElement.focus();
+    }
+}
 
+        // keeps keyboard focus trapped in the modal
         function trapTabKey(e) {
             if (e.key === 'Tab') {
                 const focusableElements = loginModal.querySelectorAll(
@@ -613,14 +617,14 @@
             }
         }
 
-        // Login/Dashboard button behavior
+        // maekes login button do different things based on login status
         loginDashboardBtn.addEventListener('click', (e) => {
             e.preventDefault();
             if (isLoggedIn) {
-                // If already logged in, go to dashboard
+                // if already logged in, go to dashboard
                 showPage('dashboard');
             } else {
-                // If not logged in, show login modal
+                // if not logged in, show login modal
                 openLoginModal();
             }
         });
@@ -633,7 +637,7 @@
             }
         });
 
-        // Downloads buttons behavior
+        // makes download buttons either go to downloads or show login
         downloadsHeroBtn.addEventListener('click', (e) => {
             e.preventDefault();
             if (isLoggedIn) {
@@ -645,43 +649,53 @@
 
         downloadsLoginBtn.addEventListener('click', openLoginModal);
 
-        // Login Form Submission 
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value;
-            
-            // Input sanitization
-            if (username.length === 0 || password.length === 0) {
-                loginError.textContent = 'Please fill in all fields';
-                loginError.style.display = 'block';
-                return;
-            }
-            
-            // Simple authentication (for demo purposes only)
-            // In a real application, this would be handled server-side
-            if (username === 'admin' && password === 'admin') {
-                // Successful login
-                isLoggedIn = true;
-                currentUsername = username;
-                if (saveLogin(username)) {
-                    updateUIForLoggedInUser();
-                    showPage('dashboard');
-                    closeLoginModal();
-                    loginError.style.display = 'none';
-                } else {
-                    loginError.textContent = 'Error saving login session';
-                    loginError.style.display = 'block';
-                }
-            } else {
-    loginError.textContent = 'Invalid username or password';
-    loginError.style.display = 'block';
-    document.getElementById('password').value = '';
-    document.getElementById('password').focus();
-                    }
-        });
-
-        // Logout
+        // handles the actual login form submission
+       loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+    
+    // basic input validation
+    if (username.length === 0 || password.length === 0) {
+        loginError.textContent = 'Please fill in all fields';
+        loginError.style.display = 'block';
+        return;
+    }
+    
+    if (username.length < 3) {
+        loginError.textContent = 'Username must be at least 3 characters';
+        loginError.style.display = 'block';
+        return;
+    }
+    
+    if (password.length < 3) {
+        loginError.textContent = 'Password must be at least 3 characters';
+        loginError.style.display = 'block';
+        return;
+    }
+    
+    // check if credentials match our hardcoded demo
+    if (username === 'admin' && password === 'admin') {
+        // Successful login
+        isLoggedIn = true;
+        currentUsername = username;
+        if (saveLogin(username)) {
+            updateUIForLoggedInUser();
+            showPage('dashboard');
+            closeLoginModal();
+            loginError.style.display = 'none';
+        } else {
+            loginError.textContent = 'Error saving login session';
+            loginError.style.display = 'block';
+        }
+    } else {
+        loginError.textContent = 'Invalid username or password';
+        loginError.style.display = 'block';
+        document.getElementById('password').value = '';
+        document.getElementById('password').focus();
+    }
+});
+        // logs the user out
         logoutBtn.addEventListener('click', () => {
             isLoggedIn = false;
             currentUsername = '';
@@ -695,20 +709,20 @@
             }
         });
 
-        // Initialize page 
+        // runs when the page loads
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize FAQ functionality
             initializeFAQ();
             
-            // Setup navigation
+            // setup navigation
             setupNavigation();
             
-            // Check if user is already logged in
+            // check if user is already logged in
             if (checkLoginStatus()) {
-                // If logged in, show dashboard by default
+                // if logged in, show dashboard by default
                 showPage('dashboard');
             } else {
-                // If not logged in, show home page
+                // if not logged in, show home page
                 showPage('home');
             }
         });
@@ -716,7 +730,3 @@
     </script>
 </body>
 </html>
-
-
-
-
