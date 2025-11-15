@@ -30,3 +30,6 @@ cd ivoryhook-site
 **OR**
 
 just download from relase page
+
+
+[![github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=pekuruubump)](https://github.com/ashutosh00710/github-readme-activity-graph)
