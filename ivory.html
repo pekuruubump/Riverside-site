@@ -282,7 +282,7 @@
     </section>
 
     <!--place you get to after logging in -->
-    <section id="dashboard" class="page-content dashboard" style="display: none;">
+    <section id="dashboard" class="page-content dashboard">
         <div class="container">
             <div class="dashboard-header">
                 <h1>Welcome, <span id="username-display">User</span></h1>
@@ -499,19 +499,29 @@
 
         // makes navigation links actually work
         function setupNavigation() {
-            const navigationHandler = function(e) {
-                e.preventDefault();
-                const page = this.getAttribute('data-page');
-                if (page) {
-                    showPage(page);
-                }
-            };
-            
-            document.querySelectorAll('.nav-link, .footer-links a, .hero-btns a').forEach(link => {
-                link.removeEventListener('click', navigationHandler);
-                link.addEventListener('click', navigationHandler);
-            });
+    const navigationHandler = function(e) {
+        e.preventDefault();
+        const page = this.getAttribute('data-page');
+        if (page) {
+            showPage(page);
         }
+    };
+
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', navigationHandler);
+    });
+    
+    document.querySelectorAll('.hero-btns a').forEach(btn => {
+        btn.addEventListener('click', navigationHandler);
+    });
+    
+
+    document.querySelectorAll('.footer-links a[data-page]').forEach(link => {
+        link.addEventListener('click', navigationHandler);
+    });
+}
+
 
         // shows the right page and hides the others
         function showPage(pageId) {
@@ -520,6 +530,12 @@
                 page.style.display = 'none';
                 page.classList.remove('active');
             });
+
+              if (pageId === 'dashboard' && !isLoggedIn) {
+        openLoginModal();
+        showPage('home');
+        return;
+    }
             
             // handle downloads page based on authentication
             if (pageId === 'downloads') {
@@ -546,7 +562,7 @@
                     
                     // dashboard stats when dashboard is shown
                     if (pageId === 'dashboard' && isLoggedIn) {
-                   setTimeout(initializeDashboardStats, 500);
+                        setTimeout(initializeDashboardStats, 500);
 }
                     // faq when support page is shown
                     if (pageId === 'support') {
@@ -651,12 +667,19 @@
 
         // handles the actual login form submission
        loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value;
+       e.preventDefault();
+       const username = document.getElementById('username').value.trim();
+       const password = document.getElementById('password').value;
+
+    //sanitisztion 
+        if (username.includes('<') || username.includes('>') || password.includes('<') || password.includes('>')) {
+        loginError.textContent = 'Invalid characters in input';
+        loginError.style.display = 'block';
+        return;
+}
     
     // basic input validation
-    if (username.length === 0 || password.length === 0) {
+        if (username.length === 0 || password.length === 0) {
         loginError.textContent = 'Please fill in all fields';
         loginError.style.display = 'block';
         return;
@@ -691,6 +714,7 @@
     } else {
         loginError.textContent = 'Invalid username or password';
         loginError.style.display = 'block';
+        document.getElementById('username').value = '';
         document.getElementById('password').value = '';
         document.getElementById('password').focus();
     }
