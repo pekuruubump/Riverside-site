@@ -6,9 +6,9 @@
     <title>IvoryHook - Premium Minecraft Client</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-</head>
+ </head>
 <body>
-    <!-- the thing at the top with navigation -->
+    <!-- header -->
     <header>
         <div class="container">
             <nav class="navbar">
@@ -22,12 +22,17 @@
                     <li><a href="#" class="nav-link" data-page="support">Support</a></li>
                     <li><a href="#" class="nav-link" data-page="dashboard">Dashboard</a></li>
                 </ul>
-                <button class="login-btn" id="login-dashboard-btn">Login</button>
+                <div class="navbar-actions">
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                    <button class="login-btn" id="login-dashboard-btn">Login</button>
+                </div>
             </nav>
         </div>
     </header>
 
-    <!-- first page people see -->
+    <!-- home -->
     <section id="home" class="page-content active">
         <div class="hero">
             <div class="container">
@@ -78,7 +83,7 @@
         </div>
     </section>
 
-    <!--  list all the hacks -->
+    <!-- features -->
     <section id="features" class="page-content">
         <div class="container">
             <h1>Features</h1>
@@ -145,21 +150,20 @@
         </div>
     </section>
 
-    <!-- you're not logged in, go do it -->
+    <!-- download -->
     <section id="downloads" class="page-content">
         <div class="container">
-            <!-- Stuff when not logged in -->
-            <div id="downloads-restricted" class="restricted-message">
-                <div class="restricted-icon">
-                    🔒
-                </div>
-                <h1>Downloads Restricted</h1>
-           <p>You need to be logged in to access the downloads section.</p>
+            <!--not logged in -->
+            <div class="restricted-icon">
+                   🔒
+</div>
+             <h1>Downloads Restricted</h1>
+             <p>You need to be logged in to access the downloads section.</p>
             <p>Please log in to download IvoryHook and access all premium features.</p>
             <button class="btn btn-primary" style="margin-top: 30px;" id="downloads-login-btn">Login to Access Downloads</button>
         </div>
         
-        <!-- logged in users (initially hidden) -->
+        <!-- content for logged in users (initially hidden) -->
         <div id="downloads-authenticated" style="display: none;">
             <h1>Downloads</h1>
             <p>Download the latest version of IvoryHook for your Minecraft version.</p>
@@ -179,7 +183,7 @@
                 </div>
             </div>
             
-            <div style="margin-top: 50px; background-color: var(--bg-card); padding: 30px; border-radius: 10px;">
+            <div style="margin-top: 50px; background-color: var(--bg-card); padding: 30px; border-radius: 10px; transition: background-color var(--transition-speed) var(--transition-timing);">
                 <h3>Installation Guide</h3>
                 <p style="margin-top: 15px;">1. Download the IvoryHook client for your Minecraft version</p>
                 <p>2. Make sure you have Java 8 or higher installed</p>
@@ -191,7 +195,7 @@
     </div>
 </section>
 
-    <!-- where people go when they can't figure things out (not irl problems)  -->
+    <!--support page -->
     <section id="support" class="page-content">
         <div class="container">
             <h1>Support</h1>
@@ -218,7 +222,7 @@
                 </div>
             </div>
 
-            <!-- faq  -->
+            <!-- faq section -->
             <div class="faq-section">
                 <h2>Frequently Asked Questions</h2>
                 <div class="faq-list">
@@ -281,7 +285,7 @@
         </div>
     </section>
 
-    <!--place you get to after logging in -->
+    <!-- dashboard page -->
     <section id="dashboard" class="page-content dashboard">
         <div class="container">
             <div class="dashboard-header">
@@ -289,7 +293,7 @@
                 <p>IvoryHook Loader Dashboard</p>
             </div>
             
-            <!-- stats mostly made up numbers -->
+            <!-- stats (mostly made up numbers) -->
             <div class="quick-stats">
                 <div class="stat-card">
                     <div class="stat-icon">👥</div>
@@ -335,7 +339,7 @@
         </div>
     </section>
 
-   <!-- popup that asks for your credentials -->
+   <!-- login modal -->
 <div class="modal" id="login-modal" aria-hidden="true" aria-labelledby="login-title" style="display: none;">
     <div class="modal-content" role="dialog" aria-modal="true">
         <span class="close-modal" id="close-login" aria-label="Close login modal" tabindex="0">&times;</span>
@@ -358,7 +362,7 @@
     </div>
 </div>
 
-    <!--  thing at the bottom nobody reads -->
+    <!-- footer -->
     <footer>
         <div class="container">
             <div class="footer-links">
@@ -374,7 +378,40 @@
     </footer>
 
     <script>
-        // makes numbers go up like they're counting looks fancy
+        // theme toggle 
+        function initializeTheme() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle.querySelector('.theme-icon');
+            
+            // check for saved theme preference or default to light
+            const savedTheme = localStorage.getItem('ivoryhook-theme') || 'dark';
+            
+            // Apply the saved theme
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                themeIcon.textContent = '☀️';
+            } else {
+                document.body.classList.remove('light-theme');
+                themeIcon.textContent = '🌙';
+            }
+            
+            // toggle theme when button is clicked (DUH)
+            themeToggle.addEventListener('click', () => {
+                if (document.body.classList.contains('light-theme')) {
+                    // switch to dark theme
+                    document.body.classList.remove('light-theme');
+                    themeIcon.textContent = '🌙';
+                    localStorage.setItem('ivoryhook-theme', 'dark');
+                } else {
+                    // switch to light theme
+                    document.body.classList.add('light-theme');
+                    themeIcon.textContent = '☀️';
+                    localStorage.setItem('ivoryhook-theme', 'light');
+                }
+            });
+        }
+
+        // makes numbers go up like they're counting (looks fancy)
         function animateCounter(element, target) {
             let current = 0;
             const increment = target / 50;
@@ -405,11 +442,11 @@
                     if (isActive) {
                         item.classList.remove('active');
                     } else {
-                        // close all other faq items
+                        // close all other FAQ items
                         faqItems.forEach(faqItem => {
                             faqItem.classList.remove('active');
                         });
-                        // Open the clicked item
+                        // open the clicked item
                         item.classList.add('active');
                     }
                 });
@@ -441,7 +478,7 @@
                         const now = new Date();
                         const hoursSinceLogin = (now - loginTime) / (1000 * 60 * 60);
                         
-                        // auto-logout after 24 hours for somewhat of security
+                        // auto-logout after 24 hours for security
                         if (hoursSinceLogin < 24) {
                             isLoggedIn = true;
                             currentUsername = loginData.username;
@@ -461,7 +498,7 @@
             return false;
         }
 
-        // saves login to localstorage so you don't have to login every time
+        // saves login to localStorage so you don't have to login every time
         function saveLogin(username) {
             try {
                 const loginData = {
@@ -487,41 +524,38 @@
             }
         }
 
-        // updates the ui to show you're logged in
+        // updates the UI to show you're logged in
         function updateUIForLoggedInUser() {
             document.getElementById('username-display').textContent = currentUsername;
             document.getElementById('login-dashboard-btn').textContent = 'Dashboard';
             
-            // update last update date up to date
+            // update last update date to be current
             const now = new Date();
             document.getElementById('last-update').textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
         }
 
         // makes navigation links actually work
         function setupNavigation() {
-    const navigationHandler = function(e) {
-        e.preventDefault();
-        const page = this.getAttribute('data-page');
-        if (page) {
-            showPage(page);
+            const navigationHandler = function(e) {
+                e.preventDefault();
+                const page = this.getAttribute('data-page');
+                if (page) {
+                    showPage(page);
+                }
+            };
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', navigationHandler);
+            });
+            
+            document.querySelectorAll('.hero-btns a').forEach(btn => {
+                btn.addEventListener('click', navigationHandler);
+            });
+            
+            document.querySelectorAll('.footer-links a[data-page]').forEach(link => {
+                link.addEventListener('click', navigationHandler);
+            });
         }
-    };
-
-
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', navigationHandler);
-    });
-    
-    document.querySelectorAll('.hero-btns a').forEach(btn => {
-        btn.addEventListener('click', navigationHandler);
-    });
-    
-
-    document.querySelectorAll('.footer-links a[data-page]').forEach(link => {
-        link.addEventListener('click', navigationHandler);
-    });
-}
-
 
         // shows the right page and hides the others
         function showPage(pageId) {
@@ -531,11 +565,11 @@
                 page.classList.remove('active');
             });
 
-              if (pageId === 'dashboard' && !isLoggedIn) {
-        openLoginModal();
-        showPage('home');
-        return;
-    }
+            if (pageId === 'dashboard' && !isLoggedIn) {
+                openLoginModal();
+                showPage('home');
+                return;
+            }
             
             // handle downloads page based on authentication
             if (pageId === 'downloads') {
@@ -563,7 +597,7 @@
                     // dashboard stats when dashboard is shown
                     if (pageId === 'dashboard' && isLoggedIn) {
                         setTimeout(initializeDashboardStats, 500);
-}
+                    }
                     // faq when support page is shown
                     if (pageId === 'support') {
                         setTimeout(initializeFAQ, 100);
@@ -575,7 +609,7 @@
             window.scrollTo(0, 0);
         }
 
-        // login modal stuff
+        // login modal functionality
         const loginModal = document.getElementById('login-modal');
         const loginDashboardBtn = document.getElementById('login-dashboard-btn');
         const closeLoginBtn = document.getElementById('close-login');
@@ -587,28 +621,27 @@
         const downloadsLoginBtn = document.getElementById('downloads-login-btn');
         let lastFocusedElement = null;
 
-
         // opens the login popup
         function openLoginModal() {
-        lastFocusedElement = document.activeElement;
-        loginModal.style.display = 'flex';
-        loginModal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-        document.getElementById('username').focus();
-        document.addEventListener('keydown', trapTabKey);
-}
+            lastFocusedElement = document.activeElement;
+            loginModal.style.display = 'flex';
+            loginModal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('modal-open');
+            document.getElementById('username').focus();
+            document.addEventListener('keydown', trapTabKey);
+        }
 
         // closes the login popup
         function closeLoginModal() {
-        loginModal.style.display = 'none';
-         loginModal.setAttribute('aria-hidden', 'true');
-         loginError.style.display = 'none';
-         document.body.classList.remove('modal-open');
-         document.removeEventListener('keydown', trapTabKey);
-          if (lastFocusedElement) {
-          lastFocusedElement.focus();
-    }
-}
+            loginModal.style.display = 'none';
+            loginModal.setAttribute('aria-hidden', 'true');
+            loginError.style.display = 'none';
+            document.body.classList.remove('modal-open');
+            document.removeEventListener('keydown', trapTabKey);
+            if (lastFocusedElement) {
+                lastFocusedElement.focus();
+            }
+        }
 
         // keeps keyboard focus trapped in the modal
         function trapTabKey(e) {
@@ -633,7 +666,7 @@
             }
         }
 
-        // maekes login button do different things based on login status
+        // makes login button do different things based on login status
         loginDashboardBtn.addEventListener('click', (e) => {
             e.preventDefault();
             if (isLoggedIn) {
@@ -666,59 +699,60 @@
         downloadsLoginBtn.addEventListener('click', openLoginModal);
 
         // handles the actual login form submission
-       loginForm.addEventListener('submit', (e) => {
-       e.preventDefault();
-       const username = document.getElementById('username').value.trim();
-       const password = document.getElementById('password').value;
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
 
-    //sanitisztion 
-        if (username.includes('<') || username.includes('>') || password.includes('<') || password.includes('>')) {
-        loginError.textContent = 'Invalid characters in input';
-        loginError.style.display = 'block';
-        return;
-}
-    
-    // basic input validation
-        if (username.length === 0 || password.length === 0) {
-        loginError.textContent = 'Please fill in all fields';
-        loginError.style.display = 'block';
-        return;
-    }
-    
-    if (username.length < 3) {
-        loginError.textContent = 'Username must be at least 3 characters';
-        loginError.style.display = 'block';
-        return;
-    }
-    
-    if (password.length < 3) {
-        loginError.textContent = 'Password must be at least 3 characters';
-        loginError.style.display = 'block';
-        return;
-    }
-    
-    // check if credentials match our hardcoded demo
-    if (username === 'admin' && password === 'admin') {
-        // Successful login
-        isLoggedIn = true;
-        currentUsername = username;
-        if (saveLogin(username)) {
-            updateUIForLoggedInUser();
-            showPage('dashboard');
-            closeLoginModal();
-            loginError.style.display = 'none';
-        } else {
-            loginError.textContent = 'Error saving login session';
-            loginError.style.display = 'block';
-        }
-    } else {
-        loginError.textContent = 'Invalid username or password';
-        loginError.style.display = 'block';
-        document.getElementById('username').value = '';
-        document.getElementById('password').value = '';
-        document.getElementById('password').focus();
-    }
-});
+            // sanitization
+            if (username.includes('<') || username.includes('>') || password.includes('<') || password.includes('>')) {
+                loginError.textContent = 'Invalid characters in input';
+                loginError.style.display = 'block';
+                return;
+            }
+            
+            // basic input validation
+            if (username.length === 0 || password.length === 0) {
+                loginError.textContent = 'Please fill in all fields';
+                loginError.style.display = 'block';
+                return;
+            }
+            
+            if (username.length < 3) {
+                loginError.textContent = 'Username must be at least 3 characters';
+                loginError.style.display = 'block';
+                return;
+            }
+            
+            if (password.length < 3) {
+                loginError.textContent = 'Password must be at least 3 characters';
+                loginError.style.display = 'block';
+                return;
+            }
+            
+            // check if credentials match our hardcoded demo
+            if (username === 'admin' && password === 'admin') {
+                // successful login
+                isLoggedIn = true;
+                currentUsername = username;
+                if (saveLogin(username)) {
+                    updateUIForLoggedInUser();
+                    showPage('dashboard');
+                    closeLoginModal();
+                    loginError.style.display = 'none';
+                } else {
+                    loginError.textContent = 'Error saving login session';
+                    loginError.style.display = 'block';
+                }
+            } else {
+                loginError.textContent = 'Invalid username or password';
+                loginError.style.display = 'block';
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }
+        });
+
         // logs the user out
         logoutBtn.addEventListener('click', () => {
             isLoggedIn = false;
@@ -735,8 +769,9 @@
 
         // runs when the page loads
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize FAQ functionality
+            // make fawq functionality
             initializeFAQ();
+            initializeTheme();
             
             // setup navigation
             setupNavigation();
@@ -750,7 +785,6 @@
                 showPage('home');
             }
         });
-    
     </script>
 </body>
 </html>
