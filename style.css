@@ -19,6 +19,8 @@
             --border-light: #e2e8f0;
         }
 
+:focus-visible{ outline: 3px solid var(--focus-ring); outline-offset: 3px; border-radius: 6px; }
+
         body {
             background-color: var(--bg-primary);
             color: var(--text-primary);
@@ -1094,3 +1096,4 @@
                 font-size: 28px;
             }
         }
+
