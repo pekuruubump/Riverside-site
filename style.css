@@ -45,7 +45,7 @@
         }
 
         body.light-theme .form-control {
-            background-color: rgba(0, 0, 0, 0.02);
+            background-color: rgba(0, 0, 0, 0.05);
             border: 1px solid var(--border-light);
             color: var(--text-primary-light);
         }
@@ -1096,4 +1096,5 @@
                 font-size: 28px;
             }
         }
+
 
