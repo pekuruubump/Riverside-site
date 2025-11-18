@@ -96,6 +96,15 @@
             border-bottom: 1px solid var(--border-light);
         }
 
+
+
+        #downloads-restricted {
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto;
+}
+
+
         /* theme toggle  */
         .theme-toggle {
             background: transparent;
