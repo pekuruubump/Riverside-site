@@ -6,7 +6,300 @@
     <title>IvoryHook - Premium Minecraft Client</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
- </head>
+    <style>
+        /* Page transitions */
+        .page-content {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        
+        /* Navigation active state */
+        .nav-link.active {
+            color: var(--primary-color, #007bff);
+            font-weight: 600;
+        }
+        
+        /* Modal improvements */
+        .modal {
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        .modal-content {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        /* Error shake animation */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        /* Success notification animations */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
+        /* FAQ improvements */
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            opacity: 1;
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+        }
+        
+        /* Feature card hover effects */
+        .feature-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Button improvements */
+        .btn {
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .btn.success {
+            background: #4CAF50 !important;
+            border-color: #4CAF50 !important;
+        }
+        
+        .btn.update-available {
+            background: #FF9800 !important;
+            border-color: #FF9800 !important;
+        }
+        
+        .btn.up-to-date {
+            background: #4CAF50 !important;
+            border-color: #4CAF50 !important;
+        }
+        
+        /* Button ripple effect */
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn:active::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        /* Modal overlay improvements */
+        .modal-open {
+            overflow: hidden;
+        }
+        
+        /* Loading states */
+        .loading {
+            position: relative;
+            pointer-events: none;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        /* Skeleton loaders */
+        .skeleton-loader {
+            padding: 20px;
+        }
+        
+        .skeleton-header {
+            height: 30px;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            width: 60%;
+        }
+        
+        .skeleton-line {
+            height: 20px;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .skeleton-line.short {
+            width: 40%;
+        }
+        
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Improved focus states for accessibility */
+        .btn:focus,
+        .nav-link:focus,
+        input:focus,
+        button:focus {
+            outline: 2px solid var(--primary-color, #007bff);
+            outline-offset: 2px;
+        }
+        
+        /* Theme toggle improvements */
+        .theme-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .theme-toggle:hover .theme-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Stat card animations */
+        .stat-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Mobile menu styles */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            margin-right: 10px;
+        }
+        
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-color, #333);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 3px;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        
+        /* Mobile responsiveness improvements */
+        @media (max-width: 768px) {
+            .page-content {
+                transition: none;
+            }
+            
+            .nav-links {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-color, #fff);
+                flex-direction: column;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                z-index: 1000;
+            }
+            
+            .nav-links li {
+                margin: 0;
+            }
+            
+            .nav-link {
+                display: block;
+                padding: 15px 20px;
+                border-bottom: 1px solid var(--border-color, #eee);
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .navbar {
+                position: relative;
+            }
+            
+            .navbar-actions {
+                align-items: center;
+            }
+        }
+    </style>
+ <script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
 <body>
     <!-- header -->
     <header>
@@ -26,6 +319,11 @@
                     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                         <span class="theme-icon">🌙</span>
                     </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                     <button class="login-btn" id="login-dashboard-btn">Login</button>
                 </div>
             </nav>
@@ -38,7 +336,7 @@
             <div class="container">
                 <h1>IvoryHook Client</h1>
                 <p>
-                    Experience Minecraft With Premium Client With Ghost And Balant Modules.
+                    Experience Minecraft With Premium Client With Ghost And Blatant Modules.
                 </p>
                 <div class="hero-btns">
                     <a href="#" class="btn btn-primary" data-page="features">Explore Features</a>
@@ -333,8 +631,8 @@
             </div>
             
             <div class="loader-actions">
-                <button class="btn btn-primary">Launch Loader</button>
-                <button class="btn btn-secondary">Check for Updates</button>
+                <button class="btn btn-primary" id="launch-loader-btn">Launch Loader</button>
+                <button class="btn btn-secondary" id="check-updates-btn">Check for Updates</button>
                 <button class="btn btn-secondary" id="logout-btn">Logout</button>
             </div>
         </div>
@@ -432,6 +730,7 @@
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
                 const question = item.querySelector('.faq-question');
+                const toggle = item.querySelector('.faq-toggle');
                 // remove any existing listeners to prevent duplicates
                 const newQuestion = question.cloneNode(true);
                 question.parentNode.replaceChild(newQuestion, question);
@@ -442,13 +741,16 @@
                     // close the clicked item if it's already active
                     if (isActive) {
                         item.classList.remove('active');
+                        toggle.textContent = '+';
                     } else {
-                        // close all other FAQ items
+                        // close all other FAQ items and reset their toggles
                         faqItems.forEach(faqItem => {
                             faqItem.classList.remove('active');
+                            faqItem.querySelector('.faq-toggle').textContent = '+';
                         });
                         // open the clicked item
                         item.classList.add('active');
+                        toggle.textContent = '−';
                     }
                 });
             });
@@ -558,13 +860,21 @@
             });
         }
 
-        // shows the right page and hides the others
+        // shows the right page and hides the others with smooth transition
         function showPage(pageId) {
-            // hide all pages
-            document.querySelectorAll('.page-content').forEach(page => {
-                page.style.display = 'none';
-                page.classList.remove('active');
+            // get current active page for transition
+            const currentPage = document.querySelector('.page-content.active');
+            
+            // remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
             });
+
+            // add active class to current nav link
+            const currentNavLink = document.querySelector(`.nav-link[data-page="${pageId}"]`);
+            if (currentNavLink) {
+                currentNavLink.classList.add('active');
+            }
 
             if (pageId === 'dashboard' && !isLoggedIn) {
                 openLoginModal();
@@ -586,14 +896,13 @@
                     authenticatedContent.style.display = 'none';
                 }
                 
-                downloadsSection.style.display = 'block';
-                downloadsSection.classList.add('active');
+                // transition to downloads page
+                transitionToPage(downloadsSection);
             } else {
                 // show page
                 const targetPage = document.getElementById(pageId);
                 if (targetPage) {
-                    targetPage.style.display = 'block';
-                    targetPage.classList.add('active');
+                    transitionToPage(targetPage);
                     
                     // dashboard stats when dashboard is shown
                     if (pageId === 'dashboard' && isLoggedIn) {
@@ -606,8 +915,42 @@
                 }
             }
             
-            // scroll to top 
-            window.scrollTo(0, 0);
+            // scroll to top with smooth behavior
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // smooth transition between pages
+        function transitionToPage(targetPage) {
+            const currentPage = document.querySelector('.page-content.active');
+            
+            if (currentPage && currentPage !== targetPage) {
+                // fade out current page
+                currentPage.style.opacity = '0';
+                currentPage.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    // hide current page
+                    currentPage.style.display = 'none';
+                    currentPage.classList.remove('active');
+                    currentPage.style.opacity = '';
+                    currentPage.style.transform = '';
+                    
+                    // show new page with fade in
+                    targetPage.style.display = 'block';
+                    targetPage.style.opacity = '0';
+                    targetPage.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        targetPage.classList.add('active');
+                        targetPage.style.opacity = '1';
+                        targetPage.style.transform = 'translateY(0)';
+                    }, 50);
+                }, 300);
+            } else if (!currentPage) {
+                // first page load
+                targetPage.style.display = 'block';
+                targetPage.classList.add('active');
+            }
         }
 
         // login modal functionality
@@ -628,8 +971,16 @@
             loginModal.style.display = 'flex';
             loginModal.setAttribute('aria-hidden', 'false');
             document.body.classList.add('modal-open');
-            document.getElementById('username').focus();
+            
+            // small delay to ensure modal is visible before focusing
+            setTimeout(() => {
+                document.getElementById('username').focus();
+            }, 100);
+            
             document.addEventListener('keydown', trapTabKey);
+            
+            // prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
         }
 
         // closes the login popup
@@ -638,7 +989,13 @@
             loginModal.setAttribute('aria-hidden', 'true');
             loginError.style.display = 'none';
             document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
             document.removeEventListener('keydown', trapTabKey);
+            
+            // clear form fields
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            
             if (lastFocusedElement) {
                 lastFocusedElement.focus();
             }
@@ -700,36 +1057,26 @@
         downloadsLoginBtn.addEventListener('click', openLoginModal);
 
         // handles the actual login form submission
-        loginForm.addEventListener('submit', (e) => {
+        loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
+            const submitBtn = loginForm.querySelector('.submit-btn');
+            
+            // show loading state
+            submitBtn.textContent = 'Logging in...';
+            submitBtn.disabled = true;
+            loginError.style.display = 'none';
 
-            // sanitization
-            if (username.includes('<') || username.includes('>') || password.includes('<') || password.includes('>')) {
-                loginError.textContent = 'Invalid characters in input';
-                loginError.style.display = 'block';
-                return;
-            }
-            
             // basic input validation
-            if (username.length === 0 || password.length === 0) {
-                loginError.textContent = 'Please fill in all fields';
-                loginError.style.display = 'block';
+            if (!validateLoginForm(username, password)) {
+                submitBtn.textContent = 'Login';
+                submitBtn.disabled = false;
                 return;
             }
             
-            if (username.length < 3) {
-                loginError.textContent = 'Username must be at least 3 characters';
-                loginError.style.display = 'block';
-                return;
-            }
-            
-            if (password.length < 3) {
-                loginError.textContent = 'Password must be at least 3 characters';
-                loginError.style.display = 'block';
-                return;
-            }
+            // simulate authentication delay for better UX
+            await simulateAsyncOperation(800);
             
             // check if credentials match our hardcoded demo
             if (username === 'admin' && password === 'admin') {
@@ -740,19 +1087,116 @@
                     updateUIForLoggedInUser();
                     showPage('dashboard');
                     closeLoginModal();
-                    loginError.style.display = 'none';
+                    showSuccessMessage('Login successful! Welcome back, ' + username);
                 } else {
-                    loginError.textContent = 'Error saving login session';
-                    loginError.style.display = 'block';
+                    showError('Error saving login session. Please try again.');
                 }
             } else {
-                loginError.textContent = 'Invalid username or password';
-                loginError.style.display = 'block';
+                showError('Invalid username or password');
                 document.getElementById('username').value = '';
                 document.getElementById('password').value = '';
                 document.getElementById('password').focus();
             }
+            
+            submitBtn.textContent = 'Login';
+            submitBtn.disabled = false;
         });
+
+        // validate login form inputs
+        function validateLoginForm(username, password) {
+            // sanitization
+            if (username.includes('<') || username.includes('>') || password.includes('<') || password.includes('>')) {
+                showError('Invalid characters in input');
+                return false;
+            }
+            
+            // basic input validation
+            if (username.length === 0 || password.length === 0) {
+                showError('Please fill in all fields');
+                return false;
+            }
+            
+            if (username.length < 3) {
+                showError('Username must be at least 3 characters');
+                return false;
+            }
+            
+            if (password.length < 3) {
+                showError('Password must be at least 3 characters');
+                return false;
+            }
+            
+            return true;
+        }
+
+        // show error message with animation
+        function showError(message) {
+            const loginError = document.getElementById('login-error');
+            loginError.textContent = message;
+            loginError.style.display = 'block';
+            loginError.style.animation = 'shake 0.5s';
+            setTimeout(() => {
+                loginError.style.animation = '';
+            }, 500);
+        }
+
+        // show success message
+        function showSuccessMessage(message) {
+            // create temporary success notification
+            const notification = document.createElement('div');
+            notification.className = 'success-notification';
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #4CAF50;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                animation: slideIn 0.3s ease-out;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // simulate async operation
+        function simulateAsyncOperation(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // show loading state for content
+        function showLoadingState(element) {
+            element.classList.add('loading');
+            element.style.opacity = '0.6';
+        }
+
+        // hide loading state for content
+        function hideLoadingState(element) {
+            element.classList.remove('loading');
+            element.style.opacity = '';
+        }
+
+        // create skeleton loader
+        function createSkeletonLoader() {
+            return `
+                <div class="skeleton-loader">
+                    <div class="skeleton-header"></div>
+                    <div class="skeleton-line"></div>
+                    <div class="skeleton-line short"></div>
+                    <div class="skeleton-line"></div>
+                </div>
+            `;
+        }
 
         // logs the user out
         logoutBtn.addEventListener('click', () => {
@@ -762,20 +1206,261 @@
                 showPage('home');
                 document.getElementById('username').value = '';
                 document.getElementById('password').value = '';
-                loginDashboardBtn.textContent = 'Login';
+                document.getElementById('login-dashboard-btn').textContent = 'Login';
+                showSuccessMessage('Logged out successfully');
             } else {
                 console.error('Failed to clear login data');
             }
         });
 
+        // launch loader functionality
+        document.getElementById('launch-loader-btn').addEventListener('click', async () => {
+            const btn = document.getElementById('launch-loader-btn');
+            const originalText = btn.textContent;
+            
+            btn.textContent = 'Launching...';
+            btn.disabled = true;
+            
+            // simulate loader launch
+            await simulateAsyncOperation(2000);
+            
+            btn.textContent = 'Loader Active';
+            btn.classList.add('success');
+            
+            showSuccessMessage('IvoryHook loader launched successfully!');
+            
+            // reset button after 3 seconds
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+                btn.classList.remove('success');
+            }, 3000);
+        });
+
+        // check for updates functionality
+        document.getElementById('check-updates-btn').addEventListener('click', async () => {
+            const btn = document.getElementById('check-updates-btn');
+            const originalText = btn.textContent;
+            
+            btn.textContent = 'Checking...';
+            btn.disabled = true;
+            
+            // simulate update check
+            await simulateAsyncOperation(1500);
+            
+            // randomly show update available or up to date
+            const updateAvailable = Math.random() > 0.5;
+            
+            if (updateAvailable) {
+                showSuccessMessage('Update v2.2.0 is available! Download from the Downloads page.');
+                btn.textContent = 'Update Available';
+                btn.classList.add('update-available');
+            } else {
+                showSuccessMessage('You are using the latest version of IvoryHook.');
+                btn.textContent = 'Up to Date';
+                btn.classList.add('up-to-date');
+            }
+            
+            // reset button after 3 seconds
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+                btn.classList.remove('update-available', 'up-to-date');
+            }, 3000);
+        });
+
+        // handle download buttons
+        document.querySelectorAll('#downloads-authenticated .btn-primary').forEach(btn => {
+            if (btn.textContent === 'Download') {
+                btn.addEventListener('click', async () => {
+                    const version = btn.closest('.feature-card').querySelector('h3').textContent;
+                    const originalText = btn.textContent;
+                    
+                    btn.textContent = 'Downloading...';
+                    btn.disabled = true;
+                    
+                    // simulate download
+                    await simulateAsyncOperation(2000);
+                    
+                    btn.textContent = 'Downloaded!';
+                    btn.classList.add('success');
+                    
+                    showSuccessMessage(`${version} downloaded successfully!`);
+                    
+                    // reset button after 3 seconds
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.disabled = false;
+                        btn.classList.remove('success');
+                    }, 3000);
+                });
+            }
+        });
+
+        // handle support page buttons
+        document.querySelectorAll('.features-grid .btn-primary').forEach(btn => {
+            if (btn.closest('#support')) {
+                btn.addEventListener('click', () => {
+                    const action = btn.textContent;
+                    showSuccessMessage(`Opening ${action}... (This is a demo - actual functionality would be implemented here)`);
+                });
+            }
+        });
+
+        // initialize mobile menu
+        function initializeMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            let isMenuOpen = false;
+            
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener('click', () => {
+                    isMenuOpen = !isMenuOpen;
+                    
+                    if (isMenuOpen) {
+                        navLinks.style.maxHeight = navLinks.scrollHeight + 'px';
+                        mobileMenuToggle.classList.add('active');
+                    } else {
+                        navLinks.style.maxHeight = '0';
+                        mobileMenuToggle.classList.remove('active');
+                    }
+                });
+                
+                // close menu when clicking on a link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (isMenuOpen) {
+                            isMenuOpen = false;
+                            navLinks.style.maxHeight = '0';
+                            mobileMenuToggle.classList.remove('active');
+                        }
+                    });
+                });
+            }
+        }
+
+        // handle window resize for mobile menu
+        function handleResize() {
+            const navLinks = document.querySelector('.nav-links');
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            
+            if (window.innerWidth > 768) {
+                navLinks.style.maxHeight = '';
+                mobileMenuToggle.classList.remove('active');
+            }
+        }
+
+        // debounce function for performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // optimize resize handler
+        const debouncedResize = debounce(handleResize, 250);
+
+        // initialize keyboard shortcuts
+        function initializeKeyboardShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                // only handle shortcuts when not in input fields
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                    return;
+                }
+                
+                // Ctrl/Cmd + K for quick search/ dashboard
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                    e.preventDefault();
+                    if (isLoggedIn) {
+                        showPage('dashboard');
+                    } else {
+                        openLoginModal();
+                    }
+                }
+                
+                // Ctrl/Cmd + D for downloads
+                if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
+                    e.preventDefault();
+                    if (isLoggedIn) {
+                        showPage('downloads');
+                    } else {
+                        openLoginModal();
+                    }
+                }
+                
+                // Escape to close modal
+                if (e.key === 'Escape') {
+                    const loginModal = document.getElementById('login-modal');
+                    if (loginModal.style.display === 'flex') {
+                        closeLoginModal();
+                    }
+                }
+                
+                // Alt + T for theme toggle
+                if (e.altKey && e.key === 't') {
+                    e.preventDefault();
+                    document.getElementById('theme-toggle').click();
+                }
+                
+                // Number keys for navigation (1-5)
+                if (e.key >= '1' && e.key <= '5') {
+                    const pages = ['home', 'features', 'downloads', 'support', 'dashboard'];
+                    const pageIndex = parseInt(e.key) - 1;
+                    
+                    if (pages[pageIndex] === 'dashboard' && !isLoggedIn) {
+                        openLoginModal();
+                    } else {
+                        showPage(pages[pageIndex]);
+                    }
+                }
+            });
+        }
+
+        // prevent common console errors
+        function preventConsoleErrors() {
+            // prevent errors from missing elements
+            window.addEventListener('error', (e) => {
+                if (e.message.includes('Cannot read property') || 
+                    e.message.includes('null') || 
+                    e.message.includes('undefined')) {
+                    e.preventDefault();
+                    console.warn('Prevented error:', e.message);
+                }
+            });
+            
+            // safe querySelector helper
+            window.safeQuery = (selector) => {
+                try {
+                    return document.querySelector(selector);
+                } catch (e) {
+                    console.warn('Invalid selector:', selector);
+                    return null;
+                }
+            };
+        }
+
         // runs when the page loads
         document.addEventListener('DOMContentLoaded', () => {
-            // make fawq functionality
+            // prevent console errors
+            preventConsoleErrors();
+            
+            // make FAQ functionality
             initializeFAQ();
             initializeTheme();
+            initializeMobileMenu();
+            initializeKeyboardShortcuts();
             
             // setup navigation
             setupNavigation();
+            
+            // setup optimized resize handler
+            window.addEventListener('resize', debouncedResize);
             
             // check if user is already logged in
             if (checkLoginStatus()) {
@@ -788,5 +1473,4 @@
         });
     </script>
 </body>
-</html>
-
+</html> 
