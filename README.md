@@ -32,6 +32,12 @@ cd ivoryhook-site
 just download from relase page
 
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+[![github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=pekuruubump)](https://github.com/ashutosh00710/github-readme-activity-graph)
+
+
+
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -40,8 +46,3 @@ just download from relase page
 Why the rename? Well, the name “IvoryHook” sounded kinda unofficial and unprofessional, and honestly, I want this project to look a little more legit so, the rename is about giving it that also its  just a way to make it feel less like some shady side project and more like something worth actually checking out.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-[![github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=pekuruubump)](https://github.com/ashutosh00710/github-readme-activity-graph)
