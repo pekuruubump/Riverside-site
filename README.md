@@ -1,4 +1,4 @@
-## ivoryhook.love site
+##Riverside.moe  site
 
 *hey, read this before doing anything.*
 
@@ -14,7 +14,7 @@ changes pushed to this repo are provisional not final and stable version, until 
 ## Downloading the project.
 
 <!-- BEGIN LATEST DOWNLOAD BUTTON -->
-[Download ZIP](https://github.com/pekuruubump/ivoryhook-site/archive/refs/tags/site.zip)
+[Download ZIP](https://github.com/pekuruubump/Riverside-site/archive/refs/tags/site.zip)
 
 
 <!-- END LATEST DOWNLOAD BUTTON -->
