@@ -11,11 +11,15 @@ If you fork, remix or use significant portion of  this repo, please credit me so
 changes pushed to this repo are provisional not final and stable version, until I publish an official release, that means features, UI, and text may be tweaked, removed, or replaced while I test ideas. I advise you to wait until I post to releases for the stable, “finished” version.
 
 
-
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 > WARNING, THIS REPO WAS RENAMED TO RIVERSIDE.MOE IN 18.11.2025 
 
 Why the rename? Well, the name “IvoryHook” sounded kinda unofficial and unprofessional, and honestly, I want this project to look a little more legit so, the rename is about giving it that also its  just a way to make it feel less like some shady side project and more like something worth actually checking out.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 ## Downloading the project.
 
