@@ -386,802 +386,707 @@
     </footer>
 
     <script>
-        // theme toggle 
-        function initializeTheme() {
-            const themeToggle = document.getElementById('theme-toggle');
-            const themeIcon = themeToggle.querySelector('.theme-icon');
-            
-            // check for saved theme preference or default to light
-            const savedTheme = localStorage.getItem('Riverside-theme') || 'dark';
-            
-            // Apply the saved theme
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-theme');
-                themeIcon.textContent = '☀️';
-            } else {
+    // Cache DOM elements for better performance
+    const cachedElements = {
+        mobileMenuToggle: document.getElementById('mobile-menu-toggle'),
+        navLinks: document.querySelector('.nav-links'),
+        navLinkItems: document.querySelectorAll('.nav-link'),
+        themeToggle: document.getElementById('theme-toggle'),
+        themeIcon: document.querySelector('.theme-icon')
+    };
+
+    // theme toggle 
+    function initializeTheme() {
+        // check for saved theme preference or default to dark
+        const savedTheme = localStorage.getItem('Riverside-theme') || 'dark';
+        
+        // Apply the saved theme
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+            cachedElements.themeIcon.textContent = '☀️';
+        } else {
+            document.body.classList.remove('light-theme');
+            cachedElements.themeIcon.textContent = '🌙';
+        }
+        
+        // toggle theme when button is clicked
+        cachedElements.themeToggle.addEventListener('click', () => {
+            if (document.body.classList.contains('light-theme')) {
+                // switch to dark theme
                 document.body.classList.remove('light-theme');
-                themeIcon.textContent = '🌙';
+                cachedElements.themeIcon.textContent = '🌙';
+                localStorage.setItem('Riverside-theme', 'dark');
+            } else {
+                // switch to light theme
+                document.body.classList.add('light-theme');
+                cachedElements.themeIcon.textContent = '☀️';
+                localStorage.setItem('Riverside-theme', 'light');
             }
+        });
+    }
+
+    // makes numbers go up like they're counting
+    function animateCounter(element, target) {
+        let current = 0;
+        const increment = target / 50;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                element.textContent = target.toLocaleString();
+                clearInterval(timer);
+            } else {
+                element.textContent = Math.floor(current).toLocaleString();
+            }
+        }, 30);
+    }
+
+    // makes faq questions clickable so they show answers
+    function initializeFAQ() {
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const toggle = item.querySelector('.faq-toggle');
             
-            // toggle theme when button is clicked (DUH)
-            themeToggle.addEventListener('click', () => {
-                if (document.body.classList.contains('light-theme')) {
-                    // switch to dark theme
-                    document.body.classList.remove('light-theme');
-                    themeIcon.textContent = '🌙';
-                    localStorage.setItem('Riverside-theme', 'dark');
-                } else {
-                    // switch to light theme
-                    document.body.classList.add('light-theme');
-                    themeIcon.textContent = '☀️';
-                    localStorage.setItem('Riverside-theme', 'light');
-                }
-            });
-        }
-
-        // makes numbers go up like they're counting (looks fancy)
-        function animateCounter(element, target) {
-            let current = 0;
-            const increment = target / 50;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    element.textContent = target.toLocaleString();
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(current).toLocaleString();
-                }
-            }, 30);
-        }
-
-        // makes faq questions clickable so they show answers
-        function initializeFAQ() {
-            const faqItems = document.querySelectorAll('.faq-item');
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
-                const toggle = item.querySelector('.faq-toggle');
-                // remove any existing listeners to prevent duplicates
-                const newQuestion = question.cloneNode(true);
-                question.parentNode.replaceChild(newQuestion, question);
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
                 
-                newQuestion.addEventListener('click', () => {
-                    const isActive = item.classList.contains('active');
-                    
-                    // close the clicked item if it's already active
-                    if (isActive) {
-                        item.classList.remove('active');
-                        toggle.textContent = '+';
-                    } else {
-                        // close all other FAQ items and reset their toggles
-                        faqItems.forEach(faqItem => {
-                            faqItem.classList.remove('active');
-                            faqItem.querySelector('.faq-toggle').textContent = '+';
-                        });
-                        // open the clicked item
-                        item.classList.add('active');
-                        toggle.textContent = '−';
-                    }
+                // close all FAQ items first
+                faqItems.forEach(faqItem => {
+                    faqItem.classList.remove('active');
+                    faqItem.querySelector('.faq-toggle').textContent = '+';
                 });
+                
+                // open the clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                    toggle.textContent = '−';
+                }
             });
-        }
+        });
+    }
 
-        // sets up fake stats for the dashboard
-        function initializeDashboardStats() {
-            // make random online users and loads
-            const onlineUsers = Math.floor(Math.random() * 2000) + 1000;
-            const loadsToday = Math.floor(Math.random() * 1000) + 500;
-            
-            animateCounter(document.getElementById('online-users'), onlineUsers);
-            animateCounter(document.getElementById('loads-today'), loadsToday);
-        }
+    // sets up fake stats for the dashboard
+    function initializeDashboardStats() {
+        const onlineUsers = Math.floor(Math.random() * 2000) + 1000;
+        const loadsToday = Math.floor(Math.random() * 1000) + 500;
+        
+        animateCounter(document.getElementById('online-users'), onlineUsers);
+        animateCounter(document.getElementById('loads-today'), loadsToday);
+    }
 
-        // tracks if someone is logged in
-        let isLoggedIn = false;
-        let currentUsername = '';
+    // tracks if someone is logged in
+    let isLoggedIn = false;
+    let currentUsername = '';
 
-        // checks if user is already logged in from localStorage 
-        function checkLoginStatus() {
-            try {
-                const savedLogin = localStorage.getItem('Riverside-login');
-                if (savedLogin) {
-                    const loginData = JSON.parse(savedLogin);
-                    if (loginData.username && loginData.timestamp) {
-                        const loginTime = new Date(loginData.timestamp);
-                        const now = new Date();
-                        const hoursSinceLogin = (now - loginTime) / (1000 * 60 * 60);
-                        
-                        // auto-logout after 24 hours for security
-                        if (hoursSinceLogin < 24) {
-                            isLoggedIn = true;
-                            currentUsername = loginData.username;
-                            updateUIForLoggedInUser();
-                            return true;
-                        } else {
-                            // session expired
-                            localStorage.removeItem('Riverside-login');
-                        }
+    // checks if user is already logged in from localStorage 
+    function checkLoginStatus() {
+        try {
+            const savedLogin = localStorage.getItem('Riverside-login');
+            if (savedLogin) {
+                const loginData = JSON.parse(savedLogin);
+                if (loginData.username && loginData.timestamp) {
+                    const loginTime = new Date(loginData.timestamp);
+                    const now = new Date();
+                    const hoursSinceLogin = (now - loginTime) / (1000 * 60 * 60);
+                    
+                    // auto-logout after 24 hours for security
+                    if (hoursSinceLogin < 24) {
+                        isLoggedIn = true;
+                        currentUsername = loginData.username;
+                        updateUIForLoggedInUser();
+                        return true;
+                    } else {
+                        // session expired
+                        localStorage.removeItem('Riverside-login');
                     }
                 }
-            } catch (e) {
-                console.error('Error checking login status:', e);
-                // clear potentially corrupted data
-                localStorage.removeItem('Riverside-login');
             }
+        } catch (e) {
+            console.error('Error checking login status:', e);
+            localStorage.removeItem('Riverside-login');
+        }
+        return false;
+    }
+
+    // saves login to localStorage
+    function saveLogin(username) {
+        try {
+            const loginData = {
+                username: username,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('Riverside-login', JSON.stringify(loginData));
+            return true;
+        } catch (e) {
+            console.error('Failed to save login:', e);
             return false;
         }
+    }
 
-        // saves login to localStorage so you don't have to login every time
-        function saveLogin(username) {
-            try {
-                const loginData = {
-                    username: username,
-                    timestamp: new Date().toISOString()
-                };
-                localStorage.setItem('Riverside-login', JSON.stringify(loginData));
-                return true;
-            } catch (e) {
-                console.error('Failed to save login:', e);
-                return false;
-            }
+    // removes login from localStorage when you logout
+    function clearLogin() {
+        try {
+            localStorage.removeItem('Riverside-login');
+            return true;
+        } catch (e) {
+            console.error('Failed to clear login:', e);
+            return false;
+        }
+    }
+
+    // updates the UI to show you're logged in
+    function updateUIForLoggedInUser() {
+        document.getElementById('username-display').textContent = currentUsername;
+        document.getElementById('login-dashboard-btn').textContent = 'Dashboard';
+        
+        const now = new Date();
+        document.getElementById('last-update').textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+    }
+
+    // navigation handler function
+    function navigationHandler(e) {
+        e.preventDefault();
+        const page = this.getAttribute('data-page');
+        if (page) {
+            showPage(page);
+        }
+    }
+
+    // makes navigation links actually work
+    function setupNavigation() {
+        cachedElements.navLinkItems.forEach(link => {
+            link.addEventListener('click', navigationHandler);
+        });
+        
+        document.querySelectorAll('.hero-btns a').forEach(btn => {
+            btn.addEventListener('click', navigationHandler);
+        });
+        
+        document.querySelectorAll('.footer-links a[data-page]').forEach(link => {
+            link.addEventListener('click', navigationHandler);
+        });
+    }
+
+    // shows the right page and hides the others with smooth transition
+    function showPage(pageId) {
+        // remove active class from all nav links
+        cachedElements.navLinkItems.forEach(link => {
+            link.classList.remove('active');
+        });
+
+        // add active class to current nav link
+        const currentNavLink = Array.from(cachedElements.navLinkItems).find(link => 
+            link.getAttribute('data-page') === pageId
+        );
+        if (currentNavLink) {
+            currentNavLink.classList.add('active');
         }
 
-        // removes login from localStorage when you logout
-        function clearLogin() {
-            try {
-                localStorage.removeItem('Riverside-login');
-                return true;
-            } catch (e) {
-                console.error('Failed to clear login:', e);
-                return false;
-            }
+        if (pageId === 'dashboard' && !isLoggedIn) {
+            openLoginModal();
+            showPage('home');
+            return;
         }
-
-        // updates the UI to show you're logged in
-        function updateUIForLoggedInUser() {
-            document.getElementById('username-display').textContent = currentUsername;
-            document.getElementById('login-dashboard-btn').textContent = 'Dashboard';
+        
+        // handle downloads page based on authentication
+        if (pageId === 'downloads') {
+            const downloadsSection = document.getElementById('downloads');
+            const restrictedContent = document.getElementById('downloads-restricted');
+            const authenticatedContent = document.getElementById('downloads-authenticated');
             
-            // update last update date to be current
-            const now = new Date();
-            document.getElementById('last-update').textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
-        }
-
-        // makes navigation links actually work
-        function setupNavigation() {
-            const navigationHandler = function(e) {
-                e.preventDefault();
-                const page = this.getAttribute('data-page');
-                if (page) {
-                    showPage(page);
-                }
-            };
-
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', navigationHandler);
-            });
-            
-            document.querySelectorAll('.hero-btns a').forEach(btn => {
-                btn.addEventListener('click', navigationHandler);
-            });
-            
-            document.querySelectorAll('.footer-links a[data-page]').forEach(link => {
-                link.addEventListener('click', navigationHandler);
-            });
-        }
-
-        // shows the right page and hides the others with smooth transition
-        function showPage(pageId) {
-            // get current active page for transition
-            const currentPage = document.querySelector('.page-content.active');
-            
-            // remove active class from all nav links
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-
-            // add active class to current nav link
-            const currentNavLink = document.querySelector(`.nav-link[data-page="${pageId}"]`);
-            if (currentNavLink) {
-                currentNavLink.classList.add('active');
-            }
-
-            if (pageId === 'dashboard' && !isLoggedIn) {
-                openLoginModal();
-                showPage('home');
-                return;
-            }
-            
-            // handle downloads page based on authentication
-            if (pageId === 'downloads') {
-                const downloadsSection = document.getElementById('downloads');
-                const restrictedContent = document.getElementById('downloads-restricted');
-                const authenticatedContent = document.getElementById('downloads-authenticated');
-                
-                if (isLoggedIn) {
-                    restrictedContent.style.display = 'none';
-                    authenticatedContent.style.display = 'block';
-                } else {
-                    restrictedContent.style.display = 'block';
-                    authenticatedContent.style.display = 'none';
-                }
-                
-                // transition to downloads page
-                transitionToPage(downloadsSection);
+            if (isLoggedIn) {
+                restrictedContent.style.display = 'none';
+                authenticatedContent.style.display = 'block';
             } else {
-                // show page
-                const targetPage = document.getElementById(pageId);
-                if (targetPage) {
-                    transitionToPage(targetPage);
-                    
-                    // dashboard stats when dashboard is shown
-                    if (pageId === 'dashboard' && isLoggedIn) {
-                        setTimeout(initializeDashboardStats, 500);
-                    }
-                    // faq when support page is shown
-                    if (pageId === 'support') {
-                        setTimeout(initializeFAQ, 100);
-                    }
-                }
+                restrictedContent.style.display = 'block';
+                authenticatedContent.style.display = 'none';
             }
             
-            // scroll to top with smooth behavior
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            transitionToPage(downloadsSection);
+        } else {
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                transitionToPage(targetPage);
+                
+                if (pageId === 'dashboard' && isLoggedIn) {
+                    setTimeout(initializeDashboardStats, 500);
+                }
+                if (pageId === 'support') {
+                    setTimeout(initializeFAQ, 100);
+                }
+            }
         }
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-        // smooth transition between pages
-        function transitionToPage(targetPage) {
-            const currentPage = document.querySelector('.page-content.active');
+    // smooth transition between pages
+    function transitionToPage(targetPage) {
+        const currentPage = document.querySelector('.page-content.active');
+        
+        if (currentPage && currentPage !== targetPage) {
+            currentPage.style.opacity = '0';
+            currentPage.style.transform = 'translateY(20px)';
             
-            if (currentPage && currentPage !== targetPage) {
-                // fade out current page
-                currentPage.style.opacity = '0';
-                currentPage.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                currentPage.style.display = 'none';
+                currentPage.classList.remove('active');
+                currentPage.style.opacity = '';
+                currentPage.style.transform = '';
+                
+                targetPage.style.display = 'block';
+                targetPage.style.opacity = '0';
+                targetPage.style.transform = 'translateY(20px)';
                 
                 setTimeout(() => {
-                    // hide current page
-                    currentPage.style.display = 'none';
-                    currentPage.classList.remove('active');
-                    currentPage.style.opacity = '';
-                    currentPage.style.transform = '';
-                    
-                    // show new page with fade in
-                    targetPage.style.display = 'block';
-                    targetPage.style.opacity = '0';
-                    targetPage.style.transform = 'translateY(20px)';
-                    
-                    setTimeout(() => {
-                        targetPage.classList.add('active');
-                        targetPage.style.opacity = '1';
-                        targetPage.style.transform = 'translateY(0)';
-                    }, 50);
-                }, 300);
-            } else if (!currentPage) {
-                // first page load
-                targetPage.style.display = 'block';
-                targetPage.classList.add('active');
-            }
+                    targetPage.classList.add('active');
+                    targetPage.style.opacity = '1';
+                    targetPage.style.transform = 'translateY(0)';
+                }, 50);
+            }, 300);
+        } else if (!currentPage) {
+            targetPage.style.display = 'block';
+            targetPage.classList.add('active');
         }
+    }
 
-        // login modal functionality
-        const loginModal = document.getElementById('login-modal');
-        const loginDashboardBtn = document.getElementById('login-dashboard-btn');
-        const closeLoginBtn = document.getElementById('close-login');
-        const loginForm = document.getElementById('login-form');
-        const loginError = document.getElementById('login-error');
-        const logoutBtn = document.getElementById('logout-btn');
-        const downloadsLink = document.getElementById('downloads-link');
-        const downloadsHeroBtn = document.getElementById('downloads-hero-btn');
-        const downloadsLoginBtn = document.getElementById('downloads-login-btn');
-        let lastFocusedElement = null;
+    // login modal functionality
+    const loginModal = document.getElementById('login-modal');
+    const loginDashboardBtn = document.getElementById('login-dashboard-btn');
+    const closeLoginBtn = document.getElementById('close-login');
+    const loginForm = document.getElementById('login-form');
+    const loginError = document.getElementById('login-error');
+    const logoutBtn = document.getElementById('logout-btn');
+    const downloadsHeroBtn = document.getElementById('downloads-hero-btn');
+    const downloadsLoginBtn = document.getElementById('downloads-login-btn');
+    let lastFocusedElement = null;
 
-        // opens the login popup
-        function openLoginModal() {
-            lastFocusedElement = document.activeElement;
-            loginModal.style.display = 'flex';
-            loginModal.setAttribute('aria-hidden', 'false');
-            document.body.classList.add('modal-open');
-            
-            // small delay to ensure modal is visible before focusing
-            setTimeout(() => {
-                document.getElementById('username').focus();
-            }, 100);
-            
-            document.addEventListener('keydown', trapTabKey);
-            
-            // prevent body scroll when modal is open
-            document.body.style.overflow = 'hidden';
+    // opens the login popup
+    function openLoginModal() {
+        lastFocusedElement = document.activeElement;
+        loginModal.style.display = 'flex';
+        loginModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        
+        setTimeout(() => {
+            document.getElementById('username').focus();
+        }, 100);
+        
+        document.addEventListener('keydown', trapTabKey);
+    }
+
+    // closes the login popup
+    function closeLoginModal() {
+        loginModal.style.display = 'none';
+        loginModal.setAttribute('aria-hidden', 'true');
+        loginError.style.display = 'none';
+        document.body.style.overflow = '';
+        
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+        
+        if (lastFocusedElement) {
+            lastFocusedElement.focus();
         }
+    }
 
-        // closes the login popup
-        function closeLoginModal() {
-            loginModal.style.display = 'none';
-            loginModal.setAttribute('aria-hidden', 'true');
-            loginError.style.display = 'none';
-            document.body.classList.remove('modal-open');
-            document.body.style.overflow = '';
-            document.removeEventListener('keydown', trapTabKey);
-            
-            // clear form fields
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-            
-            if (lastFocusedElement) {
-                lastFocusedElement.focus();
-            }
-        }
+    // keeps keyboard focus trapped in the modal
+    function trapTabKey(e) {
+        if (e.key === 'Tab') {
+            const focusableElements = loginModal.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
 
-        // keeps keyboard focus trapped in the modal
-        function trapTabKey(e) {
-            if (e.key === 'Tab') {
-                const focusableElements = loginModal.querySelectorAll(
-                    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-                );
-                const firstElement = focusableElements[0];
-                const lastElement = focusableElements[focusableElements.length - 1];
-
-                if (e.shiftKey) {
-                    if (document.activeElement === firstElement) {
-                        lastElement.focus();
-                        e.preventDefault();
-                    }
-                } else {
-                    if (document.activeElement === lastElement) {
-                        firstElement.focus();
-                        e.preventDefault();
-                    }
+            if (e.shiftKey) {
+                if (document.activeElement === firstElement) {
+                    lastElement.focus();
+                    e.preventDefault();
+                }
+            } else {
+                if (document.activeElement === lastElement) {
+                    firstElement.focus();
+                    e.preventDefault();
                 }
             }
         }
+    }
 
-        // makes login button do different things based on login status
-        loginDashboardBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (isLoggedIn) {
-                // if already logged in, go to dashboard
-                showPage('dashboard');
-            } else {
-                // if not logged in, show login modal
-                openLoginModal();
-            }
-        });
+    // login button functionality
+    loginDashboardBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (isLoggedIn) {
+            showPage('dashboard');
+        } else {
+            openLoginModal();
+        }
+    });
 
-        closeLoginBtn.addEventListener('click', closeLoginModal);
+    closeLoginBtn.addEventListener('click', closeLoginModal);
 
-        window.addEventListener('click', (e) => {
-            if (e.target === loginModal) {
-                closeLoginModal();
-            }
-        });
+    window.addEventListener('click', (e) => {
+        if (e.target === loginModal) {
+            closeLoginModal();
+        }
+    });
 
-        // makes download buttons either go to downloads or show login
-        downloadsHeroBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (isLoggedIn) {
-                showPage('downloads');
-            } else {
-                openLoginModal();
-            }
-        });
+    // download buttons functionality
+    downloadsHeroBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (isLoggedIn) {
+            showPage('downloads');
+        } else {
+            openLoginModal();
+        }
+    });
 
-        downloadsLoginBtn.addEventListener('click', openLoginModal);
+    downloadsLoginBtn.addEventListener('click', openLoginModal);
 
-        // handles the actual login form submission
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value;
-            const submitBtn = loginForm.querySelector('.submit-btn');
-            
-            // show loading state
-            submitBtn.textContent = 'Logging in...';
-            submitBtn.disabled = true;
-            loginError.style.display = 'none';
+    // handles the actual login form submission
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+        const submitBtn = loginForm.querySelector('.submit-btn');
+        
+        submitBtn.textContent = 'Logging in...';
+        submitBtn.disabled = true;
+        loginError.style.display = 'none';
 
-            // basic input validation
-            if (!validateLoginForm(username, password)) {
-                submitBtn.textContent = 'Login';
-                submitBtn.disabled = false;
-                return;
-            }
-            
-            // simulate authentication delay for better UX
-            await simulateAsyncOperation(800);
-            
-            // check if credentials match our hardcoded demo
-            if (username === 'admin' && password === 'admin') {
-                // successful login
-                isLoggedIn = true;
-                currentUsername = username;
-                if (saveLogin(username)) {
-                    updateUIForLoggedInUser();
-                    showPage('dashboard');
-                    closeLoginModal();
-                    showSuccessMessage('Login successful! Welcome back, ' + username);
-                } else {
-                    showError('Error saving login session. Please try again.');
-                }
-            } else {
-                showError('Invalid username or password');
-                document.getElementById('username').value = '';
-                document.getElementById('password').value = '';
-                document.getElementById('password').focus();
-            }
-            
+        if (!validateLoginForm(username, password)) {
             submitBtn.textContent = 'Login';
             submitBtn.disabled = false;
-        });
+            return;
+        }
+        
+        await simulateAsyncOperation(800);
+        
+        if (username === 'admin' && password === 'admin') {
+            isLoggedIn = true;
+            currentUsername = username;
+            if (saveLogin(username)) {
+                updateUIForLoggedInUser();
+                showPage('dashboard');
+                closeLoginModal();
+                showSuccessMessage('Login successful! Welcome back, ' + username);
+            } else {
+                showError('Error saving login session. Please try again.');
+            }
+        } else {
+            showError('Invalid username or password');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('password').focus();
+        }
+        
+        submitBtn.textContent = 'Login';
+        submitBtn.disabled = false;
+    });
 
-        // validate login form inputs
-        function validateLoginForm(username, password) {
-            // sanitization
-            if (username.includes('<') || username.includes('>') || password.includes('<') || password.includes('>')) {
+    // password security 
+    function validateLoginForm(username, password) {
+        const sanitizedUsername = username.trim().replace(/[<>"'&\/\\]/g, '');
+        const sanitizedPassword = password.replace(/[<>"'&\/\\]/g, '');
+        
+        const dangerousPatterns = [
+            /<script/i, /javascript:/i, /on\w+=/i, /data:/i, /vbscript:/i
+        ];
+        
+        for (let pattern of dangerousPatterns) {
+            if (pattern.test(sanitizedUsername) || pattern.test(sanitizedPassword)) {
                 showError('Invalid characters in input');
                 return false;
             }
-            
-            // basic input validation
-            if (username.length === 0 || password.length === 0) {
-                showError('Please fill in all fields');
-                return false;
-            }
-            
-            if (username.length < 3) {
-                showError('Username must be at least 3 characters');
-                return false;
-            }
-            
-            if (password.length < 3) {
-                showError('Password must be at least 3 characters');
-                return false;
-            }
-            
-            return true;
         }
-
-        // show error message with animation
-        function showError(message) {
-            const loginError = document.getElementById('login-error');
-            loginError.textContent = message;
-            loginError.style.display = 'block';
-            loginError.style.animation = 'shake 0.5s';
-            setTimeout(() => {
-                loginError.style.animation = '';
-            }, 500);
+        
+        if (sanitizedUsername.length === 0 || sanitizedPassword.length === 0) {
+            showError('Please fill in all fields');
+            return false;
         }
+        
+        if (sanitizedUsername.length < 3) {
+            showError('Username must be at least 3 characters');
+            return false;
+        }
+        
+        if (sanitizedPassword.length < 3) {
+            showError('Password must be at least 3 characters');
+            return false;
+        }
+        
+        return true;
+    }
 
-        // show success message
-        function showSuccessMessage(message) {
-            // create temporary success notification
-            const notification = document.createElement('div');
-            notification.className = 'success-notification';
-            notification.textContent = message;
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: #4CAF50;
-                color: white;
-                padding: 15px 20px;
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                z-index: 10000;
-                animation: slideIn 0.3s ease-out;
-            `;
-            
-            document.body.appendChild(notification);
-            
+    // show error message with animation
+    function showError(message) {
+        loginError.textContent = message;
+        loginError.style.display = 'block';
+        loginError.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+            loginError.style.animation = '';
+        }, 500);
+    }
+
+    // show success message
+    function showSuccessMessage(message) {
+        const notification = document.createElement('div');
+        notification.className = 'success-notification';
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10000;
+            animation: slideIn 0.3s ease-out;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.animation = 'slideOut 0.3s ease-out';
             setTimeout(() => {
-                notification.style.animation = 'slideOut 0.3s ease-out';
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+
+    // simulate async operation
+    function simulateAsyncOperation(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // logs the user out
+    logoutBtn.addEventListener('click', () => {
+        isLoggedIn = false;
+        currentUsername = '';
+        if (clearLogin()) {
+            showPage('home');
+            document.getElementById('login-dashboard-btn').textContent = 'Login';
+            showSuccessMessage('Logged out successfully');
+        }
+    });
+
+    // launch loader functionality
+    document.getElementById('launch-loader-btn').addEventListener('click', async () => {
+        const btn = document.getElementById('launch-loader-btn');
+        const originalText = btn.textContent;
+        
+        btn.textContent = 'Launching...';
+        btn.disabled = true;
+        
+        await simulateAsyncOperation(2000);
+        
+        btn.textContent = 'Loader Active';
+        btn.classList.add('success');
+        
+        showSuccessMessage('Riverside loader launched successfully!');
+        
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.disabled = false;
+            btn.classList.remove('success');
+        }, 3000);
+    });
+
+    // check for updates functionality
+    document.getElementById('check-updates-btn').addEventListener('click', async () => {
+        const btn = document.getElementById('check-updates-btn');
+        const originalText = btn.textContent;
+        
+        btn.textContent = 'Checking...';
+        btn.disabled = true;
+        
+        await simulateAsyncOperation(1500);
+        
+        const updateAvailable = Math.random() > 0.5;
+        
+        if (updateAvailable) {
+            showSuccessMessage('Update v2.2.0 is available! Download from the Downloads page.');
+            btn.textContent = 'Update Available';
+            btn.classList.add('update-available');
+        } else {
+            showSuccessMessage('You are using the latest version of Riverside.');
+            btn.textContent = 'Up to Date';
+            btn.classList.add('up-to-date');
+        }
+        
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.disabled = false;
+            btn.classList.remove('update-available', 'up-to-date');
+        }, 3000);
+    });
+
+    // handle download buttons
+    document.querySelectorAll('#downloads-authenticated .btn-primary').forEach(btn => {
+        if (btn.textContent === 'Download') {
+            btn.addEventListener('click', async () => {
+                const version = btn.closest('.feature-card').querySelector('h3').textContent;
+                const originalText = btn.textContent;
+                
+                btn.textContent = 'Downloading...';
+                btn.disabled = true;
+                
+                await simulateAsyncOperation(2000);
+                
+                btn.textContent = 'Downloaded!';
+                btn.classList.add('success');
+                
+                showSuccessMessage(`${version} downloaded successfully!`);
+                
                 setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 300);
-            }, 3000);
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    btn.classList.remove('success');
+                }, 3000);
+            });
         }
+    });
 
-        // simulate async operation
-        function simulateAsyncOperation(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        // show loading state for content
-        function showLoadingState(element) {
-            element.classList.add('loading');
-            element.style.opacity = '0.6';
-        }
-
-        // hide loading state for content
-        function hideLoadingState(element) {
-            element.classList.remove('loading');
-            element.style.opacity = '';
-        }
-
-        // create skeleton loader
-        function createSkeletonLoader() {
-            return `
-                <div class="skeleton-loader">
-                    <div class="skeleton-header"></div>
-                    <div class="skeleton-line"></div>
-                    <div class="skeleton-line short"></div>
-                    <div class="skeleton-line"></div>
-                </div>
-            `;
-        }
-
-        // logs the user out
-        logoutBtn.addEventListener('click', () => {
-            isLoggedIn = false;
-            currentUsername = '';
-            if (clearLogin()) {
-                showPage('home');
-                document.getElementById('username').value = '';
-                document.getElementById('password').value = '';
-                document.getElementById('login-dashboard-btn').textContent = 'Login';
-                showSuccessMessage('Logged out successfully');
-            } else {
-                console.error('Failed to clear login data');
-            }
+    // handle support page buttons
+    document.querySelectorAll('#support .features-grid .btn-primary').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const action = btn.textContent;
+            showSuccessMessage(`Opening ${action}... (This is a demo)`);
         });
+    });
 
-        // launch loader functionality
-        document.getElementById('launch-loader-btn').addEventListener('click', async () => {
-            const btn = document.getElementById('launch-loader-btn');
-            const originalText = btn.textContent;
-            
-            btn.textContent = 'Launching...';
-            btn.disabled = true;
-            
-            // simulate loader launch
-            await simulateAsyncOperation(2000);
-            
-            btn.textContent = 'Loader Active';
-            btn.classList.add('success');
-            
-            showSuccessMessage('Riverside loader launched successfully!');
-            
-            // reset button after 3 seconds
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.disabled = false;
-                btn.classList.remove('success');
-            }, 3000);
-        });
+    // initialize mobile menu
+    function initializeMobileMenu() {
+        let isMenuOpen = false;
+        
+        if (cachedElements.mobileMenuToggle && cachedElements.navLinks) {
+            cachedElements.mobileMenuToggle.addEventListener('click', () => {
+                isMenuOpen = !isMenuOpen;
+                
+                cachedElements.mobileMenuToggle.setAttribute('aria-expanded', isMenuOpen);
+                cachedElements.navLinks.setAttribute('aria-hidden', !isMenuOpen);
 
-        // check for updates functionality
-        document.getElementById('check-updates-btn').addEventListener('click', async () => {
-            const btn = document.getElementById('check-updates-btn');
-            const originalText = btn.textContent;
-            
-            btn.textContent = 'Checking...';
-            btn.disabled = true;
-            
-            // simulate update check
-            await simulateAsyncOperation(1500);
-            
-            // randomly show update available or up to date
-            const updateAvailable = Math.random() > 0.5;
-            
-            if (updateAvailable) {
-                showSuccessMessage('Update v2.2.0 is available! Download from the Downloads page.');
-                btn.textContent = 'Update Available';
-                btn.classList.add('update-available');
-            } else {
-                showSuccessMessage('You are using the latest version of Riverside.');
-                btn.textContent = 'Up to Date';
-                btn.classList.add('up-to-date');
-            }
-            
-            // reset button after 3 seconds
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.disabled = false;
-                btn.classList.remove('update-available', 'up-to-date');
-            }, 3000);
-        });
+                if (isMenuOpen) {
+                    cachedElements.navLinks.style.maxHeight = cachedElements.navLinks.scrollHeight + 'px';
+                    cachedElements.mobileMenuToggle.classList.add('active');
+                } else {
+                    cachedElements.navLinks.style.maxHeight = '0';
+                    cachedElements.mobileMenuToggle.classList.remove('active');
+                }
+            });
 
-        // handle download buttons
-        document.querySelectorAll('#downloads-authenticated .btn-primary').forEach(btn => {
-            if (btn.textContent === 'Download') {
-                btn.addEventListener('click', async () => {
-                    const version = btn.closest('.feature-card').querySelector('h3').textContent;
-                    const originalText = btn.textContent;
-                    
-                    btn.textContent = 'Downloading...';
-                    btn.disabled = true;
-                    
-                    // simulate download
-                    await simulateAsyncOperation(2000);
-                    
-                    btn.textContent = 'Downloaded!';
-                    btn.classList.add('success');
-                    
-                    showSuccessMessage(`${version} downloaded successfully!`);
-                    
-                    // reset button after 3 seconds
-                    setTimeout(() => {
-                        btn.textContent = originalText;
-                        btn.disabled = false;
-                        btn.classList.remove('success');
-                    }, 3000);
-                });
-            }
-        });
-
-        // handle support page buttons
-        document.querySelectorAll('.features-grid .btn-primary').forEach(btn => {
-            if (btn.closest('#support')) {
-                btn.addEventListener('click', () => {
-                    const action = btn.textContent;
-                    showSuccessMessage(`Opening ${action}... (This is a demo - actual functionality would be implemented here)`);
-                });
-            }
-        });
-
-        // initialize mobile menu
-        function initializeMobileMenu() {
-            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-            const navLinks = document.querySelector('.nav-links');
-            let isMenuOpen = false;
-            
-            if (mobileMenuToggle) {
-                mobileMenuToggle.addEventListener('click', () => {
-                    isMenuOpen = !isMenuOpen;
-                    
+            // Add click event to nav links to close menu when clicked
+            const navLinksItems = cachedElements.navLinks.querySelectorAll('a');
+            navLinksItems.forEach(link => {
+                link.addEventListener('click', (e) => {
                     if (isMenuOpen) {
-                        navLinks.style.maxHeight = navLinks.scrollHeight + 'px';
-                        mobileMenuToggle.classList.add('active');
-                    } else {
-                        navLinks.style.maxHeight = '0';
-                        mobileMenuToggle.classList.remove('active');
+                        isMenuOpen = false;
+                        cachedElements.navLinks.style.maxHeight = '0';
+                        cachedElements.mobileMenuToggle.classList.remove('active');
+                        cachedElements.mobileMenuToggle.setAttribute('aria-expanded', false);
+                        cachedElements.navLinks.setAttribute('aria-hidden', true);
                     }
                 });
-                
-                // close menu when clicking on a link
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.addEventListener('click', () => {
-                        if (isMenuOpen) {
-                            isMenuOpen = false;
-                            navLinks.style.maxHeight = '0';
-                            mobileMenuToggle.classList.remove('active');
-                        }
-                    });
-                });
-            }
+            });
         }
+    }
 
-        // handle window resize for mobile menu
-        function handleResize() {
-            const navLinks = document.querySelector('.nav-links');
-            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-            
-            if (window.innerWidth > 768) {
-                navLinks.style.maxHeight = '';
-                mobileMenuToggle.classList.remove('active');
-            }
+    // handle window resize for mobile menu
+    function handleResize() {
+        if (window.innerWidth > 768 && cachedElements.navLinks) {
+            cachedElements.navLinks.style.maxHeight = '';
+            cachedElements.mobileMenuToggle.classList.remove('active');
         }
+    }
 
-        // debounce function for performance
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
+    // debounce function for performance
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
                 clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
+                func(...args);
             };
-        }
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
 
-        // optimize resize handler
-        const debouncedResize = debounce(handleResize, 250);
-
-        // initialize keyboard shortcuts
-        function initializeKeyboardShortcuts() {
-            document.addEventListener('keydown', (e) => {
-                // only handle shortcuts when not in input fields
-                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-                    return;
-                }
-                
-                // Ctrl/Cmd + K for quick search/ dashboard
-                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                    e.preventDefault();
-                    if (isLoggedIn) {
-                        showPage('dashboard');
-                    } else {
-                        openLoginModal();
-                    }
-                }
-                
-                // Ctrl/Cmd + D for downloads
-                if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
-                    e.preventDefault();
-                    if (isLoggedIn) {
-                        showPage('downloads');
-                    } else {
-                        openLoginModal();
-                    }
-                }
-                
-                // Escape to close modal
-                if (e.key === 'Escape') {
-                    const loginModal = document.getElementById('login-modal');
-                    if (loginModal.style.display === 'flex') {
-                        closeLoginModal();
-                    }
-                }
-                
-                // Alt + T for theme toggle
-                if (e.altKey && e.key === 't') {
-                    e.preventDefault();
-                    document.getElementById('theme-toggle').click();
-                }
-                
-                // Number keys for navigation (1-5)
-                if (e.key >= '1' && e.key <= '5') {
-                    const pages = ['home', 'features', 'downloads', 'support', 'dashboard'];
-                    const pageIndex = parseInt(e.key) - 1;
-                    
-                    if (pages[pageIndex] === 'dashboard' && !isLoggedIn) {
-                        openLoginModal();
-                    } else {
-                        showPage(pages[pageIndex]);
-                    }
-                }
-            });
-        }
-
-        // prevent common console errors
-        function preventConsoleErrors() {
-            // prevent errors from missing elements
-            window.addEventListener('error', (e) => {
-                if (e.message.includes('Cannot read property') || 
-                    e.message.includes('null') || 
-                    e.message.includes('undefined')) {
-                    e.preventDefault();
-                    console.warn('Prevented error:', e.message);
-                }
-            });
+    // initialize keyboard shortcuts
+    function initializeKeyboardShortcuts() {
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                return;
+            }
             
-            // safe querySelector helper
-            window.safeQuery = (selector) => {
-                try {
-                    return document.querySelector(selector);
-                } catch (e) {
-                    console.warn('Invalid selector:', selector);
-                    return null;
+            // Ctrl/Cmd + K for quick search/dashboard
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                if (isLoggedIn) {
+                    showPage('dashboard');
+                } else {
+                    openLoginModal();
                 }
-            };
-        }
-
-        // runs when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            // prevent console errors
-            preventConsoleErrors();
+            }
             
-            // make FAQ functionality
-            initializeFAQ();
-            initializeTheme();
-            initializeMobileMenu();
-            initializeKeyboardShortcuts();
+            // Ctrl/Cmd + D for downloads
+            if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
+                e.preventDefault();
+                if (isLoggedIn) {
+                    showPage('downloads');
+                } else {
+                    openLoginModal();
+                }
+            }
             
-            // setup navigation
-            setupNavigation();
+            // Escape to close modal
+            if (e.key === 'Escape') {
+                if (loginModal.style.display === 'flex') {
+                    closeLoginModal();
+                }
+            }
             
-            // setup optimized resize handler
-            window.addEventListener('resize', debouncedResize);
+            // Alt + T for theme toggle
+            if (e.altKey && e.key === 't') {
+                e.preventDefault();
+                cachedElements.themeToggle.click();
+            }
             
-            // check if user is already logged in
-            if (checkLoginStatus()) {
-                // if logged in, show dashboard by default
-                showPage('dashboard');
-            } else {
-                // if not logged in, show home page
-                showPage('home');
+            // Number keys for navigation (1-5)
+            if (e.key >= '1' && e.key <= '5') {
+                const pages = ['home', 'features', 'downloads', 'support', 'dashboard'];
+                const pageIndex = parseInt(e.key) - 1;
+                
+                if (pages[pageIndex] === 'dashboard' && !isLoggedIn) {
+                    openLoginModal();
+                } else {
+                    showPage(pages[pageIndex]);
+                }
             }
         });
-    </script>
+    }
+
+    // runs when the page loads
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeFAQ();
+        initializeTheme();
+        initializeMobileMenu();
+        initializeKeyboardShortcuts();
+        setupNavigation();
+        
+        window.addEventListener('resize', debounce(handleResize, 250));
+        
+        if (checkLoginStatus()) {
+            showPage('dashboard');
+        } else {
+            showPage('home');
+        }
+    });
+</script>
 </body>
 </html> 
+
 
 
