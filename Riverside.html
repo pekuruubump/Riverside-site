@@ -384,14 +384,51 @@
     </footer>
 
     <script>
-    // Cache DOM elements for better performance
+    // dom..wait holly shit
     const cachedElements = {
         mobileMenuToggle: document.getElementById('mobile-menu-toggle'),
         navLinks: document.querySelector('.nav-links'),
         navLinkItems: document.querySelectorAll('.nav-link'),
         themeToggle: document.getElementById('theme-toggle'),
-        themeIcon: document.querySelector('.theme-icon')
-    };
+        themeIcon: document.querySelector('.theme-icon'),
+        loginModal: document.getElementById('login-modal'),
+        closeLoginBtn: document.getElementById('close-login'),
+        loginForm: document.getElementById('login-form'),
+        loginError: document.getElementById('login-error'),
+        loginDashboardBtn: document.getElementById('login-dashboard-btn'),
+        logoutBtn: document.getElementById('logout-btn'),
+        downloadsHeroBtn: document.getElementById('downloads-hero-btn'),
+        downloadsLoginBtn: document.getElementById('downloads-login-btn')
+    }; // its the coder's epstein list
+
+    // track timeouts and intervals for cleanup
+    let activeTimeouts = [];
+    let activeIntervals = [];
+
+    // cleanup!
+    function cleanupTimeoutsAndIntervals() {
+        activeTimeouts.forEach(timeout => clearTimeout(timeout));
+        activeIntervals.forEach(interval => clearInterval(interval));
+        activeTimeouts = [];
+        activeIntervals = [];
+    }
+
+    // Safe setTimeout with cleanup
+    function safeSetTimeout(func, delay) {
+        const timeoutId = setTimeout(() => {
+            func();
+            activeTimeouts = activeTimeouts.filter(id => id !== timeoutId);
+        }, delay);
+        activeTimeouts.push(timeoutId);
+        return timeoutId;
+    }
+
+    // Safe setInterval with cleanup
+    function safeSetInterval(func, delay) {
+        const intervalId = setInterval(func, delay);
+        activeIntervals.push(intervalId);
+        return intervalId;
+    }
 
     // theme toggle 
     function initializeTheme() {
@@ -425,13 +462,16 @@
 
     // makes numbers go up like they're counting
     function animateCounter(element, target) {
+        if (!element) return;
+        
         let current = 0;
         const increment = target / 50;
-        const timer = setInterval(() => {
+        const timer = safeSetInterval(() => {
             current += increment;
             if (current >= target) {
-                element.textContent = target.toLocaleString();
+                element.textContent = Math.round(target).toLocaleString();
                 clearInterval(timer);
+                activeIntervals = activeIntervals.filter(id => id !== timer);
             } else {
                 element.textContent = Math.floor(current).toLocaleString();
             }
@@ -451,13 +491,14 @@
                 // close all FAQ items first
                 faqItems.forEach(faqItem => {
                     faqItem.classList.remove('active');
-                    faqItem.querySelector('.faq-toggle').textContent = '+';
+                    const faqToggle = faqItem.querySelector('.faq-toggle');
+                    if (faqToggle) faqToggle.textContent = '+';
                 });
                 
                 // open the clicked item if it wasn't active
                 if (!isActive) {
                     item.classList.add('active');
-                    toggle.textContent = '−';
+                    if (toggle) toggle.textContent = '−';
                 }
             });
         });
@@ -534,11 +575,20 @@
 
     // updates the UI to show you're logged in
     function updateUIForLoggedInUser() {
-        document.getElementById('username-display').textContent = currentUsername;
-        document.getElementById('login-dashboard-btn').textContent = 'Dashboard';
+        const usernameDisplay = document.getElementById('username-display');
+        if (usernameDisplay) {
+            usernameDisplay.textContent = currentUsername;
+        }
         
-        const now = new Date();
-        document.getElementById('last-update').textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+        if (cachedElements.loginDashboardBtn) {
+            cachedElements.loginDashboardBtn.textContent = 'Dashboard';
+        }
+        
+        const lastUpdate = document.getElementById('last-update');
+        if (lastUpdate) {
+            const now = new Date();
+            lastUpdate.textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+        }
     }
 
     // navigation handler function
@@ -552,9 +602,11 @@
 
     // makes navigation links actually work
     function setupNavigation() {
-        cachedElements.navLinkItems.forEach(link => {
-            link.addEventListener('click', navigationHandler);
-        });
+        if (cachedElements.navLinkItems) {
+            cachedElements.navLinkItems.forEach(link => {
+                link.addEventListener('click', navigationHandler);
+            });
+        }
         
         document.querySelectorAll('.hero-btns a').forEach(btn => {
             btn.addEventListener('click', navigationHandler);
@@ -567,17 +619,28 @@
 
     // shows the right page and hides the others with smooth transition
     function showPage(pageId) {
+        // validate pageId
+        const validPages = ['home', 'features', 'downloads', 'support', 'dashboard'];
+        if (!validPages.includes(pageId)) {
+            console.warn(`Invalid page id: ${pageId}`);
+            pageId = 'home';
+        }
+        
         // remove active class from all nav links
-        cachedElements.navLinkItems.forEach(link => {
-            link.classList.remove('active');
-        });
+        if (cachedElements.navLinkItems) {
+            cachedElements.navLinkItems.forEach(link => {
+                link.classList.remove('active');
+            });
+        }
 
         // add active class to current nav link
-        const currentNavLink = Array.from(cachedElements.navLinkItems).find(link => 
-            link.getAttribute('data-page') === pageId
-        );
-        if (currentNavLink) {
-            currentNavLink.classList.add('active');
+        if (cachedElements.navLinkItems) {
+            const currentNavLink = Array.from(cachedElements.navLinkItems).find(link => 
+                link.getAttribute('data-page') === pageId
+            );
+            if (currentNavLink) {
+                currentNavLink.classList.add('active');
+            }
         }
 
         if (pageId === 'dashboard' && !isLoggedIn) {
@@ -592,25 +655,26 @@
             const restrictedContent = document.getElementById('downloads-restricted');
             const authenticatedContent = document.getElementById('downloads-authenticated');
             
-            if (isLoggedIn) {
-                restrictedContent.style.display = 'none';
-                authenticatedContent.style.display = 'block';
-            } else {
-                restrictedContent.style.display = 'block';
-                authenticatedContent.style.display = 'none';
+            if (restrictedContent && authenticatedContent) {
+                if (isLoggedIn) {
+                    restrictedContent.style.display = 'none';
+                    authenticatedContent.style.display = 'block';
+                } else {
+                    restrictedContent.style.display = 'block';
+                    authenticatedContent.style.display = 'none';
+                }
             }
             
-            transitionToPage(downloadsSection);
+            if (downloadsSection) {
+                transitionToPage(downloadsSection);
+            }
         } else {
             const targetPage = document.getElementById(pageId);
             if (targetPage) {
                 transitionToPage(targetPage);
                 
                 if (pageId === 'dashboard' && isLoggedIn) {
-                    setTimeout(initializeDashboardStats, 500);
-                }
-                if (pageId === 'support') {
-                    setTimeout(initializeFAQ, 100);
+                    safeSetTimeout(initializeDashboardStats, 500);
                 }
             }
         }
@@ -620,13 +684,15 @@
 
     // smooth transition between pages
     function transitionToPage(targetPage) {
+        if (!targetPage) return;
+        
         const currentPage = document.querySelector('.page-content.active');
         
         if (currentPage && currentPage !== targetPage) {
             currentPage.style.opacity = '0';
             currentPage.style.transform = 'translateY(20px)';
             
-            setTimeout(() => {
+            safeSetTimeout(() => {
                 currentPage.style.display = 'none';
                 currentPage.classList.remove('active');
                 currentPage.style.opacity = '';
@@ -636,7 +702,7 @@
                 targetPage.style.opacity = '0';
                 targetPage.style.transform = 'translateY(20px)';
                 
-                setTimeout(() => {
+                safeSetTimeout(() => {
                     targetPage.classList.add('active');
                     targetPage.style.opacity = '1';
                     targetPage.style.transform = 'translateY(0)';
@@ -649,51 +715,58 @@
     }
 
     // login modal functionality
-    const loginModal = document.getElementById('login-modal');
-    const loginDashboardBtn = document.getElementById('login-dashboard-btn');
-    const closeLoginBtn = document.getElementById('close-login');
-    const loginForm = document.getElementById('login-form');
-    const loginError = document.getElementById('login-error');
-    const logoutBtn = document.getElementById('logout-btn');
-    const downloadsHeroBtn = document.getElementById('downloads-hero-btn');
-    const downloadsLoginBtn = document.getElementById('downloads-login-btn');
     let lastFocusedElement = null;
 
     // opens the login popup
     function openLoginModal() {
         lastFocusedElement = document.activeElement;
-        loginModal.style.display = 'flex';
-        loginModal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-        
-        setTimeout(() => {
-            document.getElementById('username').focus();
-        }, 100);
-        
-        document.addEventListener('keydown', trapTabKey);
+        if (cachedElements.loginModal) {
+            cachedElements.loginModal.style.display = 'flex';
+            cachedElements.loginModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            
+            safeSetTimeout(() => {
+                const usernameInput = document.getElementById('username');
+                if (usernameInput) usernameInput.focus();
+            }, 100);
+            
+            document.addEventListener('keydown', trapTabKey);
+        }
     }
 
     // closes the login popup
     function closeLoginModal() {
-        loginModal.style.display = 'none';
-        loginModal.setAttribute('aria-hidden', 'true');
-        loginError.style.display = 'none';
+        if (cachedElements.loginModal) {
+            cachedElements.loginModal.style.display = 'none';
+            cachedElements.loginModal.setAttribute('aria-hidden', 'true');
+        }
+        
+        if (cachedElements.loginError) {
+            cachedElements.loginError.style.display = 'none';
+        }
+        
         document.body.style.overflow = '';
         
-        document.getElementById('username').value = '';
-        document.getElementById('password').value = '';
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        if (usernameInput) usernameInput.value = '';
+        if (passwordInput) passwordInput.value = '';
         
         if (lastFocusedElement) {
             lastFocusedElement.focus();
         }
+        
+        document.removeEventListener('keydown', trapTabKey);
     }
 
     // keeps keyboard focus trapped in the modal
     function trapTabKey(e) {
-        if (e.key === 'Tab') {
-            const focusableElements = loginModal.querySelectorAll(
+        if (e.key === 'Tab' && cachedElements.loginModal) {
+            const focusableElements = cachedElements.loginModal.querySelectorAll(
                 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
             );
+            if (focusableElements.length === 0) return;
+            
             const firstElement = focusableElements[0];
             const lastElement = focusableElements[focusableElements.length - 1];
 
@@ -712,75 +785,94 @@
     }
 
     // login button functionality
-    loginDashboardBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (isLoggedIn) {
-            showPage('dashboard');
-        } else {
-            openLoginModal();
-        }
-    });
+    if (cachedElements.loginDashboardBtn) {
+        cachedElements.loginDashboardBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (isLoggedIn) {
+                showPage('dashboard');
+            } else {
+                openLoginModal();
+            }
+        });
+    }
 
-    closeLoginBtn.addEventListener('click', closeLoginModal);
+    if (cachedElements.closeLoginBtn) {
+        cachedElements.closeLoginBtn.addEventListener('click', closeLoginModal);
+    }
 
     window.addEventListener('click', (e) => {
-        if (e.target === loginModal) {
+        if (e.target === cachedElements.loginModal) {
             closeLoginModal();
         }
     });
 
     // download buttons functionality
-    downloadsHeroBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (isLoggedIn) {
-            showPage('downloads');
-        } else {
-            openLoginModal();
-        }
-    });
+    if (cachedElements.downloadsHeroBtn) {
+        cachedElements.downloadsHeroBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (isLoggedIn) {
+                showPage('downloads');
+            } else {
+                openLoginModal();
+            }
+        });
+    }
 
-    downloadsLoginBtn.addEventListener('click', openLoginModal);
+    if (cachedElements.downloadsLoginBtn) {
+        cachedElements.downloadsLoginBtn.addEventListener('click', openLoginModal);
+    }
 
     // handles the actual login form submission
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const username = document.getElementById('username').value.trim();
-        const password = document.getElementById('password').value;
-        const submitBtn = loginForm.querySelector('.submit-btn');
-        
-        submitBtn.textContent = 'Logging in...';
-        submitBtn.disabled = true;
-        loginError.style.display = 'none';
+    if (cachedElements.loginForm) {
+        cachedElements.loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            
+            if (!usernameInput || !passwordInput) return;
+            
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+            const submitBtn = cachedElements.loginForm.querySelector('.submit-btn');
+            
+            if (!submitBtn) return;
+            
+            submitBtn.textContent = 'Logging in...';
+            submitBtn.disabled = true;
+            if (cachedElements.loginError) {
+                cachedElements.loginError.style.display = 'none';
+            }
 
-        if (!validateLoginForm(username, password)) {
+            if (!validateLoginForm(username, password)) {
+                submitBtn.textContent = 'Login';
+                submitBtn.disabled = false;
+                return;
+            }
+            
+            await simulateAsyncOperation(800);
+            
+            if (username === 'admin' && password === 'admin') {
+                isLoggedIn = true;
+                currentUsername = username;
+                if (saveLogin(username)) {
+                    updateUIForLoggedInUser();
+                    showPage('dashboard');
+                    closeLoginModal();
+                    showSuccessMessage('Login successful! Welcome back, ' + username);
+                } else {
+                    showError('Error saving login session. Please try again.');
+                }
+            } else {
+                showError('Invalid username or password');
+                if (usernameInput) usernameInput.value = '';
+                if (passwordInput) passwordInput.value = '';
+                if (passwordInput) passwordInput.focus();
+            }
+            
             submitBtn.textContent = 'Login';
             submitBtn.disabled = false;
-            return;
-        }
-        
-        await simulateAsyncOperation(800);
-        
-        if (username === 'admin' && password === 'admin') {
-            isLoggedIn = true;
-            currentUsername = username;
-            if (saveLogin(username)) {
-                updateUIForLoggedInUser();
-                showPage('dashboard');
-                closeLoginModal();
-                showSuccessMessage('Login successful! Welcome back, ' + username);
-            } else {
-                showError('Error saving login session. Please try again.');
-            }
-        } else {
-            showError('Invalid username or password');
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-            document.getElementById('password').focus();
-        }
-        
-        submitBtn.textContent = 'Login';
-        submitBtn.disabled = false;
-    });
+        });
+    }
 
     // password security 
     function validateLoginForm(username, password) {
@@ -818,11 +910,13 @@
 
     // show error message with animation
     function showError(message) {
-        loginError.textContent = message;
-        loginError.style.display = 'block';
-        loginError.style.animation = 'shake 0.5s';
-        setTimeout(() => {
-            loginError.style.animation = '';
+        if (!cachedElements.loginError) return;
+        
+        cachedElements.loginError.textContent = message;
+        cachedElements.loginError.style.display = 'block';
+        cachedElements.loginError.style.animation = 'shake 0.5s';
+        safeSetTimeout(() => {
+            cachedElements.loginError.style.animation = '';
         }, 500);
     }
 
@@ -842,90 +936,111 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             z-index: 10000;
             animation: slideIn 0.3s ease-out;
-        `;
+        `; //ah yes.. the css in html, we have a FILE for this!
         
         document.body.appendChild(notification);
         
-        setTimeout(() => {
+        const timeoutId = safeSetTimeout(() => {
             notification.style.animation = 'slideOut 0.3s ease-out';
-            setTimeout(() => {
-                document.body.removeChild(notification);
+            safeSetTimeout(() => {
+                if (notification.parentNode) {
+                    document.body.removeChild(notification);
+                }
             }, 300);
         }, 3000);
+        
+        return timeoutId;
     }
 
     // simulate async operation
     function simulateAsyncOperation(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
+        return new Promise(resolve => {
+            const timeoutId = setTimeout(resolve, ms);
+            activeTimeouts.push(timeoutId);
+        });
     }
 
     // logs the user out
-    logoutBtn.addEventListener('click', () => {
-        isLoggedIn = false;
-        currentUsername = '';
-        if (clearLogin()) {
-            showPage('home');
-            document.getElementById('login-dashboard-btn').textContent = 'Login';
-            showSuccessMessage('Logged out successfully');
-        }
-    });
+    if (cachedElements.logoutBtn) {
+        cachedElements.logoutBtn.addEventListener('click', () => {
+            isLoggedIn = false;
+            currentUsername = '';
+            if (clearLogin()) {
+                cleanupTimeoutsAndIntervals();
+                showPage('home');
+                if (cachedElements.loginDashboardBtn) {
+                    cachedElements.loginDashboardBtn.textContent = 'Login';
+                }
+                showSuccessMessage('Logged out successfully');
+            }
+        });
+    }
 
     // launch loader functionality
-    document.getElementById('launch-loader-btn').addEventListener('click', async () => {
-        const btn = document.getElementById('launch-loader-btn');
-        const originalText = btn.textContent;
-        
-        btn.textContent = 'Launching...';
-        btn.disabled = true;
-        
-        await simulateAsyncOperation(2000);
-        
-        btn.textContent = 'Loader Active';
-        btn.classList.add('success');
-        
-        showSuccessMessage('Riverside loader launched successfully!');
-        
-        setTimeout(() => {
-            btn.textContent = originalText;
-            btn.disabled = false;
-            btn.classList.remove('success');
-        }, 3000);
-    });
+    const launchLoaderBtn = document.getElementById('launch-loader-btn');
+    if (launchLoaderBtn) {
+        launchLoaderBtn.addEventListener('click', async () => {
+            const btn = launchLoaderBtn;
+            const originalText = btn.textContent;
+            
+            btn.textContent = 'Launching...';
+            btn.disabled = true;
+            
+            await simulateAsyncOperation(2000);
+            
+            btn.textContent = 'Loader Active';
+            btn.classList.add('success');
+            
+            showSuccessMessage('Riverside loader launched successfully!');
+            
+            safeSetTimeout(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+                btn.classList.remove('success');
+            }, 3000);
+        });
+    }
 
     // check for updates functionality
-    document.getElementById('check-updates-btn').addEventListener('click', async () => {
-        const btn = document.getElementById('check-updates-btn');
-        const originalText = btn.textContent;
-        
-        btn.textContent = 'Checking...';
-        btn.disabled = true;
-        
-        await simulateAsyncOperation(1500);
-        
-        const updateAvailable = Math.random() > 0.5;
-        
-        if (updateAvailable) {
-            showSuccessMessage('Update v2.2.0 is available! Download from the Downloads page.');
-            btn.textContent = 'Update Available';
-            btn.classList.add('update-available');
-        } else {
-            showSuccessMessage('You are using the latest version of Riverside.');
-            btn.textContent = 'Up to Date';
-            btn.classList.add('up-to-date');
-        }
-        
-        setTimeout(() => {
-            btn.textContent = originalText;
-            btn.disabled = false;
-            btn.classList.remove('update-available', 'up-to-date');
-        }, 3000);
-    });
+    const checkUpdatesBtn = document.getElementById('check-updates-btn');
+    if (checkUpdatesBtn) {
+        checkUpdatesBtn.addEventListener('click', async () => {
+            const btn = checkUpdatesBtn;
+            const originalText = btn.textContent;
+            
+            btn.textContent = 'Checking...';
+            btn.disabled = true;
+            
+            await simulateAsyncOperation(1500);
+            
+            const updateAvailable = Math.random() > 0.5;
+            
+            if (updateAvailable) {
+                showSuccessMessage('Update v2.2.0 is available! Download from the Downloads page.');
+                btn.textContent = 'Update Available';
+                btn.classList.add('update-available');
+            } else {
+                showSuccessMessage('You are using the latest version of Riverside.');
+                btn.textContent = 'Up to Date';
+                btn.classList.add('up-to-date');
+            }
+            
+            safeSetTimeout(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+                btn.classList.remove('update-available', 'up-to-date');
+            }, 3000);
+        });
+    }
 
     // handle download buttons
     document.querySelectorAll('#downloads-authenticated .btn-primary').forEach(btn => {
         if (btn.textContent === 'Download') {
             btn.addEventListener('click', async () => {
-                const version = btn.closest('.feature-card').querySelector('h3').textContent;
+                const versionElement = btn.closest('.feature-card')?.querySelector('h3');
+                if (!versionElement) return;
+                
+                const version = versionElement.textContent;
                 const originalText = btn.textContent;
                 
                 btn.textContent = 'Downloading...';
@@ -938,7 +1053,7 @@
                 
                 showSuccessMessage(`${version} downloaded successfully!`);
                 
-                setTimeout(() => {
+                safeSetTimeout(() => {
                     btn.textContent = originalText;
                     btn.disabled = false;
                     btn.classList.remove('success');
@@ -947,7 +1062,7 @@
         }
     });
 
-    // handle support page buttons
+    //  support page buttons
     document.querySelectorAll('#support .features-grid .btn-primary').forEach(btn => {
         btn.addEventListener('click', () => {
             const action = btn.textContent;
@@ -955,40 +1070,40 @@
         });
     });
 
-    // initialize mobile menu
+    //  mobile menu
     function initializeMobileMenu() {
+        if (!cachedElements.mobileMenuToggle || !cachedElements.navLinks) return;
+        
         let isMenuOpen = false;
         
-        if (cachedElements.mobileMenuToggle && cachedElements.navLinks) {
-            cachedElements.mobileMenuToggle.addEventListener('click', () => {
-                isMenuOpen = !isMenuOpen;
-                
-                cachedElements.mobileMenuToggle.setAttribute('aria-expanded', isMenuOpen);
-                cachedElements.navLinks.setAttribute('aria-hidden', !isMenuOpen);
+        cachedElements.mobileMenuToggle.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            
+            cachedElements.mobileMenuToggle.setAttribute('aria-expanded', isMenuOpen);
+            cachedElements.navLinks.setAttribute('aria-hidden', !isMenuOpen);
 
+            if (isMenuOpen) {
+                cachedElements.navLinks.style.maxHeight = cachedElements.navLinks.scrollHeight + 'px';
+                cachedElements.mobileMenuToggle.classList.add('active');
+            } else {
+                cachedElements.navLinks.style.maxHeight = '0';
+                cachedElements.mobileMenuToggle.classList.remove('active');
+            }
+        });
+
+        // click event to nav links to close menu when clicked
+        const navLinksItems = cachedElements.navLinks.querySelectorAll('a');
+        navLinksItems.forEach(link => {
+            link.addEventListener('click', (e) => {
                 if (isMenuOpen) {
-                    cachedElements.navLinks.style.maxHeight = cachedElements.navLinks.scrollHeight + 'px';
-                    cachedElements.mobileMenuToggle.classList.add('active');
-                } else {
+                    isMenuOpen = false;
                     cachedElements.navLinks.style.maxHeight = '0';
                     cachedElements.mobileMenuToggle.classList.remove('active');
+                    cachedElements.mobileMenuToggle.setAttribute('aria-expanded', false);
+                    cachedElements.navLinks.setAttribute('aria-hidden', true);
                 }
             });
-
-            // Add click event to nav links to close menu when clicked
-            const navLinksItems = cachedElements.navLinks.querySelectorAll('a');
-            navLinksItems.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    if (isMenuOpen) {
-                        isMenuOpen = false;
-                        cachedElements.navLinks.style.maxHeight = '0';
-                        cachedElements.mobileMenuToggle.classList.remove('active');
-                        cachedElements.mobileMenuToggle.setAttribute('aria-expanded', false);
-                        cachedElements.navLinks.setAttribute('aria-hidden', true);
-                    }
-                });
-            });
-        }
+        });
     }
 
     // handle window resize for mobile menu
@@ -996,10 +1111,12 @@
         if (window.innerWidth > 768 && cachedElements.navLinks) {
             cachedElements.navLinks.style.maxHeight = '';
             cachedElements.mobileMenuToggle.classList.remove('active');
+            cachedElements.mobileMenuToggle.setAttribute('aria-expanded', false);
+            cachedElements.navLinks.setAttribute('aria-hidden', false);
         }
     }
 
-    // debounce function for performance
+    // performance 
     function debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -1009,17 +1126,18 @@
             };
             clearTimeout(timeout);
             timeout = setTimeout(later, wait);
+            activeTimeouts.push(timeout); //so you tell me allat hold the site performance? really
         };
     }
 
-    // initialize keyboard shortcuts
+    // keyboard shortcuts
     function initializeKeyboardShortcuts() {
         document.addEventListener('keydown', (e) => {
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) {
                 return;
             }
             
-            // Ctrl/Cmd + K for quick search/dashboard
+            // quick search/dashboard
             if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
                 e.preventDefault();
                 if (isLoggedIn) {
@@ -1029,7 +1147,7 @@
                 }
             }
             
-            // Ctrl/Cmd + D for downloads
+            // downlods
             if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
                 e.preventDefault();
                 if (isLoggedIn) {
@@ -1039,20 +1157,20 @@
                 }
             }
             
-            // Escape to close modal
+            // esc close modal
             if (e.key === 'Escape') {
-                if (loginModal.style.display === 'flex') {
+                if (cachedElements.loginModal && cachedElements.loginModal.style.display === 'flex') {
                     closeLoginModal();
                 }
             }
             
-            // Alt + T for theme toggle
+            //you can toggle themes
             if (e.altKey && e.key === 't') {
                 e.preventDefault();
-                cachedElements.themeToggle.click();
+                if (cachedElements.themeToggle) cachedElements.themeToggle.click();
             }
             
-            // Number keys for navigation (1-5)
+            // numeros for ez walking
             if (e.key >= '1' && e.key <= '5') {
                 const pages = ['home', 'features', 'downloads', 'support', 'dashboard'];
                 const pageIndex = parseInt(e.key) - 1;
@@ -1066,15 +1184,21 @@
         });
     }
 
-    // runs when the page loads
+    // runs when the page loads (needed do not remove or something unrelated will be broke)
     document.addEventListener('DOMContentLoaded', () => {
-        initializeFAQ();
+        // the table of everything
+        initializeFAQ(); // we need one of em btw..
         initializeTheme();
         initializeMobileMenu();
         initializeKeyboardShortcuts();
         setupNavigation();
         
-        window.addEventListener('resize', debounce(handleResize, 250));
+        
+        const debouncedResize = debounce(handleResize, 250);
+        window.addEventListener('resize', debouncedResize);
+        
+       
+        handleResize();
         
         if (checkLoginStatus()) {
             showPage('dashboard');
@@ -1082,10 +1206,14 @@
             showPage('home');
         }
     });
+
+   
+    window.addEventListener('beforeunload', cleanupTimeoutsAndIntervals);
+    
+  
+    safeSetTimeout(() => {
+        console.log('Riverside client initialized successfully');
+    }, 100);
 </script>
 </body>
-</html> 
-
-
-
-
+</html>
