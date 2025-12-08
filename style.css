@@ -51,7 +51,7 @@ html {
 body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Orbitron', -apple-system, BlinkMacSystemFont, 'Bold 700', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
     transition: background-color var(--transition-speed) var(--transition-timing),
@@ -1248,3 +1248,4 @@ footer {
         font-size: 14px;
     }
 }
+
