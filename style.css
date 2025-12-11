@@ -79,6 +79,8 @@ h1 { font-size: 3.25rem; font-weight: 700; line-height: 1.1; color: var(--text-s
 h2 { font-size: 2.5rem; font-weight: 600; margin-bottom: 1rem; }
 h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
 
+
+
 p {
     color: var(--text-secondary);
     font-size: 1.125rem;
@@ -101,6 +103,13 @@ p {
     height: 3px;
     background: var(--accent-primary);
     border-radius: 2px;
+}
+
+mark {
+    background-color: var(--accent-primary);
+    color: white;
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
 }
 
 header {
@@ -701,3 +710,4 @@ copyright { text-align: center; color: var(--text-muted); font-size: 0.9rem; }
         .mobile-menu-toggle.active span:nth-child(3) {
             transform: rotate(-45deg) translate(7px, -6px);
         }
+
