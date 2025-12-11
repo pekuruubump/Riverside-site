@@ -11,25 +11,19 @@ If you fork, remix or use significant portion of  this repo, please credit me so
 changes pushed to this repo are provisional not final and stable version, until I publish an official release, that means features, UI, and text may be tweaked, removed, or replaced while I test ideas. I advise you to wait until I post to releases for the stable, “finished” version.
 
 
-## Downloading the project.
+## Downloading the Project
 
-<!-- BEGIN LATEST DOWNLOAD BUTTON -->
-[Go To Download](https://github.com/pekuruubump/Riverside-site/releases/tag/riverside_v9.01)
-
-
-<!-- END LATEST DOWNLOAD BUTTON -->
-
-**OR**
-
-```
-git clone [https://github.com/pekuruubump/Riverside-site.git]
+### Option 1: Using Git (Recommended)
+```bash
+git clone https://github.com/pekuruubump/Riverside-site.git
 cd Riverside-site
 ```
+### Option 2: Download ZIP
+Go to the [Releases](https://github.com/pekuruubump/Riverside-site/releases) page
 
+Download the latest release files
 
-**OR**
-
-just download from relase page
+Extract the files to your desired location!
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
