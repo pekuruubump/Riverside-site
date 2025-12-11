@@ -14,7 +14,7 @@ changes pushed to this repo are provisional not final and stable version, until 
 ## Downloading the project.
 
 <!-- BEGIN LATEST DOWNLOAD BUTTON -->
-[Go To Download](https://github.com/pekuruubump/Riverside-site/archive/refs/tags/site.zip](https://github.com/pekuruubump/Riverside-site/releases/tag/riverside_v9.01))
+[Go To Download](https://github.com/pekuruubump/Riverside-site/releases/tag/riverside_v9.01)
 
 
 <!-- END LATEST DOWNLOAD BUTTON -->
