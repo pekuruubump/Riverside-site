@@ -22,8 +22,8 @@ changes pushed to this repo are provisional not final and stable version, until 
 **OR**
 
 ```
-git clone https://github.com/pekuruubump/ivoryhook-site.git
-cd ivoryhook-site
+git clone [https://github.com/pekuruubump/Riverside-site.git]
+cd Riverside-site
 ```
 
 
