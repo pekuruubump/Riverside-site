@@ -37,6 +37,6 @@ Extract the files to your desired location!
 
 > WARNING, THIS REPO WAS RENAMED TO RIVERSIDE.MOE IN 18.11.2025 
 
-Why the rename? Well, the name “IvoryHook” sounded kinda unofficial and unprofessional, and honestly, I want this project to look a little more legit so, the rename is about giving it that also its  just a way to make it feel less like some shady side project and more like something worth actually checking out.
+
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
