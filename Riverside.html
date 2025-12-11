@@ -6,16 +6,17 @@
     <title>Riverside - Premium Minecraft Client</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
-    <!-- header -->
+    
     <header>
         <div class="container">
             <nav class="navbar">
                 <div class="logo">
                     riverside.moe 
                 </div>
-                <ul class="nav-links">
+                <ul class="nav-links" aria-hidden="false">
                     <li><a href="#" class="nav-link" data-page="home">Home</a></li>
                     <li><a href="#" class="nav-link" data-page="features">Features</a></li>
                     <li><a href="#" class="nav-link" id="downloads-link" data-page="downloads">Downloads</a></li>
@@ -26,7 +27,7 @@
                     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                         <span class="theme-icon">🌙</span>
                     </button>
-                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
                         <span></span>
                         <span></span>
                         <span></span>
@@ -37,7 +38,7 @@
         </div>
     </header>
 
-    <!-- home -->
+
     <section id="home" class="page-content active">
         <div class="hero">
             <div class="container">
@@ -88,7 +89,7 @@
         </div>
     </section>
 
-    <!-- features -->
+   
     <section id="features" class="page-content">
         <div class="container">
             <h1>Features</h1>
@@ -155,53 +156,54 @@
         </div>
     </section>
 
-    <!-- download -->
-<section id="downloads" class="page-content">
-    <div class="container">
-        <!--not logged in -->
-        <div id="downloads-restricted">
-            <div class="restricted-icon">
-                   🔒
-            </div>
-             <h1>Downloads Restricted</h1>
-             <p>You need to be logged in to access the downloads section.</p>
-            <p>Please log in to download Riverside and access all premium features.</p>
-            <button class="btn btn-primary" style="margin-top: 30px;" id="downloads-login-btn">Login to Access Downloads</button>
-        </div>
-        
-        <!-- content for logged in users (initially hidden) -->
-        <div id="downloads-authenticated" style="display: none;">
-            <h1>Downloads</h1>
-            <p>Download the latest version of Riverside for your Minecraft version.</p>
+    
+    <section id="downloads" class="page-content">
+        <div class="container">
             
-            <div class="features-grid" style="margin-top: 50px;">
-                <div class="feature-card">
-                    <div class="feature-icon">👈</div>
-                    <h3>Riverside v2.1.4</h3>
-                    <p>Compatible with Minecraft 1.8.9</p>
-                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">Download</button>
-                </div>     
-                <div class="feature-card">
-                    <div class="feature-icon">👈</div>
-                    <h3>Riverside v2.0.9</h3>
-                    <p>Compatible with Minecraft 1.20.1</p>
-                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">Download</button>
+            <div id="downloads-restricted">
+                <div class="restricted-icon">
+                       🔒
+                </div>
+                 <h1>Downloads Restricted</h1>
+                 <p>You need to be logged in to access the downloads section.</p>
+                <p>Please log in to download Riverside and access all premium features.</p>
+                <button class="btn btn-primary" style="margin-top: 30px;" id="downloads-login-btn">Login to Access Downloads</button>
+            </div>
+            
+            
+            <div id="downloads-authenticated" style="display: none;">
+                <h1>Downloads</h1>
+                <p>Download the latest version of Riverside for your Minecraft version.</p>
+                
+                <div class="features-grid" style="margin-top: 50px;">
+                    <div class="feature-card">
+                        <div class="feature-icon">👈</div>
+                        <h3>Riverside v2.1.4</h3>
+                        <p>Compatible with Minecraft 1.8.9</p>
+                        <button class="btn btn-primary download-btn" style="margin-top: 20px; width: 100%;" data-version="v2.1.4">Download</button>
+                    </div>     
+                    <div class="feature-card">
+                        <div class="feature-icon">👈</div>
+                        <h3>Riverside v2.0.9</h3>
+                        <p>Compatible with Minecraft 1.20.1</p>
+                        <button class="btn btn-primary download-btn" style="margin-top: 20px; width: 100%;" data-version="v2.0.9">Download</button>
+                    </div>
+                </div>
+                
+                <div class="installation-guide" style="margin-top: 50px; background-color: var(--bg-card); padding: 30px; border-radius: 10px;">
+                    <h3>Installation Guide</h3>
+                    <ol style="margin-top: 15px; padding-left: 20px;">
+                        <li>Download the Riverside client for your Minecraft version</li>
+                        <li>Make sure you have Java 8 or higher installed</li>
+                        <li>Run the installer and follow the on-screen instructions</li>
+                        <li>Launch Minecraft and select the Riverside profile</li>
+                        <li>Log in with your credentials and enjoy!</li>
+                    </ol>
                 </div>
             </div>
-            
-            <div style="margin-top: 50px; background-color: var(--bg-card); padding: 30px; border-radius: 10px; transition: background-color var(--transition-speed) var(--transition-timing);">
-                <h3>Installation Guide</h3>
-                <p style="margin-top: 15px;">1. Download the Riverside client for your Minecraft version</p>
-                <p>2. Make sure you have Java 8 or higher installed</p>
-                <p>3. Run the installer and follow the on-screen instructions</p>
-                <p>4. Launch Minecraft and select the Riverside profile</p>
-                <p>5. Log in with your credentials and enjoy!</p>
-            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-    <!--support page -->
     <section id="support" class="page-content">
         <div class="container">
             <h1>Support</h1>
@@ -212,23 +214,23 @@
                     <div class="feature-icon">📚</div>
                     <h3>Documentation</h3>
                     <p>Comprehensive guides and tutorials for all Riverside features and settings.</p>
-                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">View Documentation</button>
+                    <button class="btn btn-primary support-btn" style="margin-top: 20px; width: 100%;">View Documentation</button>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">❓</div>
                     <h3>FAQ</h3>
                     <p>Answers to frequently asked questions about installation, usage, and troubleshooting.</p>
-                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">View FAQ</button>
+                    <button class="btn btn-primary support-btn" style="margin-top: 20px; width: 100%;">View FAQ</button>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">💬</div>
                     <h3>Contact Support</h3>
                     <p>Can't find what you're looking for? Contact our support team for assistance.</p>
-                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">Contact Us</button>
+                    <button class="btn btn-primary support-btn" style="margin-top: 20px; width: 100%;">Contact Us</button>
                 </div>
             </div>
 
-            <!-- faq section -->
+            
             <div class="faq-section">
                 <h2>Frequently Asked Questions</h2>
                 <div class="faq-list">
@@ -291,7 +293,7 @@
         </div>
     </section>
 
-    <!-- dashboard page -->
+    
     <section id="dashboard" class="page-content dashboard">
         <div class="container">
             <div class="dashboard-header">
@@ -299,7 +301,7 @@
                 <p>Riverside Loader Dashboard</p>
             </div>
             
-            <!-- stats (mostly made up numbers) -->
+            
             <div class="quick-stats">
                 <div class="stat-card">
                     <div class="stat-icon">👥</div>
@@ -345,30 +347,30 @@
         </div>
     </section>
 
-   <!-- login modal -->
-<div class="modal" id="login-modal" aria-hidden="true" aria-labelledby="login-title" style="display: none;">
-    <div class="modal-content" role="dialog" aria-modal="true">
-        <span class="close-modal" id="close-login" aria-label="Close login modal" tabindex="0">&times;</span>
-        <h2 id="login-title">Login to Riverside</h2>
-        <form id="login-form">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" class="form-control" placeholder="Enter your username" required autocomplete="username">
+   
+    <div class="modal" id="login-modal" aria-hidden="true" aria-labelledby="login-title" role="dialog" style="display: none;">
+        <div class="modal-content">
+            <button class="close-modal" id="close-login" aria-label="Close login modal" tabindex="0">&times;</button>
+            <h2 id="login-title">Login to Riverside</h2>
+            <form id="login-form" novalidate>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="form-control" placeholder="Enter your username" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+                <div class="error-message" id="login-error" style="display: none;" role="alert" aria-live="assertive"></div>
+            </form>
+            <div class="demo-credentials" style="margin-top: 15px; padding: 10px; background: #f5f5f5; border-radius: 5px; font-size: 0.9em;">
+                <p style="margin: 0; color: #666;">Demo credentials: admin / admin</p>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
-            </div>
-            <button type="submit" class="submit-btn">Login</button>
-            <div class="error-message" id="login-error" style="display: none;" aria-live="polite">Invalid username or password</div>
-        </form>
-        <div class="demo-credentials" style="margin-top: 15px; padding: 10px; background: #f5f5f5; border-radius: 5px; font-size: 0.9em;">
-            <p style="margin: 0; color: #666;">Demo credentials: admin / admin</p>
         </div>
     </div>
-</div>
 
-    <!-- footer -->
+    
     <footer>
         <div class="container">
             <div class="footer-links">
@@ -384,7 +386,7 @@
     </footer>
 
     <script>
-    // dom..wait holly shit
+    
     const cachedElements = {
         mobileMenuToggle: document.getElementById('mobile-menu-toggle'),
         navLinks: document.querySelector('.nav-links'),
@@ -399,13 +401,15 @@
         logoutBtn: document.getElementById('logout-btn'),
         downloadsHeroBtn: document.getElementById('downloads-hero-btn'),
         downloadsLoginBtn: document.getElementById('downloads-login-btn')
-    }; // its the coder's epstein list
+    };
 
-    // track timeouts and intervals for cleanup
+    
+    let isLoggedIn = false;
+    let currentUsername = '';
     let activeTimeouts = [];
     let activeIntervals = [];
 
-    // cleanup!
+
     function cleanupTimeoutsAndIntervals() {
         activeTimeouts.forEach(timeout => clearTimeout(timeout));
         activeIntervals.forEach(interval => clearInterval(interval));
@@ -413,54 +417,69 @@
         activeIntervals = [];
     }
 
-    // Safe setTimeout with cleanup
+   
     function safeSetTimeout(func, delay) {
         const timeoutId = setTimeout(() => {
-            func();
+            try {
+                func();
+            } catch (error) {
+                console.error('Timeout function error:', error);
+            }
             activeTimeouts = activeTimeouts.filter(id => id !== timeoutId);
         }, delay);
         activeTimeouts.push(timeoutId);
         return timeoutId;
     }
 
-    // Safe setInterval with cleanup
     function safeSetInterval(func, delay) {
-        const intervalId = setInterval(func, delay);
+        const intervalId = setInterval(() => {
+            try {
+                func();
+            } catch (error) {
+                console.error('Interval function error:', error);
+                clearInterval(intervalId);
+            }
+        }, delay);
         activeIntervals.push(intervalId);
         return intervalId;
     }
 
-    // theme toggle 
+    
     function initializeTheme() {
-        // check for saved theme preference or default to dark
         const savedTheme = localStorage.getItem('Riverside-theme') || 'dark';
         
-        // Apply the saved theme
         if (savedTheme === 'light') {
             document.body.classList.add('light-theme');
-            cachedElements.themeIcon.textContent = '☀️';
+            if (cachedElements.themeIcon) {
+                cachedElements.themeIcon.textContent = '☀️';
+            }
         } else {
             document.body.classList.remove('light-theme');
-            cachedElements.themeIcon.textContent = '🌙';
+            if (cachedElements.themeIcon) {
+                cachedElements.themeIcon.textContent = '🌙';
+            }
         }
         
-        // toggle theme when button is clicked
-        cachedElements.themeToggle.addEventListener('click', () => {
-            if (document.body.classList.contains('light-theme')) {
-                // switch to dark theme
-                document.body.classList.remove('light-theme');
-                cachedElements.themeIcon.textContent = '🌙';
-                localStorage.setItem('Riverside-theme', 'dark');
-            } else {
-                // switch to light theme
-                document.body.classList.add('light-theme');
-                cachedElements.themeIcon.textContent = '☀️';
-                localStorage.setItem('Riverside-theme', 'light');
-            }
-        });
+        if (cachedElements.themeToggle) {
+            cachedElements.themeToggle.addEventListener('click', () => {
+                if (document.body.classList.contains('light-theme')) {
+                    document.body.classList.remove('light-theme');
+                    if (cachedElements.themeIcon) {
+                        cachedElements.themeIcon.textContent = '🌙';
+                    }
+                    localStorage.setItem('Riverside-theme', 'dark');
+                } else {
+                    document.body.classList.add('light-theme');
+                    if (cachedElements.themeIcon) {
+                        cachedElements.themeIcon.textContent = '☀️';
+                    }
+                    localStorage.setItem('Riverside-theme', 'light');
+                }
+            });
+        }
     }
 
-    // makes numbers go up like they're counting
+    
     function animateCounter(element, target) {
         if (!element) return;
         
@@ -478,46 +497,53 @@
         }, 30);
     }
 
-    // makes faq questions clickable so they show answers
+    
     function initializeFAQ() {
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
             const toggle = item.querySelector('.faq-toggle');
             
-            question.addEventListener('click', () => {
-                const isActive = item.classList.contains('active');
-                
-                // close all FAQ items first
-                faqItems.forEach(faqItem => {
-                    faqItem.classList.remove('active');
-                    const faqToggle = faqItem.querySelector('.faq-toggle');
-                    if (faqToggle) faqToggle.textContent = '+';
+            if (question) {
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    faqItems.forEach(faqItem => {
+                        faqItem.classList.remove('active');
+                        const faqToggle = faqItem.querySelector('.faq-toggle');
+                        if (faqToggle) faqToggle.textContent = '+';
+                    });
+                    
+                    if (!isActive) {
+                        item.classList.add('active');
+                        if (toggle) toggle.textContent = '−';
+                    }
                 });
                 
-                // open the clicked item if it wasn't active
-                if (!isActive) {
-                    item.classList.add('active');
-                    if (toggle) toggle.textContent = '−';
-                }
-            });
+                question.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        question.click();
+                    }
+                });
+            }
         });
     }
 
-    // sets up fake stats for the dashboard
     function initializeDashboardStats() {
         const onlineUsers = Math.floor(Math.random() * 2000) + 1000;
         const loadsToday = Math.floor(Math.random() * 1000) + 500;
         
         animateCounter(document.getElementById('online-users'), onlineUsers);
         animateCounter(document.getElementById('loads-today'), loadsToday);
+        
+        const lastUpdate = document.getElementById('last-update');
+        if (lastUpdate) {
+            const now = new Date();
+            lastUpdate.textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+        }
     }
 
-    // tracks if someone is logged in
-    let isLoggedIn = false;
-    let currentUsername = '';
-
-    // checks if user is already logged in from localStorage 
     function checkLoginStatus() {
         try {
             const savedLogin = localStorage.getItem('Riverside-login');
@@ -528,14 +554,12 @@
                     const now = new Date();
                     const hoursSinceLogin = (now - loginTime) / (1000 * 60 * 60);
                     
-                    // auto-logout after 24 hours for security
                     if (hoursSinceLogin < 24) {
                         isLoggedIn = true;
                         currentUsername = loginData.username;
                         updateUIForLoggedInUser();
                         return true;
                     } else {
-                        // session expired
                         localStorage.removeItem('Riverside-login');
                     }
                 }
@@ -547,7 +571,6 @@
         return false;
     }
 
-    // saves login to localStorage
     function saveLogin(username) {
         try {
             const loginData = {
@@ -562,7 +585,6 @@
         }
     }
 
-    // removes login from localStorage when you logout
     function clearLogin() {
         try {
             localStorage.removeItem('Riverside-login');
@@ -573,7 +595,6 @@
         }
     }
 
-    // updates the UI to show you're logged in
     function updateUIForLoggedInUser() {
         const usernameDisplay = document.getElementById('username-display');
         if (usernameDisplay) {
@@ -582,16 +603,10 @@
         
         if (cachedElements.loginDashboardBtn) {
             cachedElements.loginDashboardBtn.textContent = 'Dashboard';
-        }
-        
-        const lastUpdate = document.getElementById('last-update');
-        if (lastUpdate) {
-            const now = new Date();
-            lastUpdate.textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+            cachedElements.loginDashboardBtn.setAttribute('aria-label', 'Go to dashboard');
         }
     }
 
-    // navigation handler function
     function navigationHandler(e) {
         e.preventDefault();
         const page = this.getAttribute('data-page');
@@ -600,7 +615,6 @@
         }
     }
 
-    // makes navigation links actually work
     function setupNavigation() {
         if (cachedElements.navLinkItems) {
             cachedElements.navLinkItems.forEach(link => {
@@ -615,41 +629,49 @@
         document.querySelectorAll('.footer-links a[data-page]').forEach(link => {
             link.addEventListener('click', navigationHandler);
         });
+        
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (isLoggedIn) {
+                    const version = this.getAttribute('data-version');
+                    simulateDownload(version);
+                } else {
+                    openLoginModal();
+                }
+            });
+        });
+        
+        document.querySelectorAll('.support-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const action = this.textContent;
+                showSuccessMessage(`Opening ${action}...`);
+            });
+        });
     }
 
-    // shows the right page and hides the others with smooth transition
     function showPage(pageId) {
-        // validate pageId
         const validPages = ['home', 'features', 'downloads', 'support', 'dashboard'];
         if (!validPages.includes(pageId)) {
             console.warn(`Invalid page id: ${pageId}`);
             pageId = 'home';
         }
         
-        // remove active class from all nav links
         if (cachedElements.navLinkItems) {
             cachedElements.navLinkItems.forEach(link => {
                 link.classList.remove('active');
+                if (link.getAttribute('data-page') === pageId) {
+                    link.classList.add('active');
+                }
             });
         }
-
-        // add active class to current nav link
-        if (cachedElements.navLinkItems) {
-            const currentNavLink = Array.from(cachedElements.navLinkItems).find(link => 
-                link.getAttribute('data-page') === pageId
-            );
-            if (currentNavLink) {
-                currentNavLink.classList.add('active');
-            }
-        }
-
+        
         if (pageId === 'dashboard' && !isLoggedIn) {
             openLoginModal();
-            showPage('home');
             return;
         }
         
-        // handle downloads page based on authentication
         if (pageId === 'downloads') {
             const downloadsSection = document.getElementById('downloads');
             const restrictedContent = document.getElementById('downloads-restricted');
@@ -682,7 +704,6 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // smooth transition between pages
     function transitionToPage(targetPage) {
         if (!targetPage) return;
         
@@ -714,10 +735,8 @@
         }
     }
 
-    // login modal functionality
     let lastFocusedElement = null;
 
-    // opens the login popup
     function openLoginModal() {
         lastFocusedElement = document.activeElement;
         if (cachedElements.loginModal) {
@@ -731,10 +750,10 @@
             }, 100);
             
             document.addEventListener('keydown', trapTabKey);
+            document.addEventListener('keydown', handleEscapeKey);
         }
     }
 
-    // closes the login popup
     function closeLoginModal() {
         if (cachedElements.loginModal) {
             cachedElements.loginModal.style.display = 'none';
@@ -757,9 +776,9 @@
         }
         
         document.removeEventListener('keydown', trapTabKey);
+        document.removeEventListener('keydown', handleEscapeKey);
     }
 
-    // keeps keyboard focus trapped in the modal
     function trapTabKey(e) {
         if (e.key === 'Tab' && cachedElements.loginModal) {
             const focusableElements = cachedElements.loginModal.querySelectorAll(
@@ -784,99 +803,122 @@
         }
     }
 
-    // login button functionality
-    if (cachedElements.loginDashboardBtn) {
-        cachedElements.loginDashboardBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (isLoggedIn) {
-                showPage('dashboard');
-            } else {
-                openLoginModal();
-            }
-        });
-    }
-
-    if (cachedElements.closeLoginBtn) {
-        cachedElements.closeLoginBtn.addEventListener('click', closeLoginModal);
-    }
-
-    window.addEventListener('click', (e) => {
-        if (e.target === cachedElements.loginModal) {
+    function handleEscapeKey(e) {
+        if (e.key === 'Escape') {
             closeLoginModal();
         }
-    });
+    }
 
-    // download buttons functionality
-    if (cachedElements.downloadsHeroBtn) {
-        cachedElements.downloadsHeroBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (isLoggedIn) {
-                showPage('downloads');
-            } else {
-                openLoginModal();
+    function setupEventListeners() {
+        if (cachedElements.loginDashboardBtn) {
+            cachedElements.loginDashboardBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (isLoggedIn) {
+                    showPage('dashboard');
+                } else {
+                    openLoginModal();
+                }
+            });
+        }
+        
+        if (cachedElements.closeLoginBtn) {
+            cachedElements.closeLoginBtn.addEventListener('click', closeLoginModal);
+        }
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === cachedElements.loginModal) {
+                closeLoginModal();
             }
         });
-    }
-
-    if (cachedElements.downloadsLoginBtn) {
-        cachedElements.downloadsLoginBtn.addEventListener('click', openLoginModal);
-    }
-
-    // handles the actual login form submission
-    if (cachedElements.loginForm) {
-        cachedElements.loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const usernameInput = document.getElementById('username');
-            const passwordInput = document.getElementById('password');
-            
-            if (!usernameInput || !passwordInput) return;
-            
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value;
-            const submitBtn = cachedElements.loginForm.querySelector('.submit-btn');
-            
-            if (!submitBtn) return;
-            
-            submitBtn.textContent = 'Logging in...';
-            submitBtn.disabled = true;
-            if (cachedElements.loginError) {
-                cachedElements.loginError.style.display = 'none';
-            }
-
-            if (!validateLoginForm(username, password)) {
-                submitBtn.textContent = 'Login';
-                submitBtn.disabled = false;
-                return;
-            }
-            
-            await simulateAsyncOperation(800);
-            
-            if (username === 'admin' && password === 'admin') {
-                isLoggedIn = true;
-                currentUsername = username;
-                if (saveLogin(username)) {
-                    updateUIForLoggedInUser();
-                    showPage('dashboard');
-                    closeLoginModal();
-                    showSuccessMessage('Login successful! Welcome back, ' + username);
+        
+        if (cachedElements.downloadsHeroBtn) {
+            cachedElements.downloadsHeroBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (isLoggedIn) {
+                    showPage('downloads');
                 } else {
-                    showError('Error saving login session. Please try again.');
+                    openLoginModal();
                 }
-            } else {
-                showError('Invalid username or password');
-                if (usernameInput) usernameInput.value = '';
-                if (passwordInput) passwordInput.value = '';
-                if (passwordInput) passwordInput.focus();
-            }
-            
+            });
+        }
+        
+        if (cachedElements.downloadsLoginBtn) {
+            cachedElements.downloadsLoginBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openLoginModal();
+            });
+        }
+        
+        if (cachedElements.loginForm) {
+            cachedElements.loginForm.addEventListener('submit', handleLoginSubmit);
+        }
+        
+        if (cachedElements.logoutBtn) {
+            cachedElements.logoutBtn.addEventListener('click', handleLogout);
+        }
+        
+        const launchLoaderBtn = document.getElementById('launch-loader-btn');
+        if (launchLoaderBtn) {
+            launchLoaderBtn.addEventListener('click', handleLaunchLoader);
+        }
+        
+        const checkUpdatesBtn = document.getElementById('check-updates-btn');
+        if (checkUpdatesBtn) {
+            checkUpdatesBtn.addEventListener('click', handleCheckUpdates);
+        }
+    }
+
+    async function handleLoginSubmit(e) {
+        e.preventDefault();
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        
+        if (!usernameInput || !passwordInput) return;
+        
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value;
+        const submitBtn = cachedElements.loginForm.querySelector('.submit-btn');
+        
+        if (!submitBtn) return;
+        
+        submitBtn.textContent = 'Logging in...';
+        submitBtn.disabled = true;
+        if (cachedElements.loginError) {
+            cachedElements.loginError.style.display = 'none';
+        }
+        
+        if (!validateLoginForm(username, password)) {
             submitBtn.textContent = 'Login';
             submitBtn.disabled = false;
-        });
+            return;
+        }
+        
+        await simulateAsyncOperation(800);
+        
+        if (username === 'admin' && password === 'admin') {
+            isLoggedIn = true;
+            currentUsername = username;
+            if (saveLogin(username)) {
+                updateUIForLoggedInUser();
+                closeLoginModal();
+                showSuccessMessage('Login successful! Welcome back, ' + username);
+                safeSetTimeout(() => showPage('dashboard'), 500);
+            } else {
+                showError('Error saving login session. Please try again.');
+            }
+        } else {
+            showError('Invalid username or password');
+            usernameInput.value = '';
+            passwordInput.value = '';
+            passwordInput.focus();
+        }
+        
+        submitBtn.textContent = 'Login';
+        submitBtn.disabled = false;
     }
 
-    // password security 
     function validateLoginForm(username, password) {
-        const sanitizedUsername = username.trim().replace(/[<>"'&\/\\]/g, '');
+        const sanitizedUsername = username.replace(/[<>"'&\/\\]/g, '');
         const sanitizedPassword = password.replace(/[<>"'&\/\\]/g, '');
         
         const dangerousPatterns = [
@@ -890,12 +932,12 @@
             }
         }
         
-        if (sanitizedUsername.length === 0 || sanitizedPassword.length === 0) {
+        if (!sanitizedUsername.trim() || !sanitizedPassword) {
             showError('Please fill in all fields');
             return false;
         }
         
-        if (sanitizedUsername.length < 3) {
+        if (sanitizedUsername.trim().length < 3) {
             showError('Username must be at least 3 characters');
             return false;
         }
@@ -908,35 +950,31 @@
         return true;
     }
 
-    // show error message with animation
     function showError(message) {
         if (!cachedElements.loginError) return;
         
         cachedElements.loginError.textContent = message;
         cachedElements.loginError.style.display = 'block';
         cachedElements.loginError.style.animation = 'shake 0.5s';
+        
         safeSetTimeout(() => {
             cachedElements.loginError.style.animation = '';
         }, 500);
     }
 
-    // show success message
     function showSuccessMessage(message) {
+        const existingNotifications = document.querySelectorAll('.success-notification');
+        existingNotifications.forEach(notification => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        });
+        
         const notification = document.createElement('div');
         notification.className = 'success-notification';
+        notification.setAttribute('role', 'alert');
+        notification.setAttribute('aria-live', 'polite');
         notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #4CAF50;
-            color: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 10000;
-            animation: slideIn 0.3s ease-out;
-        `; //ah yes.. the css in html, we have a FILE for this!
         
         document.body.appendChild(notification);
         
@@ -952,7 +990,6 @@
         return timeoutId;
     }
 
-    // simulate async operation
     function simulateAsyncOperation(ms) {
         return new Promise(resolve => {
             const timeoutId = setTimeout(resolve, ms);
@@ -960,117 +997,98 @@
         });
     }
 
-    // logs the user out
-    if (cachedElements.logoutBtn) {
-        cachedElements.logoutBtn.addEventListener('click', () => {
-            isLoggedIn = false;
-            currentUsername = '';
-            if (clearLogin()) {
-                cleanupTimeoutsAndIntervals();
-                showPage('home');
-                if (cachedElements.loginDashboardBtn) {
-                    cachedElements.loginDashboardBtn.textContent = 'Login';
-                }
-                showSuccessMessage('Logged out successfully');
-            }
-        });
-    }
-
-    // launch loader functionality
-    const launchLoaderBtn = document.getElementById('launch-loader-btn');
-    if (launchLoaderBtn) {
-        launchLoaderBtn.addEventListener('click', async () => {
-            const btn = launchLoaderBtn;
-            const originalText = btn.textContent;
+    function handleLogout() {
+        isLoggedIn = false;
+        currentUsername = '';
+        
+        if (clearLogin()) {
+            cleanupTimeoutsAndIntervals();
             
-            btn.textContent = 'Launching...';
-            btn.disabled = true;
-            
-            await simulateAsyncOperation(2000);
-            
-            btn.textContent = 'Loader Active';
-            btn.classList.add('success');
-            
-            showSuccessMessage('Riverside loader launched successfully!');
-            
-            safeSetTimeout(() => {
-                btn.textContent = originalText;
-                btn.disabled = false;
-                btn.classList.remove('success');
-            }, 3000);
-        });
-    }
-
-    // check for updates functionality
-    const checkUpdatesBtn = document.getElementById('check-updates-btn');
-    if (checkUpdatesBtn) {
-        checkUpdatesBtn.addEventListener('click', async () => {
-            const btn = checkUpdatesBtn;
-            const originalText = btn.textContent;
-            
-            btn.textContent = 'Checking...';
-            btn.disabled = true;
-            
-            await simulateAsyncOperation(1500);
-            
-            const updateAvailable = Math.random() > 0.5;
-            
-            if (updateAvailable) {
-                showSuccessMessage('Update v2.2.0 is available! Download from the Downloads page.');
-                btn.textContent = 'Update Available';
-                btn.classList.add('update-available');
-            } else {
-                showSuccessMessage('You are using the latest version of Riverside.');
-                btn.textContent = 'Up to Date';
-                btn.classList.add('up-to-date');
+            if (cachedElements.loginDashboardBtn) {
+                cachedElements.loginDashboardBtn.textContent = 'Login';
+                cachedElements.loginDashboardBtn.setAttribute('aria-label', 'Login to Riverside');
             }
             
-            safeSetTimeout(() => {
-                btn.textContent = originalText;
-                btn.disabled = false;
-                btn.classList.remove('update-available', 'up-to-date');
-            }, 3000);
-        });
-    }
-
-    // handle download buttons
-    document.querySelectorAll('#downloads-authenticated .btn-primary').forEach(btn => {
-        if (btn.textContent === 'Download') {
-            btn.addEventListener('click', async () => {
-                const versionElement = btn.closest('.feature-card')?.querySelector('h3');
-                if (!versionElement) return;
-                
-                const version = versionElement.textContent;
-                const originalText = btn.textContent;
-                
-                btn.textContent = 'Downloading...';
-                btn.disabled = true;
-                
-                await simulateAsyncOperation(2000);
-                
-                btn.textContent = 'Downloaded!';
-                btn.classList.add('success');
-                
-                showSuccessMessage(`${version} downloaded successfully!`);
-                
-                safeSetTimeout(() => {
-                    btn.textContent = originalText;
-                    btn.disabled = false;
-                    btn.classList.remove('success');
-                }, 3000);
-            });
+            showPage('home');
+            
+            showSuccessMessage('Logged out successfully');
         }
-    });
+    }
 
-    //  support page buttons
-    document.querySelectorAll('#support .features-grid .btn-primary').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const action = btn.textContent;
-            showSuccessMessage(`Opening ${action}...`);
-        });
-    });
+    async function handleLaunchLoader() {
+        const btn = document.getElementById('launch-loader-btn');
+        if (!btn) return;
+        
+        const originalText = btn.textContent;
+        
+        btn.textContent = 'Launching...';
+        btn.disabled = true;
+        
+        await simulateAsyncOperation(2000);
+        
+        btn.textContent = 'Loader Active';
+        btn.classList.add('success');
+        
+        showSuccessMessage('Riverside loader launched successfully!');
+        
+        safeSetTimeout(() => {
+            btn.textContent = originalText;
+            btn.disabled = false;
+            btn.classList.remove('success');
+        }, 3000);
+    }
 
-    //  mobile menu
+    async function handleCheckUpdates() {
+        const btn = document.getElementById('check-updates-btn');
+        if (!btn) return;
+        
+        const originalText = btn.textContent;
+        
+        btn.textContent = 'Checking...';
+        btn.disabled = true;
+        
+        await simulateAsyncOperation(1500);
+        
+        const updateAvailable = Math.random() > 0.5;
+        
+        if (updateAvailable) {
+            showSuccessMessage('Update v2.2.0 is available! Download from the Downloads page.');
+            btn.textContent = 'Update Available';
+            btn.classList.add('update-available');
+        } else {
+            showSuccessMessage('You are using the latest version of Riverside.');
+            btn.textContent = 'Up to Date';
+            btn.classList.add('up-to-date');
+        }
+        
+        safeSetTimeout(() => {
+            btn.textContent = originalText;
+            btn.disabled = false;
+            btn.classList.remove('update-available', 'up-to-date');
+        }, 3000);
+    }
+
+    async function simulateDownload(version) {
+        const btn = event.target;
+        const originalText = btn.textContent;
+        
+        btn.textContent = 'Downloading...';
+        btn.disabled = true;
+        
+        await simulateAsyncOperation(2000);
+        
+        btn.textContent = 'Downloaded!';
+        btn.classList.add('success');
+        
+        showSuccessMessage(`${version} downloaded successfully!`);
+        
+        safeSetTimeout(() => {
+            btn.textContent = originalText;
+            btn.disabled = false;
+            btn.classList.remove('success');
+        }, 3000);
+    }
+
     function initializeMobileMenu() {
         if (!cachedElements.mobileMenuToggle || !cachedElements.navLinks) return;
         
@@ -1091,10 +1109,9 @@
             }
         });
 
-        // click event to nav links to close menu when clicked
         const navLinksItems = cachedElements.navLinks.querySelectorAll('a');
         navLinksItems.forEach(link => {
-            link.addEventListener('click', (e) => {
+            link.addEventListener('click', () => {
                 if (isMenuOpen) {
                     isMenuOpen = false;
                     cachedElements.navLinks.style.maxHeight = '0';
@@ -1106,7 +1123,6 @@
         });
     }
 
-    // handle window resize for mobile menu
     function handleResize() {
         if (window.innerWidth > 768 && cachedElements.navLinks) {
             cachedElements.navLinks.style.maxHeight = '';
@@ -1116,7 +1132,6 @@
         }
     }
 
-    // performance 
     function debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -1126,18 +1141,18 @@
             };
             clearTimeout(timeout);
             timeout = setTimeout(later, wait);
-            activeTimeouts.push(timeout); //so you tell me allat hold the site performance? really
+            activeTimeouts.push(timeout);
         };
     }
 
-    // keyboard shortcuts
     function initializeKeyboardShortcuts() {
         document.addEventListener('keydown', (e) => {
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) {
+            if (e.target.tagName === 'INPUT' || 
+                e.target.tagName === 'TEXTAREA' || 
+                e.target.isContentEditable) {
                 return;
             }
             
-            // quick search/dashboard
             if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
                 e.preventDefault();
                 if (isLoggedIn) {
@@ -1147,7 +1162,6 @@
                 }
             }
             
-            // downlods
             if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
                 e.preventDefault();
                 if (isLoggedIn) {
@@ -1157,20 +1171,20 @@
                 }
             }
             
-            // esc close modal
             if (e.key === 'Escape') {
-                if (cachedElements.loginModal && cachedElements.loginModal.style.display === 'flex') {
+                if (cachedElements.loginModal && 
+                    cachedElements.loginModal.style.display === 'flex') {
                     closeLoginModal();
                 }
             }
             
-            //you can toggle themes
             if (e.altKey && e.key === 't') {
                 e.preventDefault();
-                if (cachedElements.themeToggle) cachedElements.themeToggle.click();
+                if (cachedElements.themeToggle) {
+                    cachedElements.themeToggle.click();
+                }
             }
             
-            // numeros for ez walking
             if (e.key >= '1' && e.key <= '5') {
                 const pages = ['home', 'features', 'downloads', 'support', 'dashboard'];
                 const pageIndex = parseInt(e.key) - 1;
@@ -1184,20 +1198,16 @@
         });
     }
 
-    // runs when the page loads (needed do not remove or something unrelated will be broke)
     document.addEventListener('DOMContentLoaded', () => {
-        // the table of everything
-        initializeFAQ(); // we need one of em btw..
+        initializeFAQ();
         initializeTheme();
         initializeMobileMenu();
         initializeKeyboardShortcuts();
         setupNavigation();
-        
+        setupEventListeners();
         
         const debouncedResize = debounce(handleResize, 250);
         window.addEventListener('resize', debouncedResize);
-        
-       
         handleResize();
         
         if (checkLoginStatus()) {
@@ -1205,17 +1215,23 @@
         } else {
             showPage('home');
         }
+        
+        safeSetTimeout(() => {
+            console.log('Riverside client initialized successfully');
+        }, 100);
     });
 
-   
     window.addEventListener('beforeunload', cleanupTimeoutsAndIntervals);
+    window.addEventListener('pagehide', cleanupTimeoutsAndIntervals);
     
-  
-    safeSetTimeout(() => {
-        console.log('Riverside client initialized successfully');
-    }, 100);
-</script>
+    window.addEventListener('error', (e) => {
+        console.error('Unhandled error:', e.error);
+    });
+    
+    window.addEventListener('unhandledrejection', (e) => {
+        console.error('Unhandled promise rejection:', e.reason);
+        e.preventDefault();
+    });
+    </script>
 </body>
 </html>
-
-
