@@ -1,1248 +1,1244 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riverside - Premium Minecraft Client</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Riverside - Premium Minecraft Client</title>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
-    
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    riverside.moe
-                </div>
-                <ul class="nav-links" aria-hidden="false">
-                    <li><a href="#" class="nav-link" data-page="home">Home</a></li>
-                    <li><a href="#" class="nav-link" data-page="features">Features</a></li>
-                    <li><a href="#" class="nav-link" id="downloads-link" data-page="downloads">Downloads</a></li>
-                    <li><a href="#" class="nav-link" data-page="support">Support</a></li>
-                    <li><a href="#" class="nav-link" data-page="dashboard">Dashboard</a></li>
-                </ul>
-                <div class="navbar-actions">
-                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-                        <span class="theme-icon">🌙</span>
-                    </button>
-                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                    <button class="login-btn" id="login-dashboard-btn">Login</button>
-                </div>
-            </nav>
-        </div>
-    </header>
+
+	<header>
+		<div class="container">
+			<nav class="navbar">
+				<div class="logo">
+					riverside.moe
+				</div>
+				<ul class="nav-links" aria-hidden="false">
+					<li><a href="#" class="nav-link" data-page="home">Home</a></li>
+					<li><a href="#" class="nav-link" data-page="features">Features</a></li>
+					<li><a href="#" class="nav-link" id="downloads-link" data-page="downloads">Downloads</a></li>
+					<li><a href="#" class="nav-link" data-page="support">Support</a></li>
+					<li><a href="#" class="nav-link" data-page="dashboard">Dashboard</a></li>
+				</ul>
+				<div class="navbar-actions">
+					<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+						<span class="theme-icon">🌙</span>
+					</button>
+					<button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+					<button class="login-btn" id="login-dashboard-btn">Login</button>
+				</div>
+			</nav>
+		</div>
+	</header>
 
 
-    <section id="home" class="page-content active">
-        <div class="hero">
-            <div class="container">
-                <h1><mark>Riverside</mark> Client</h1>
-                
-                <p>
-                    Experience Minecraft With Premium Client With <mark>Ghost</mark> And <mark>Blatant</mark> Modules.
-                </p>
-                <div class="hero-btns">
-                    <a href="#" class="btn btn-primary" data-page="features">Explore Features</a>
-                    <a href="#" class="btn btn-secondary" id="downloads-hero-btn">Download Now</a>
-                </div>
-            </div>
-        </div>
+	<section id="home" class="page-content active">
+		<div class="hero">
+			<div class="container">
+				<h1><mark>Riverside</mark> Client</h1>
 
-        <div class="features">
-            <div class="container">
-                <h2 class="section-title">Why Choose Riverside?</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            ⭐
-                        </div>
-                        <h3>High Performance</h3>
-                        <p>
-                            Optimized code ensures minimal impact on your game performance while providing all the features you need.
-                        </p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            🛡️
-                        </div>
-                        <h3>Undetectable</h3>
-                        <p>
-                            Advanced obfuscation techniques and regular updates keep you safe from detection systems.
-                        </p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            👍
-                        </div>
-                        <h3>Regular Updates</h3>
-                        <p>
-                            Our team works constantly to provide updates for the latest Minecraft versions and new features.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+				<p>
+					Experience Minecraft With Premium Client With <mark>Ghost</mark> And <mark>Blatant</mark> Modules.
+				</p>
+				<div class="hero-btns">
+					<a href="#" class="btn btn-primary" data-page="features">Explore Features</a>
+					<a href="#" class="btn btn-secondary" id="downloads-hero-btn">Download Now</a>
+				</div>
+			</div>
+		</div>
 
-   
-    <section id="features" class="page-content">
-        <div class="container">
-            <h1>Features</h1>
-            <p>
-                Riverside offers a comprehensive set of features designed to enhance your Minecraft experience.
-            </p>
-
-            <div class="features-grid" style="margin-top: 50px;">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        🎯
-                    </div>
-                    <h3>Combat Modules</h3>
-                    <p>
-                        Advanced PVP utilities including KillAura, AutoClicker, Reach, and Velocity.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        🚶
-                    </div>
-                    <h3>Movement Enhancements</h3>
-                    <p>
-                        Fly, Speed, NoSlow, and other movement modules.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        👁️
-                    </div>
-                    <h3>Visual Improvements</h3>
-                    <p>
-                        ESP, Tracers, Nametags, and other visual aids.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        ⚙️
-                    </div>
-                    <h3>Utility Modules</h3>
-                    <p>
-                        Inventory management, AutoTool, ChestStealer, and other.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        🌍
-                    </div>
-                    <h3>World Exploration</h3>
-                    <p>
-                        X-Ray, CaveFinder, and other modules.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        🔧
-                    </div>
-                    <h3>Customization</h3>
-                    <p>
-                        Fully customizable GUI, keybinds, and settings to tailor the client to your preferences.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    
-    <section id="downloads" class="page-content">
-        <div class="container">
-            
-            <div id="downloads-restricted">
-                <div class="restricted-icon">
-                       🔒
-                </div>
-                 <h1>Downloads Restricted</h1>
-                 <p>You need to be logged in to access the downloads section.</p>
-                <p>Please log in to download Riverside and access all premium features.</p>
-                <button class="btn btn-primary" style="margin-top: 30px;" id="downloads-login-btn">Login to Access Downloads</button>
-            </div>
-            
-            
-            <div id="downloads-authenticated" style="display: none;">
-                <h1>Downloads</h1>
-                <p>Download the latest version of Riverside for your Minecraft version.</p>
-                
-                <div class="features-grid" style="margin-top: 50px;">
-                    <div class="feature-card">
-                        <div class="feature-icon">👈</div>
-                        <h3>Riverside v2.1.4</h3>
-                        <p>Compatible with Minecraft 1.8.9</p>
-                        <button class="btn btn-primary download-btn" style="margin-top: 20px; width: 100%;" data-version="v2.1.4">Download</button>
-                    </div>     
-                    <div class="feature-card">
-                        <div class="feature-icon">👈</div>
-                        <h3>Riverside v2.0.9</h3>
-                        <p>Compatible with Minecraft 1.20.1</p>
-                        <button class="btn btn-primary download-btn" style="margin-top: 20px; width: 100%;" data-version="v2.0.9">Download</button>
-                    </div>
-                </div>
-                
-                <div class="installation-guide" style="margin-top: 50px; background-color: var(--bg-card); padding: 30px; border-radius: 10px;">
-                    <h3>Installation Guide</h3>
-                    <ol style="margin-top: 15px; padding-left: 20px;">
-                        <li>Download the Riverside client for your Minecraft version</li>
-                        <li>Make sure you have Java 8 or higher installed</li>
-                        <li>Run the installer and follow the on-screen instructions</li>
-                        <li>Launch Minecraft and select the Riverside profile</li>
-                        <li>Log in with your credentials and enjoy!</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="support" class="page-content">
-        <div class="container">
-            <h1>Support</h1>
-            <p>Need help with Riverside? Check out our resources below or contact our support team.</p>
-            
-            <div class="features-grid" style="margin-top: 50px;">
-                <div class="feature-card">
-                    <div class="feature-icon">📚</div>
-                    <h3>Documentation</h3>
-                    <p>Comprehensive guides and tutorials for all Riverside features and settings.</p>
-                    <button class="btn btn-primary support-btn" style="margin-top: 20px; width: 100%;">View Documentation</button>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">❓</div>
-                    <h3>FAQ</h3>
-                    <p>Answers to frequently asked questions about installation, usage, and troubleshooting.</p>
-                    <button class="btn btn-primary support-btn" style="margin-top: 20px; width: 100%;">View FAQ</button>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💬</div>
-                    <h3>Contact Support</h3>
-                    <p>Can't find what you're looking for? Contact our support team for assistance.</p>
-                    <button class="btn btn-primary support-btn" style="margin-top: 20px; width: 100%;">Contact Us</button>
-                </div>
-            </div>
-
-            
-            <div class="faq-section">
-                <h2>Frequently Asked Questions</h2>
-                <div class="faq-list">
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>Is Riverside detectable by server anti-cheats?</span>
-                            <span class="faq-toggle">+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Riverside uses advanced obfuscation techniques to avoid detection. However, no client can guarantee 100% undetectability on all servers. We recommend using our ghost modules on servers with strict anti-cheat systems.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>What Minecraft versions are supported?</span>
-                            <span class="faq-toggle">+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>We currently support Minecraft 1.7.10, 1.8.9, 1.12.2, 1.16.5, 1.18.2, 1.19.4, and 1.20.1. Check our downloads page for the latest supported versions.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>How often is Riverside updated?</span>
-                            <span class="faq-toggle">+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>We release updates regularly to add new features, improve performance, and maintain compatibility with the latest Minecraft versions. Major updates typically occur every 2-4 weeks.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>Is there a free trial available?</span>
-                            <span class="faq-toggle">+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Yes! We offer a 3-day free trial for new users. You can access all premium features during the trial period to test if Riverside meets your needs.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>Can I use Riverside on multiple computers?</span>
-                            <span class="faq-toggle">+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Your subscription allows you to use Riverside on up to 2 devices simultaneously. If you need more devices, please contact our support team.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>What payment methods do you accept?</span>
-                            <span class="faq-toggle">+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>We accept credit/debit cards, PayPal, and various cryptocurrencies. All payments are processed securely through our payment partners.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    
-    <section id="dashboard" class="page-content dashboard">
-        <div class="container">
-            <div class="dashboard-header">
-                <h1>Welcome, <mark><span id="username-display"></span></mark></h1>
-                <p> riverside.moe loader dashboard  </p>
-            </div>
-            
-            
-            <div class="quick-stats">
-                <div class="stat-card">
-                    <div class="stat-icon">👥</div>
-                    <div class="stat-info">
-                        <span class="stat-value" id="online-users">1,247</span>
-                        <span class="stat-label">Users Online</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">⚡</div>
-                    <div class="stat-info">
-                        <span class="stat-value" id="loads-today">892</span>
-                        <span class="stat-label">Loads Today</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="status-panel">
-                <h2 style="margin-bottom: 20px;">Status Panel</h2>
-                <div class="status-item">
-                    <span class="status-label">Loader Status:</span>
-                    <span class="status-value status-ready">Ready</span>
-                </div>
-                <div class="status-item">
-                    <span class="status-label">Last Update:</span>
-                    <span class="status-value" id="last-update">Loading...</span>
-                </div>
-                <div class="status-item">
-                    <span class="status-label">Detection Status:</span>
-                    <span class="status-value status-clean">Clean</span>
-                </div>
-                <div class="status-item">
-                    <span class="status-label">Subscription:</span>
-                    <span class="status-value status-ready">Active</span>
-                </div>
-            </div>
-            
-            <div class="loader-actions">
-                <button class="btn btn-primary" id="launch-loader-btn">Launch Loader</button>
-                <button class="btn btn-secondary" id="check-updates-btn">Check for Updates</button>
-                <button class="btn btn-secondary" id="logout-btn">Logout</button>
-            </div>
-        </div>
-    </section>
-
-   
-    <div class="modal" id="login-modal" aria-hidden="true" aria-labelledby="login-title" role="dialog" style="display: none;">
-        <div class="modal-content">
-            <button class="close-modal" id="close-login" aria-label="Close login modal" tabindex="0">&times;</button>
-            <h2 id="login-title">Login to Riverside</h2>
-            <form id="login-form" novalidate>
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" class="form-control" placeholder="Enter your username" required autocomplete="username">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
-                </div>
-                <button type="submit" class="submit-btn">Login</button>
-                <div class="error-message" id="login-error" style="display: none;" role="alert" aria-live="assertive"></div>
-            </form>
-            <div class="demo-credentials" style="margin-top: 15px; padding: 10px; background: #f5f5f5; border-radius: 5px; font-size: 0.9em;">
-                <p style="margin: 0; color: #666;">Demo credentials: admin / admin</p>
-            </div>
-        </div>
-    </div>
-
-    
-    <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="#" data-page="home">Home</a>
-                <a href="#" data-page="features">Features</a>
-                <a href="#" data-page="downloads">Downloads</a>
-                <a href="#" data-page="support">Support</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-            </div>
-            <p class="copyright">© 2025 Riverside. All rights reserved. This is a fictional website for testing purposes only.</p>
-        </div>
-    </footer>
-
-    <script>
-    
-    const cachedElements = {
-        mobileMenuToggle: document.getElementById('mobile-menu-toggle'),
-        navLinks: document.querySelector('.nav-links'),
-        navLinkItems: document.querySelectorAll('.nav-link'),
-        themeToggle: document.getElementById('theme-toggle'),
-        themeIcon: document.querySelector('.theme-icon'),
-        loginModal: document.getElementById('login-modal'),
-        closeLoginBtn: document.getElementById('close-login'),
-        loginForm: document.getElementById('login-form'),
-        loginError: document.getElementById('login-error'),
-        loginDashboardBtn: document.getElementById('login-dashboard-btn'),
-        logoutBtn: document.getElementById('logout-btn'),
-        downloadsHeroBtn: document.getElementById('downloads-hero-btn'),
-        downloadsLoginBtn: document.getElementById('downloads-login-btn')
-    };
-
-    
-    let isLoggedIn = false;
-    let currentUsername = '';
-    let activeTimeouts = [];
-    let activeIntervals = [];
+		<div class="features">
+			<div class="container">
+				<h2 class="section-title">Why Choose Riverside?</h2>
+				<div class="features-grid">
+					<div class="feature-card">
+						<div class="feature-icon">
+							⭐
+						</div>
+						<h3>High Performance</h3>
+						<p>
+							Optimized code ensures minimal impact on your game performance while providing all the features you need.
+						</p>
+					</div>
+					<div class="feature-card">
+						<div class="feature-icon">
+							🛡️
+						</div>
+						<h3>Undetectable</h3>
+						<p>
+							Advanced obfuscation techniques and regular updates keep you safe from detection systems.
+						</p>
+					</div>
+					<div class="feature-card">
+						<div class="feature-icon">
+							👍
+						</div>
+						<h3>Regular Updates</h3>
+						<p>
+							Our team works constantly to provide updates for the latest Minecraft versions and new features.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 
-    function cleanupTimeoutsAndIntervals() {
-        activeTimeouts.forEach(timeout => clearTimeout(timeout));
-        activeIntervals.forEach(interval => clearInterval(interval));
-        activeTimeouts = [];
-        activeIntervals = [];
-    }
+	<section id="features" class="page-content">
+		<div class="container">
+			<h1>Features</h1>
+			<p>
+				Riverside offers a comprehensive set of features designed to enhance your Minecraft experience.
+			</p>
 
-   
-    function safeSetTimeout(func, delay) {
-        const timeoutId = setTimeout(() => {
-            try {
-                func();
-            } catch (error) {
-                console.error('Timeout function error:', error);
-            }
-            activeTimeouts = activeTimeouts.filter(id => id !== timeoutId);
-        }, delay);
-        activeTimeouts.push(timeoutId);
-        return timeoutId;
-    }
+			<div class="features-grid" style="margin-top: 50px;">
+				<div class="feature-card">
+					<div class="feature-icon">
+						🎯
+					</div>
+					<h3>Combat Modules</h3>
+					<p>
+						Advanced PVP utilities including KillAura, AutoClicker, Reach, and Velocity.
+					</p>
+				</div>
+				<div class="feature-card">
+					<div class="feature-icon">
+						🚶
+					</div>
+					<h3>Movement Enhancements</h3>
+					<p>
+						Fly, Speed, NoSlow, and other movement modules.
+					</p>
+				</div>
+				<div class="feature-card">
+					<div class="feature-icon">
+						👁️
+					</div>
+					<h3>Visual Improvements</h3>
+					<p>
+						ESP, Tracers, Nametags, and other visual aids.
+					</p>
+				</div>
+				<div class="feature-card">
+					<div class="feature-icon">
+						⚙️
+					</div>
+					<h3>Utility Modules</h3>
+					<p>
+						Inventory management, AutoTool, ChestStealer, and other.
+					</p>
+				</div>
+				<div class="feature-card">
+					<div class="feature-icon">
+						🌍
+					</div>
+					<h3>World Exploration</h3>
+					<p>
+						X-Ray, CaveFinder, and other modules.
+					</p>
+				</div>
+				<div class="feature-card">
+					<div class="feature-icon">
+						🔧
+					</div>
+					<h3>Customization</h3>
+					<p>
+						Fully customizable GUI, keybinds, and settings to tailor the client to your preferences.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
 
-    function safeSetInterval(func, delay) {
-        const intervalId = setInterval(() => {
-            try {
-                func();
-            } catch (error) {
-                console.error('Interval function error:', error);
-                clearInterval(intervalId);
-            }
-        }, delay);
-        activeIntervals.push(intervalId);
-        return intervalId;
-    }
 
-    
-    function initializeTheme() {
-        const savedTheme = localStorage.getItem('Riverside-theme') || 'dark';
-        
-        if (savedTheme === 'light') {
-            document.body.classList.add('light-theme');
-            if (cachedElements.themeIcon) {
-                cachedElements.themeIcon.textContent = '☀️';
-            }
-        } else {
-            document.body.classList.remove('light-theme');
-            if (cachedElements.themeIcon) {
-                cachedElements.themeIcon.textContent = '🌙';
-            }
-        }
-        
-        if (cachedElements.themeToggle) {
-            cachedElements.themeToggle.addEventListener('click', () => {
-                if (document.body.classList.contains('light-theme')) {
-                    document.body.classList.remove('light-theme');
-                    if (cachedElements.themeIcon) {
-                        cachedElements.themeIcon.textContent = '🌙';
-                    }
-                    localStorage.setItem('Riverside-theme', 'dark');
-                } else {
-                    document.body.classList.add('light-theme');
-                    if (cachedElements.themeIcon) {
-                        cachedElements.themeIcon.textContent = '☀️';
-                    }
-                    localStorage.setItem('Riverside-theme', 'light');
-                }
-            });
-        }
-    }
+	<section id="downloads" class="page-content">
+		<div class="container">
 
-    
-    function animateCounter(element, target) {
-        if (!element) return;
-        
-        let current = 0;
-        const increment = target / 50;
-        const timer = safeSetInterval(() => {
-            current += increment;
-            if (current >= target) {
-                element.textContent = Math.round(target).toLocaleString();
-                clearInterval(timer);
-                activeIntervals = activeIntervals.filter(id => id !== timer);
-            } else {
-                element.textContent = Math.floor(current).toLocaleString();
-            }
-        }, 30);
-    }
+			<div id="downloads-restricted">
+				<div class="restricted-icon">
+					🔒
+				</div>
+				<h1>Downloads Restricted</h1>
+				<p>You need to be logged in to access the downloads section.</p>
+				<p>Please log in to download Riverside and access all premium features.</p>
+				<button class="btn btn-primary" style="margin-top: 30px;" id="downloads-login-btn">Login to Access Downloads</button>
+			</div>
 
-    
-    function initializeFAQ() {
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            const toggle = item.querySelector('.faq-toggle');
-            
-            if (question) {
-                question.addEventListener('click', () => {
-                    const isActive = item.classList.contains('active');
-                    
-                    faqItems.forEach(faqItem => {
-                        faqItem.classList.remove('active');
-                        const faqToggle = faqItem.querySelector('.faq-toggle');
-                        if (faqToggle) faqToggle.textContent = '+';
-                    });
-                    
-                    if (!isActive) {
-                        item.classList.add('active');
-                        if (toggle) toggle.textContent = '−';
-                    }
-                });
-                
-                question.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        question.click();
-                    }
-                });
-            }
-        });
-    }
 
-    function initializeDashboardStats() {
-        const onlineUsers = Math.floor(Math.random() * 2000) + 1000;
-        const loadsToday = Math.floor(Math.random() * 1000) + 500;
-        
-        animateCounter(document.getElementById('online-users'), onlineUsers);
-        animateCounter(document.getElementById('loads-today'), loadsToday);
-        
-        const lastUpdate = document.getElementById('last-update');
-        if (lastUpdate) {
-            const now = new Date();
-            lastUpdate.textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
-        }
-    }
+			<div id="downloads-authenticated" style="display: none;">
+				<h1>Downloads</h1>
+				<p>Download the latest version of Riverside for your Minecraft version.</p>
 
-    function checkLoginStatus() {
-        try {
-            const savedLogin = localStorage.getItem('Riverside-login');
-            if (savedLogin) {
-                const loginData = JSON.parse(savedLogin);
-                if (loginData.username && loginData.timestamp) {
-                    const loginTime = new Date(loginData.timestamp);
-                    const now = new Date();
-                    const hoursSinceLogin = (now - loginTime) / (1000 * 60 * 60);
-                    
-                    if (hoursSinceLogin < 24) {
-                        isLoggedIn = true;
-                        currentUsername = loginData.username;
-                        updateUIForLoggedInUser();
-                        return true;
-                    } else {
-                        localStorage.removeItem('Riverside-login');
-                    }
-                }
-            }
-        } catch (e) {
-            console.error('Error checking login status:', e);
-            localStorage.removeItem('Riverside-login');
-        }
-        return false;
-    }
+				<div class="features-grid" style="margin-top: 50px;">
+					<div class="feature-card">
+						<div class="feature-icon">👈</div>
+						<h3>Riverside v2.1.4</h3>
+						<p>Compatible with Minecraft 1.8.9</p>
+						<button class="btn btn-primary download-btn" style="margin-top: 20px; width: 100%;" data-version="v2.1.4">Download</button>
+					</div>
+					<div class="feature-card">
+						<div class="feature-icon">👈</div>
+						<h3>Riverside v2.0.9</h3>
+						<p>Compatible with Minecraft 1.20.1</p>
+						<button class="btn btn-primary download-btn" style="margin-top: 20px; width: 100%;" data-version="v2.0.9">Download</button>
+					</div>
+				</div>
 
-    function saveLogin(username) {
-        try {
-            const loginData = {
-                username: username,
-                timestamp: new Date().toISOString()
-            };
-            localStorage.setItem('Riverside-login', JSON.stringify(loginData));
-            return true;
-        } catch (e) {
-            console.error('Failed to save login:', e);
-            return false;
-        }
-    }
+				<div class="installation-guide" style="margin-top: 50px; background-color: var(--bg-card); padding: 30px; border-radius: 10px;">
+					<h3>Installation Guide</h3>
+					<ol style="margin-top: 15px; padding-left: 20px;">
+						<li>Download the Riverside client for your Minecraft version</li>
+						<li>Make sure you have Java 8 or higher installed</li>
+						<li>Run the installer and follow the on-screen instructions</li>
+						<li>Launch Minecraft and select the Riverside profile</li>
+						<li>Log in with your credentials and enjoy!</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
 
-    function clearLogin() {
-        try {
-            localStorage.removeItem('Riverside-login');
-            return true;
-        } catch (e) {
-            console.error('Failed to clear login:', e);
-            return false;
-        }
-    }
+	<section id="support" class="page-content">
+		<div class="container">
+			<h1>Support</h1>
+			<p>Need help with Riverside? Check out our resources below or contact our support team.</p>
 
-    function updateUIForLoggedInUser() {
-        const usernameDisplay = document.getElementById('username-display');
-        if (usernameDisplay) {
-            usernameDisplay.textContent = currentUsername;
-        }
-        
-        if (cachedElements.loginDashboardBtn) {
-            cachedElements.loginDashboardBtn.textContent = 'Dashboard';
-            cachedElements.loginDashboardBtn.setAttribute('aria-label', 'Go to dashboard');
-        }
-    }
+			<div class="features-grid" style="margin-top: 50px;">
+				<div class="feature-card">
+					<div class="feature-icon">📚</div>
+					<h3>Documentation</h3>
+					<p>Comprehensive guides and tutorials for all Riverside features and settings.</p>
+					<button class="btn btn-primary support-btn" style="margin-top: 20px; width: 100%;">View Documentation</button>
+				</div>
+				<div class="feature-card">
+					<div class="feature-icon">❓</div>
+					<h3>FAQ</h3>
+					<p>Answers to frequently asked questions about installation, usage, and troubleshooting.</p>
+					<button class="btn btn-primary support-btn" style="margin-top: 20px; width: 100%;">View FAQ</button>
+				</div>
+				<div class="feature-card">
+					<div class="feature-icon">💬</div>
+					<h3>Contact Support</h3>
+					<p>Can't find what you're looking for? Contact our support team for assistance.</p>
+					<button class="btn btn-primary support-btn" style="margin-top: 20px; width: 100%;">Contact Us</button>
+				</div>
+			</div>
 
-    function navigationHandler(e) {
-        e.preventDefault();
-        const page = this.getAttribute('data-page');
-        if (page) {
-            showPage(page);
-        }
-    }
 
-    function setupNavigation() {
-        if (cachedElements.navLinkItems) {
-            cachedElements.navLinkItems.forEach(link => {
-                link.addEventListener('click', navigationHandler);
-            });
-        }
-        
-        document.querySelectorAll('.hero-btns a').forEach(btn => {
-            btn.addEventListener('click', navigationHandler);
-        });
-        
-        document.querySelectorAll('.footer-links a[data-page]').forEach(link => {
-            link.addEventListener('click', navigationHandler);
-        });
-        
-        document.querySelectorAll('.download-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (isLoggedIn) {
-                    const version = this.getAttribute('data-version');
-                    simulateDownload(version);
-                } else {
-                    openLoginModal();
-                }
-            });
-        });
-        
-        document.querySelectorAll('.support-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const action = this.textContent;
-                showSuccessMessage(`Opening ${action}...`);
-            });
-        });
-    }
+			<div class="faq-section">
+				<h2>Frequently Asked Questions</h2>
+				<div class="faq-list">
+					<div class="faq-item">
+						<div class="faq-question">
+							<span>Is Riverside detectable by server anti-cheats?</span>
+							<span class="faq-toggle">+</span>
+						</div>
+						<div class="faq-answer">
+							<p>Riverside uses advanced obfuscation techniques to avoid detection. However, no client can guarantee 100% undetectability on all servers. We recommend using our ghost modules on servers with strict anti-cheat systems.</p>
+						</div>
+					</div>
+					<div class="faq-item">
+						<div class="faq-question">
+							<span>What Minecraft versions are supported?</span>
+							<span class="faq-toggle">+</span>
+						</div>
+						<div class="faq-answer">
+							<p>We currently support Minecraft 1.7.10, 1.8.9, 1.12.2, 1.16.5, 1.18.2, 1.19.4, and 1.20.1. Check our downloads page for the latest supported versions.</p>
+						</div>
+					</div>
+					<div class="faq-item">
+						<div class="faq-question">
+							<span>How often is Riverside updated?</span>
+							<span class="faq-toggle">+</span>
+						</div>
+						<div class="faq-answer">
+							<p>We release updates regularly to add new features, improve performance, and maintain compatibility with the latest Minecraft versions. Major updates typically occur every 2-4 weeks.</p>
+						</div>
+					</div>
+					<div class="faq-item">
+						<div class="faq-question">
+							<span>Is there a free trial available?</span>
+							<span class="faq-toggle">+</span>
+						</div>
+						<div class="faq-answer">
+							<p>Yes! We offer a 3-day free trial for new users. You can access all premium features during the trial period to test if Riverside meets your needs.</p>
+						</div>
+					</div>
+					<div class="faq-item">
+						<div class="faq-question">
+							<span>Can I use Riverside on multiple computers?</span>
+							<span class="faq-toggle">+</span>
+						</div>
+						<div class="faq-answer">
+							<p>Your subscription allows you to use Riverside on up to 2 devices simultaneously. If you need more devices, please contact our support team.</p>
+						</div>
+					</div>
+					<div class="faq-item">
+						<div class="faq-question">
+							<span>What payment methods do you accept?</span>
+							<span class="faq-toggle">+</span>
+						</div>
+						<div class="faq-answer">
+							<p>We accept credit/debit cards, PayPal, and various cryptocurrencies. All payments are processed securely through our payment partners.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-    function showPage(pageId) {
-        const validPages = ['home', 'features', 'downloads', 'support', 'dashboard'];
-        if (!validPages.includes(pageId)) {
-            console.warn(`Invalid page id: ${pageId}`);
-            pageId = 'home';
-        }
-        
-        if (cachedElements.navLinkItems) {
-            cachedElements.navLinkItems.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('data-page') === pageId) {
-                    link.classList.add('active');
-                }
-            });
-        }
-        
-        if (pageId === 'dashboard' && !isLoggedIn) {
-            openLoginModal();
-            return;
-        }
-        
-        if (pageId === 'downloads') {
-            const downloadsSection = document.getElementById('downloads');
-            const restrictedContent = document.getElementById('downloads-restricted');
-            const authenticatedContent = document.getElementById('downloads-authenticated');
-            
-            if (restrictedContent && authenticatedContent) {
-                if (isLoggedIn) {
-                    restrictedContent.style.display = 'none';
-                    authenticatedContent.style.display = 'block';
-                } else {
-                    restrictedContent.style.display = 'block';
-                    authenticatedContent.style.display = 'none';
-                }
-            }
-            
-            if (downloadsSection) {
-                transitionToPage(downloadsSection);
-            }
-        } else {
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                transitionToPage(targetPage);
-                
-                if (pageId === 'dashboard' && isLoggedIn) {
-                    safeSetTimeout(initializeDashboardStats, 500);
-                }
-            }
-        }
-        
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
 
-    function transitionToPage(targetPage) {
-        if (!targetPage) return;
-        
-        const currentPage = document.querySelector('.page-content.active');
-        
-        if (currentPage && currentPage !== targetPage) {
-            currentPage.style.opacity = '0';
-            currentPage.style.transform = 'translateY(20px)';
-            
-            safeSetTimeout(() => {
-                currentPage.style.display = 'none';
-                currentPage.classList.remove('active');
-                currentPage.style.opacity = '';
-                currentPage.style.transform = '';
-                
-                targetPage.style.display = 'block';
-                targetPage.style.opacity = '0';
-                targetPage.style.transform = 'translateY(20px)';
-                
-                safeSetTimeout(() => {
-                    targetPage.classList.add('active');
-                    targetPage.style.opacity = '1';
-                    targetPage.style.transform = 'translateY(0)';
-                }, 50);
-            }, 300);
-        } else if (!currentPage) {
-            targetPage.style.display = 'block';
-            targetPage.classList.add('active');
-        }
-    }
+	<section id="dashboard" class="page-content dashboard">
+		<div class="container">
+			<div class="dashboard-header">
+				<h1>Welcome, <mark><span id="username-display"></span></mark></h1>
+				<p> riverside.moe loader dashboard </p>
+			</div>
 
-    let lastFocusedElement = null;
 
-    function openLoginModal() {
-        lastFocusedElement = document.activeElement;
-        if (cachedElements.loginModal) {
-            cachedElements.loginModal.style.display = 'flex';
-            cachedElements.loginModal.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
-            
-            safeSetTimeout(() => {
-                const usernameInput = document.getElementById('username');
-                if (usernameInput) usernameInput.focus();
-            }, 100);
-            
-            document.addEventListener('keydown', trapTabKey);
-            document.addEventListener('keydown', handleEscapeKey);
-        }
-    }
+			<div class="quick-stats">
+				<div class="stat-card">
+					<div class="stat-icon">👥</div>
+					<div class="stat-info">
+						<span class="stat-value" id="online-users">1,247</span>
+						<span class="stat-label">Users Online</span>
+					</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-icon">⚡</div>
+					<div class="stat-info">
+						<span class="stat-value" id="loads-today">892</span>
+						<span class="stat-label">Loads Today</span>
+					</div>
+				</div>
+			</div>
 
-    function closeLoginModal() {
-        if (cachedElements.loginModal) {
-            cachedElements.loginModal.style.display = 'none';
-            cachedElements.loginModal.setAttribute('aria-hidden', 'true');
-        }
-        
-        if (cachedElements.loginError) {
-            cachedElements.loginError.style.display = 'none';
-        }
-        
-        document.body.style.overflow = '';
-        
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-        if (usernameInput) usernameInput.value = '';
-        if (passwordInput) passwordInput.value = '';
-        
-        if (lastFocusedElement) {
-            lastFocusedElement.focus();
-        }
-        
-        document.removeEventListener('keydown', trapTabKey);
-        document.removeEventListener('keydown', handleEscapeKey);
-    }
+			<div class="status-panel">
+				<h2 style="margin-bottom: 20px;">Status Panel</h2>
+				<div class="status-item">
+					<span class="status-label">Loader Status:</span>
+					<span class="status-value status-ready">Ready</span>
+				</div>
+				<div class="status-item">
+					<span class="status-label">Last Update:</span>
+					<span class="status-value" id="last-update">Loading...</span>
+				</div>
+				<div class="status-item">
+					<span class="status-label">Detection Status:</span>
+					<span class="status-value status-clean">Clean</span>
+				</div>
+				<div class="status-item">
+					<span class="status-label">Subscription:</span>
+					<span class="status-value status-ready">Active</span>
+				</div>
+			</div>
 
-    function trapTabKey(e) {
-        if (e.key === 'Tab' && cachedElements.loginModal) {
-            const focusableElements = cachedElements.loginModal.querySelectorAll(
-                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-            );
-            if (focusableElements.length === 0) return;
-            
-            const firstElement = focusableElements[0];
-            const lastElement = focusableElements[focusableElements.length - 1];
+			<div class="loader-actions">
+				<button class="btn btn-primary" id="launch-loader-btn">Launch Loader</button>
+				<button class="btn btn-secondary" id="check-updates-btn">Check for Updates</button>
+				<button class="btn btn-secondary" id="logout-btn">Logout</button>
+			</div>
+		</div>
+	</section>
 
-            if (e.shiftKey) {
-                if (document.activeElement === firstElement) {
-                    lastElement.focus();
-                    e.preventDefault();
-                }
-            } else {
-                if (document.activeElement === lastElement) {
-                    firstElement.focus();
-                    e.preventDefault();
-                }
-            }
-        }
-    }
 
-    function handleEscapeKey(e) {
-        if (e.key === 'Escape') {
-            closeLoginModal();
-        }
-    }
+	<div class="modal" id="login-modal" aria-hidden="true" aria-labelledby="login-title" role="dialog" style="display: none;">
+		<div class="modal-content">
+			<button class="close-modal" id="close-login" aria-label="Close login modal" tabindex="0">&times;</button>
+			<h2 id="login-title">Login to Riverside</h2>
+			<form id="login-form" novalidate>
+				<div class="form-group">
+					<label for="username">Username</label>
+					<input type="text" id="username" class="form-control" placeholder="Enter your username" required autocomplete="username">
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" id="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+				</div>
+				<button type="submit" class="submit-btn">Login</button>
+				<div class="error-message" id="login-error" style="display: none;" role="alert" aria-live="assertive"></div>
+			</form>
+			<div class="demo-credentials" style="margin-top: 15px; padding: 10px; background: #f5f5f5; border-radius: 5px; font-size: 0.9em;">
+				<p style="margin: 0; color: #666;">Demo credentials: admin / admin</p>
+			</div>
+		</div>
+	</div>
 
-    function setupEventListeners() {
-        if (cachedElements.loginDashboardBtn) {
-            cachedElements.loginDashboardBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (isLoggedIn) {
-                    showPage('dashboard');
-                } else {
-                    openLoginModal();
-                }
-            });
-        }
-        
-        if (cachedElements.closeLoginBtn) {
-            cachedElements.closeLoginBtn.addEventListener('click', closeLoginModal);
-        }
-        
-        window.addEventListener('click', (e) => {
-            if (e.target === cachedElements.loginModal) {
-                closeLoginModal();
-            }
-        });
-        
-        if (cachedElements.downloadsHeroBtn) {
-            cachedElements.downloadsHeroBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (isLoggedIn) {
-                    showPage('downloads');
-                } else {
-                    openLoginModal();
-                }
-            });
-        }
-        
-        if (cachedElements.downloadsLoginBtn) {
-            cachedElements.downloadsLoginBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                openLoginModal();
-            });
-        }
-        
-        if (cachedElements.loginForm) {
-            cachedElements.loginForm.addEventListener('submit', handleLoginSubmit);
-        }
-        
-        if (cachedElements.logoutBtn) {
-            cachedElements.logoutBtn.addEventListener('click', handleLogout);
-        }
-        
-        const launchLoaderBtn = document.getElementById('launch-loader-btn');
-        if (launchLoaderBtn) {
-            launchLoaderBtn.addEventListener('click', handleLaunchLoader);
-        }
-        
-        const checkUpdatesBtn = document.getElementById('check-updates-btn');
-        if (checkUpdatesBtn) {
-            checkUpdatesBtn.addEventListener('click', handleCheckUpdates);
-        }
-    }
 
-    async function handleLoginSubmit(e) {
-        e.preventDefault();
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-        
-        if (!usernameInput || !passwordInput) return;
-        
-        const username = usernameInput.value.trim();
-        const password = passwordInput.value;
-        const submitBtn = cachedElements.loginForm.querySelector('.submit-btn');
-        
-        if (!submitBtn) return;
-        
-        submitBtn.textContent = 'Logging in...';
-        submitBtn.disabled = true;
-        if (cachedElements.loginError) {
-            cachedElements.loginError.style.display = 'none';
-        }
-        
-        if (!validateLoginForm(username, password)) {
-            submitBtn.textContent = 'Login';
-            submitBtn.disabled = false;
-            return;
-        }
-        
-        await simulateAsyncOperation(800);
-        
-        if (username === 'admin' && password === 'admin') {
-            isLoggedIn = true;
-            currentUsername = username;
-            if (saveLogin(username)) {
-                updateUIForLoggedInUser();
-                closeLoginModal();
-                showSuccessMessage('Login successful! Welcome back, ' + username);
-                safeSetTimeout(() => showPage('dashboard'), 500);
-            } else {
-                showError('Error saving login session. Please try again.');
-            }
-        } else {
-            showError('Invalid username or password');
-            usernameInput.value = '';
-            passwordInput.value = '';
-            passwordInput.focus();
-        }
-        
-        submitBtn.textContent = 'Login';
-        submitBtn.disabled = false;
-    }
+	<footer>
+		<div class="container">
+			<div class="footer-links">
+				<a href="#" data-page="home">Home</a>
+				<a href="#" data-page="features">Features</a>
+				<a href="#" data-page="downloads">Downloads</a>
+				<a href="#" data-page="support">Support</a>
+				<a href="#">Privacy Policy</a>
+				<a href="#">Terms of Service</a>
+			</div>
+			<p class="copyright">© 2025 Riverside. All rights reserved. This is a fictional website for testing purposes only.</p>
+		</div>
+	</footer>
 
-    function validateLoginForm(username, password) {
-        const sanitizedUsername = username.replace(/[<>"'&\/\\]/g, '');
-        const sanitizedPassword = password.replace(/[<>"'&\/\\]/g, '');
-        
-        const dangerousPatterns = [
-            /<script/i, /javascript:/i, /on\w+=/i, /data:/i, /vbscript:/i
-        ];
-        
-        for (let pattern of dangerousPatterns) {
-            if (pattern.test(sanitizedUsername) || pattern.test(sanitizedPassword)) {
-                showError('Invalid characters in input');
-                return false;
-            }
-        }
-        
-        if (!sanitizedUsername.trim() || !sanitizedPassword) {
-            showError('Please fill in all fields');
-            return false;
-        }
-        
-        if (sanitizedUsername.trim().length < 3) {
-            showError('Username must be at least 3 characters');
-            return false;
-        }
-        
-        if (sanitizedPassword.length < 3) {
-            showError('Password must be at least 3 characters');
-            return false;
-        }
-        
-        return true;
-    }
+	<script>
+		const cachedElements = {
+			mobileMenuToggle: document.getElementById('mobile-menu-toggle'),
+			navLinks: document.querySelector('.nav-links'),
+			navLinkItems: document.querySelectorAll('.nav-link'),
+			themeToggle: document.getElementById('theme-toggle'),
+			themeIcon: document.querySelector('.theme-icon'),
+			loginModal: document.getElementById('login-modal'),
+			closeLoginBtn: document.getElementById('close-login'),
+			loginForm: document.getElementById('login-form'),
+			loginError: document.getElementById('login-error'),
+			loginDashboardBtn: document.getElementById('login-dashboard-btn'),
+			logoutBtn: document.getElementById('logout-btn'),
+			downloadsHeroBtn: document.getElementById('downloads-hero-btn'),
+			downloadsLoginBtn: document.getElementById('downloads-login-btn')
+		};
 
-    function showError(message) {
-        if (!cachedElements.loginError) return;
-        
-        cachedElements.loginError.textContent = message;
-        cachedElements.loginError.style.display = 'block';
-        cachedElements.loginError.style.animation = 'shake 0.5s';
-        
-        safeSetTimeout(() => {
-            cachedElements.loginError.style.animation = '';
-        }, 500);
-    }
 
-    function showSuccessMessage(message) {
-        const existingNotifications = document.querySelectorAll('.success-notification');
-        existingNotifications.forEach(notification => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        });
-        
-        const notification = document.createElement('div');
-        notification.className = 'success-notification';
-        notification.setAttribute('role', 'alert');
-        notification.setAttribute('aria-live', 'polite');
-        notification.textContent = message;
-        
-        document.body.appendChild(notification);
-        
-        const timeoutId = safeSetTimeout(() => {
-            notification.style.animation = 'slideOut 0.3s ease-out';
-            safeSetTimeout(() => {
-                if (notification.parentNode) {
-                    document.body.removeChild(notification);
-                }
-            }, 300);
-        }, 3000);
-        
-        return timeoutId;
-    }
+		let isLoggedIn = false;
+		let currentUsername = '';
+		let activeTimeouts = [];
+		let activeIntervals = [];
 
-    function simulateAsyncOperation(ms) {
-        return new Promise(resolve => {
-            const timeoutId = setTimeout(resolve, ms);
-            activeTimeouts.push(timeoutId);
-        });
-    }
 
-    function handleLogout() {
-        isLoggedIn = false;
-        currentUsername = '';
-        
-        if (clearLogin()) {
-            cleanupTimeoutsAndIntervals();
-            
-            if (cachedElements.loginDashboardBtn) {
-                cachedElements.loginDashboardBtn.textContent = 'Login';
-                cachedElements.loginDashboardBtn.setAttribute('aria-label', 'Login to Riverside');
-            }
-            
-            showPage('home');
-            
-            showSuccessMessage('Logged out successfully');
-        }
-    }
+		function cleanupTimeoutsAndIntervals() {
+			activeTimeouts.forEach(timeout => clearTimeout(timeout));
+			activeIntervals.forEach(interval => clearInterval(interval));
+			activeTimeouts = [];
+			activeIntervals = [];
+		}
 
-    async function handleLaunchLoader() {
-        const btn = document.getElementById('launch-loader-btn');
-        if (!btn) return;
-        
-        const originalText = btn.textContent;
-        
-        btn.textContent = 'Launching...';
-        btn.disabled = true;
-        
-        await simulateAsyncOperation(2000);
-        
-        btn.textContent = 'Loader Active';
-        btn.classList.add('success');
-        
-        showSuccessMessage('Riverside loader launched successfully!');
-        
-        safeSetTimeout(() => {
-            btn.textContent = originalText;
-            btn.disabled = false;
-            btn.classList.remove('success');
-        }, 3000);
-    }
 
-    async function handleCheckUpdates() {
-        const btn = document.getElementById('check-updates-btn');
-        if (!btn) return;
-        
-        const originalText = btn.textContent;
-        
-        btn.textContent = 'Checking...';
-        btn.disabled = true;
-        
-        await simulateAsyncOperation(1500);
-        
-        const updateAvailable = Math.random() > 0.5;
-        
-        if (updateAvailable) {
-            showSuccessMessage('Update v2.2.0 is available! Download from the Downloads page.');
-            btn.textContent = 'Update Available';
-            btn.classList.add('update-available');
-        } else {
-            showSuccessMessage('You are using the latest version of Riverside.');
-            btn.textContent = 'Up to Date';
-            btn.classList.add('up-to-date');
-        }
-        
-        safeSetTimeout(() => {
-            btn.textContent = originalText;
-            btn.disabled = false;
-            btn.classList.remove('update-available', 'up-to-date');
-        }, 3000);
-    }
+		function safeSetTimeout(func, delay) {
+			const timeoutId = setTimeout(() => {
+				try {
+					func();
+				} catch (error) {
+					console.error('Timeout function error:', error);
+				}
+				activeTimeouts = activeTimeouts.filter(id => id !== timeoutId);
+			}, delay);
+			activeTimeouts.push(timeoutId);
+			return timeoutId;
+		}
 
-    async function simulateDownload(version) {
-        const btn = event.target;
-        const originalText = btn.textContent;
-        
-        btn.textContent = 'Downloading...';
-        btn.disabled = true;
-        
-        await simulateAsyncOperation(2000);
-        
-        btn.textContent = 'Downloaded!';
-        btn.classList.add('success');
-        
-        showSuccessMessage(`${version} downloaded successfully!`);
-        
-        safeSetTimeout(() => {
-            btn.textContent = originalText;
-            btn.disabled = false;
-            btn.classList.remove('success');
-        }, 3000);
-    }
+		function safeSetInterval(func, delay) {
+			const intervalId = setInterval(() => {
+				try {
+					func();
+				} catch (error) {
+					console.error('Interval function error:', error);
+					clearInterval(intervalId);
+				}
+			}, delay);
+			activeIntervals.push(intervalId);
+			return intervalId;
+		}
 
-    function initializeMobileMenu() {
-        if (!cachedElements.mobileMenuToggle || !cachedElements.navLinks) return;
-        
-        let isMenuOpen = false;
-        
-        cachedElements.mobileMenuToggle.addEventListener('click', () => {
-            isMenuOpen = !isMenuOpen;
-            
-            cachedElements.mobileMenuToggle.setAttribute('aria-expanded', isMenuOpen);
-            cachedElements.navLinks.setAttribute('aria-hidden', !isMenuOpen);
 
-            if (isMenuOpen) {
-                cachedElements.navLinks.style.maxHeight = cachedElements.navLinks.scrollHeight + 'px';
-                cachedElements.mobileMenuToggle.classList.add('active');
-            } else {
-                cachedElements.navLinks.style.maxHeight = '0';
-                cachedElements.mobileMenuToggle.classList.remove('active');
-            }
-        });
+		function initializeTheme() {
+			const savedTheme = localStorage.getItem('Riverside-theme') || 'dark';
 
-        const navLinksItems = cachedElements.navLinks.querySelectorAll('a');
-        navLinksItems.forEach(link => {
-            link.addEventListener('click', () => {
-                if (isMenuOpen) {
-                    isMenuOpen = false;
-                    cachedElements.navLinks.style.maxHeight = '0';
-                    cachedElements.mobileMenuToggle.classList.remove('active');
-                    cachedElements.mobileMenuToggle.setAttribute('aria-expanded', false);
-                    cachedElements.navLinks.setAttribute('aria-hidden', true);
-                }
-            });
-        });
-    }
+			if (savedTheme === 'light') {
+				document.body.classList.add('light-theme');
+				if (cachedElements.themeIcon) {
+					cachedElements.themeIcon.textContent = '☀️';
+				}
+			} else {
+				document.body.classList.remove('light-theme');
+				if (cachedElements.themeIcon) {
+					cachedElements.themeIcon.textContent = '🌙';
+				}
+			}
 
-    function handleResize() {
-        if (window.innerWidth > 768 && cachedElements.navLinks) {
-            cachedElements.navLinks.style.maxHeight = '';
-            cachedElements.mobileMenuToggle.classList.remove('active');
-            cachedElements.mobileMenuToggle.setAttribute('aria-expanded', false);
-            cachedElements.navLinks.setAttribute('aria-hidden', false);
-        }
-    }
+			if (cachedElements.themeToggle) {
+				cachedElements.themeToggle.addEventListener('click', () => {
+					if (document.body.classList.contains('light-theme')) {
+						document.body.classList.remove('light-theme');
+						if (cachedElements.themeIcon) {
+							cachedElements.themeIcon.textContent = '🌙';
+						}
+						localStorage.setItem('Riverside-theme', 'dark');
+					} else {
+						document.body.classList.add('light-theme');
+						if (cachedElements.themeIcon) {
+							cachedElements.themeIcon.textContent = '☀️';
+						}
+						localStorage.setItem('Riverside-theme', 'light');
+					}
+				});
+			}
+		}
 
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-            activeTimeouts.push(timeout);
-        };
-    }
 
-    function initializeKeyboardShortcuts() {
-        document.addEventListener('keydown', (e) => {
-            if (e.target.tagName === 'INPUT' || 
-                e.target.tagName === 'TEXTAREA' || 
-                e.target.isContentEditable) {
-                return;
-            }
-            
-            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                e.preventDefault();
-                if (isLoggedIn) {
-                    showPage('dashboard');
-                } else {
-                    openLoginModal();
-                }
-            }
-            
-            if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
-                e.preventDefault();
-                if (isLoggedIn) {
-                    showPage('downloads');
-                } else {
-                    openLoginModal();
-                }
-            }
-            
-            if (e.key === 'Escape') {
-                if (cachedElements.loginModal && 
-                    cachedElements.loginModal.style.display === 'flex') {
-                    closeLoginModal();
-                }
-            }
-            
-            if (e.altKey && e.key === 't') {
-                e.preventDefault();
-                if (cachedElements.themeToggle) {
-                    cachedElements.themeToggle.click();
-                }
-            }
-            
-            if (e.key >= '1' && e.key <= '5') {
-                const pages = ['home', 'features', 'downloads', 'support', 'dashboard'];
-                const pageIndex = parseInt(e.key) - 1;
-                
-                if (pages[pageIndex] === 'dashboard' && !isLoggedIn) {
-                    openLoginModal();
-                } else {
-                    showPage(pages[pageIndex]);
-                }
-            }
-        });
-    }
+		function animateCounter(element, target) {
+			if (!element) return;
 
-    document.addEventListener('DOMContentLoaded', () => {
-        initializeFAQ();
-        initializeTheme();
-        initializeMobileMenu();
-        initializeKeyboardShortcuts();
-        setupNavigation();
-        setupEventListeners();
-        
-        const debouncedResize = debounce(handleResize, 250);
-        window.addEventListener('resize', debouncedResize);
-        handleResize();
-        
-        if (checkLoginStatus()) {
-            showPage('dashboard');
-        } else {
-            showPage('home');
-        }
-        
-        safeSetTimeout(() => {
-            console.log('Riverside client initialized successfully');
-        }, 100);
-    });
+			let current = 0;
+			const increment = target / 50;
+			const timer = safeSetInterval(() => {
+				current += increment;
+				if (current >= target) {
+					element.textContent = Math.round(target).toLocaleString();
+					clearInterval(timer);
+					activeIntervals = activeIntervals.filter(id => id !== timer);
+				} else {
+					element.textContent = Math.floor(current).toLocaleString();
+				}
+			}, 30);
+		}
 
-    window.addEventListener('beforeunload', cleanupTimeoutsAndIntervals);
-    window.addEventListener('pagehide', cleanupTimeoutsAndIntervals);
-    
-    window.addEventListener('error', (e) => {
-        console.error('Unhandled error:', e.error);
-    });
-    
-    window.addEventListener('unhandledrejection', (e) => {
-        console.error('Unhandled promise rejection:', e.reason);
-        e.preventDefault();
-    });
-    </script>
+
+		function initializeFAQ() {
+			const faqItems = document.querySelectorAll('.faq-item');
+			faqItems.forEach(item => {
+				const question = item.querySelector('.faq-question');
+				const toggle = item.querySelector('.faq-toggle');
+
+				if (question) {
+					question.addEventListener('click', () => {
+						const isActive = item.classList.contains('active');
+
+						faqItems.forEach(faqItem => {
+							faqItem.classList.remove('active');
+							const faqToggle = faqItem.querySelector('.faq-toggle');
+							if (faqToggle) faqToggle.textContent = '+';
+						});
+
+						if (!isActive) {
+							item.classList.add('active');
+							if (toggle) toggle.textContent = '−';
+						}
+					});
+
+					question.addEventListener('keydown', (e) => {
+						if (e.key === 'Enter' || e.key === ' ') {
+							e.preventDefault();
+							question.click();
+						}
+					});
+				}
+			});
+		}
+
+		function initializeDashboardStats() {
+			const onlineUsers = Math.floor(Math.random() * 2000) + 1000;
+			const loadsToday = Math.floor(Math.random() * 1000) + 500;
+
+			animateCounter(document.getElementById('online-users'), onlineUsers);
+			animateCounter(document.getElementById('loads-today'), loadsToday);
+
+			const lastUpdate = document.getElementById('last-update');
+			if (lastUpdate) {
+				const now = new Date();
+				lastUpdate.textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+			}
+		}
+
+		function checkLoginStatus() {
+			try {
+				const savedLogin = localStorage.getItem('Riverside-login');
+				if (savedLogin) {
+					const loginData = JSON.parse(savedLogin);
+					if (loginData.username && loginData.timestamp) {
+						const loginTime = new Date(loginData.timestamp);
+						const now = new Date();
+						const hoursSinceLogin = (now - loginTime) / (1000 * 60 * 60);
+
+						if (hoursSinceLogin < 24) {
+							isLoggedIn = true;
+							currentUsername = loginData.username;
+							updateUIForLoggedInUser();
+							return true;
+						} else {
+							localStorage.removeItem('Riverside-login');
+						}
+					}
+				}
+			} catch (e) {
+				console.error('Error checking login status:', e);
+				localStorage.removeItem('Riverside-login');
+			}
+			return false;
+		}
+
+		function saveLogin(username) {
+			try {
+				const loginData = {
+					username: username,
+					timestamp: new Date().toISOString()
+				};
+				localStorage.setItem('Riverside-login', JSON.stringify(loginData));
+				return true;
+			} catch (e) {
+				console.error('Failed to save login:', e);
+				return false;
+			}
+		}
+
+		function clearLogin() {
+			try {
+				localStorage.removeItem('Riverside-login');
+				return true;
+			} catch (e) {
+				console.error('Failed to clear login:', e);
+				return false;
+			}
+		}
+
+		function updateUIForLoggedInUser() {
+			const usernameDisplay = document.getElementById('username-display');
+			if (usernameDisplay) {
+				usernameDisplay.textContent = currentUsername;
+			}
+
+			if (cachedElements.loginDashboardBtn) {
+				cachedElements.loginDashboardBtn.textContent = 'Dashboard';
+				cachedElements.loginDashboardBtn.setAttribute('aria-label', 'Go to dashboard');
+			}
+		}
+
+		function navigationHandler(e) {
+			e.preventDefault();
+			const page = this.getAttribute('data-page');
+			if (page) {
+				showPage(page);
+			}
+		}
+
+		function setupNavigation() {
+			if (cachedElements.navLinkItems) {
+				cachedElements.navLinkItems.forEach(link => {
+					link.addEventListener('click', navigationHandler);
+				});
+			}
+
+			document.querySelectorAll('.hero-btns a').forEach(btn => {
+				btn.addEventListener('click', navigationHandler);
+			});
+
+			document.querySelectorAll('.footer-links a[data-page]').forEach(link => {
+				link.addEventListener('click', navigationHandler);
+			});
+
+			document.querySelectorAll('.download-btn').forEach(btn => {
+				btn.addEventListener('click', function(e) {
+					e.preventDefault();
+					if (isLoggedIn) {
+						const version = this.getAttribute('data-version');
+						simulateDownload(version);
+					} else {
+						openLoginModal();
+					}
+				});
+			});
+
+			document.querySelectorAll('.support-btn').forEach(btn => {
+				btn.addEventListener('click', function(e) {
+					e.preventDefault();
+					const action = this.textContent;
+					showSuccessMessage(`Opening ${action}...`);
+				});
+			});
+		}
+
+		function showPage(pageId) {
+			const validPages = ['home', 'features', 'downloads', 'support', 'dashboard'];
+			if (!validPages.includes(pageId)) {
+				console.warn(`Invalid page id: ${pageId}`);
+				pageId = 'home';
+			}
+
+			if (cachedElements.navLinkItems) {
+				cachedElements.navLinkItems.forEach(link => {
+					link.classList.remove('active');
+					if (link.getAttribute('data-page') === pageId) {
+						link.classList.add('active');
+					}
+				});
+			}
+
+			if (pageId === 'dashboard' && !isLoggedIn) {
+				openLoginModal();
+				return;
+			}
+
+			if (pageId === 'downloads') {
+				const downloadsSection = document.getElementById('downloads');
+				const restrictedContent = document.getElementById('downloads-restricted');
+				const authenticatedContent = document.getElementById('downloads-authenticated');
+
+				if (restrictedContent && authenticatedContent) {
+					if (isLoggedIn) {
+						restrictedContent.style.display = 'none';
+						authenticatedContent.style.display = 'block';
+					} else {
+						restrictedContent.style.display = 'block';
+						authenticatedContent.style.display = 'none';
+					}
+				}
+
+				if (downloadsSection) {
+					transitionToPage(downloadsSection);
+				}
+			} else {
+				const targetPage = document.getElementById(pageId);
+				if (targetPage) {
+					transitionToPage(targetPage);
+
+					if (pageId === 'dashboard' && isLoggedIn) {
+						safeSetTimeout(initializeDashboardStats, 500);
+					}
+				}
+			}
+
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		}
+
+		function transitionToPage(targetPage) {
+			if (!targetPage) return;
+
+			const currentPage = document.querySelector('.page-content.active');
+
+			if (currentPage && currentPage !== targetPage) {
+				currentPage.style.opacity = '0';
+				currentPage.style.transform = 'translateY(20px)';
+
+				safeSetTimeout(() => {
+					currentPage.style.display = 'none';
+					currentPage.classList.remove('active');
+					currentPage.style.opacity = '';
+					currentPage.style.transform = '';
+
+					targetPage.style.display = 'block';
+					targetPage.style.opacity = '0';
+					targetPage.style.transform = 'translateY(20px)';
+
+					safeSetTimeout(() => {
+						targetPage.classList.add('active');
+						targetPage.style.opacity = '1';
+						targetPage.style.transform = 'translateY(0)';
+					}, 50);
+				}, 300);
+			} else if (!currentPage) {
+				targetPage.style.display = 'block';
+				targetPage.classList.add('active');
+			}
+		}
+
+		let lastFocusedElement = null;
+
+		function openLoginModal() {
+			lastFocusedElement = document.activeElement;
+			if (cachedElements.loginModal) {
+				cachedElements.loginModal.style.display = 'flex';
+				cachedElements.loginModal.setAttribute('aria-hidden', 'false');
+				document.body.style.overflow = 'hidden';
+
+				safeSetTimeout(() => {
+					const usernameInput = document.getElementById('username');
+					if (usernameInput) usernameInput.focus();
+				}, 100);
+
+				document.addEventListener('keydown', trapTabKey);
+				document.addEventListener('keydown', handleEscapeKey);
+			}
+		}
+
+		function closeLoginModal() {
+			if (cachedElements.loginModal) {
+				cachedElements.loginModal.style.display = 'none';
+				cachedElements.loginModal.setAttribute('aria-hidden', 'true');
+			}
+
+			if (cachedElements.loginError) {
+				cachedElements.loginError.style.display = 'none';
+			}
+
+			document.body.style.overflow = '';
+
+			const usernameInput = document.getElementById('username');
+			const passwordInput = document.getElementById('password');
+			if (usernameInput) usernameInput.value = '';
+			if (passwordInput) passwordInput.value = '';
+
+			if (lastFocusedElement) {
+				lastFocusedElement.focus();
+			}
+
+			document.removeEventListener('keydown', trapTabKey);
+			document.removeEventListener('keydown', handleEscapeKey);
+		}
+
+		function trapTabKey(e) {
+			if (e.key === 'Tab' && cachedElements.loginModal) {
+				const focusableElements = cachedElements.loginModal.querySelectorAll(
+					'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+				);
+				if (focusableElements.length === 0) return;
+
+				const firstElement = focusableElements[0];
+				const lastElement = focusableElements[focusableElements.length - 1];
+
+				if (e.shiftKey) {
+					if (document.activeElement === firstElement) {
+						lastElement.focus();
+						e.preventDefault();
+					}
+				} else {
+					if (document.activeElement === lastElement) {
+						firstElement.focus();
+						e.preventDefault();
+					}
+				}
+			}
+		}
+
+		function handleEscapeKey(e) {
+			if (e.key === 'Escape') {
+				closeLoginModal();
+			}
+		}
+
+		function setupEventListeners() {
+			if (cachedElements.loginDashboardBtn) {
+				cachedElements.loginDashboardBtn.addEventListener('click', (e) => {
+					e.preventDefault();
+					if (isLoggedIn) {
+						showPage('dashboard');
+					} else {
+						openLoginModal();
+					}
+				});
+			}
+
+			if (cachedElements.closeLoginBtn) {
+				cachedElements.closeLoginBtn.addEventListener('click', closeLoginModal);
+			}
+
+			window.addEventListener('click', (e) => {
+				if (e.target === cachedElements.loginModal) {
+					closeLoginModal();
+				}
+			});
+
+			if (cachedElements.downloadsHeroBtn) {
+				cachedElements.downloadsHeroBtn.addEventListener('click', (e) => {
+					e.preventDefault();
+					if (isLoggedIn) {
+						showPage('downloads');
+					} else {
+						openLoginModal();
+					}
+				});
+			}
+
+			if (cachedElements.downloadsLoginBtn) {
+				cachedElements.downloadsLoginBtn.addEventListener('click', (e) => {
+					e.preventDefault();
+					openLoginModal();
+				});
+			}
+
+			if (cachedElements.loginForm) {
+				cachedElements.loginForm.addEventListener('submit', handleLoginSubmit);
+			}
+
+			if (cachedElements.logoutBtn) {
+				cachedElements.logoutBtn.addEventListener('click', handleLogout);
+			}
+
+			const launchLoaderBtn = document.getElementById('launch-loader-btn');
+			if (launchLoaderBtn) {
+				launchLoaderBtn.addEventListener('click', handleLaunchLoader);
+			}
+
+			const checkUpdatesBtn = document.getElementById('check-updates-btn');
+			if (checkUpdatesBtn) {
+				checkUpdatesBtn.addEventListener('click', handleCheckUpdates);
+			}
+		}
+
+		async function handleLoginSubmit(e) {
+			e.preventDefault();
+			const usernameInput = document.getElementById('username');
+			const passwordInput = document.getElementById('password');
+
+			if (!usernameInput || !passwordInput) return;
+
+			const username = usernameInput.value.trim();
+			const password = passwordInput.value;
+			const submitBtn = cachedElements.loginForm.querySelector('.submit-btn');
+
+			if (!submitBtn) return;
+
+			submitBtn.textContent = 'Logging in...';
+			submitBtn.disabled = true;
+			if (cachedElements.loginError) {
+				cachedElements.loginError.style.display = 'none';
+			}
+
+			if (!validateLoginForm(username, password)) {
+				submitBtn.textContent = 'Login';
+				submitBtn.disabled = false;
+				return;
+			}
+
+			await simulateAsyncOperation(800);
+
+			if (username === 'admin' && password === 'admin') {
+				isLoggedIn = true;
+				currentUsername = username;
+				if (saveLogin(username)) {
+					updateUIForLoggedInUser();
+					closeLoginModal();
+					showSuccessMessage('Login successful! Welcome back, ' + username);
+					safeSetTimeout(() => showPage('dashboard'), 500);
+				} else {
+					showError('Error saving login session. Please try again.');
+				}
+			} else {
+				showError('Invalid username or password');
+				usernameInput.value = '';
+				passwordInput.value = '';
+				passwordInput.focus();
+			}
+
+			submitBtn.textContent = 'Login';
+			submitBtn.disabled = false;
+		}
+
+		function validateLoginForm(username, password) {
+			const sanitizedUsername = username.replace(/[<>"'&\/\\]/g, '');
+			const sanitizedPassword = password.replace(/[<>"'&\/\\]/g, '');
+
+			const dangerousPatterns = [
+				/<script/i, /javascript:/i, /on\w+=/i, /data:/i, /vbscript:/i
+			];
+
+			for (let pattern of dangerousPatterns) {
+				if (pattern.test(sanitizedUsername) || pattern.test(sanitizedPassword)) {
+					showError('Invalid characters in input');
+					return false;
+				}
+			}
+
+			if (!sanitizedUsername.trim() || !sanitizedPassword) {
+				showError('Please fill in all fields');
+				return false;
+			}
+
+			if (sanitizedUsername.trim().length < 3) {
+				showError('Username must be at least 3 characters');
+				return false;
+			}
+
+			if (sanitizedPassword.length < 3) {
+				showError('Password must be at least 3 characters');
+				return false;
+			}
+
+			return true;
+		}
+
+		function showError(message) {
+			if (!cachedElements.loginError) return;
+
+			cachedElements.loginError.textContent = message;
+			cachedElements.loginError.style.display = 'block';
+			cachedElements.loginError.style.animation = 'shake 0.5s';
+
+			safeSetTimeout(() => {
+				cachedElements.loginError.style.animation = '';
+			}, 500);
+		}
+
+		function showSuccessMessage(message) {
+			const existingNotifications = document.querySelectorAll('.success-notification');
+			existingNotifications.forEach(notification => {
+				if (notification.parentNode) {
+					notification.parentNode.removeChild(notification);
+				}
+			});
+
+			const notification = document.createElement('div');
+			notification.className = 'success-notification';
+			notification.setAttribute('role', 'alert');
+			notification.setAttribute('aria-live', 'polite');
+			notification.textContent = message;
+
+			document.body.appendChild(notification);
+
+			const timeoutId = safeSetTimeout(() => {
+				notification.style.animation = 'slideOut 0.3s ease-out';
+				safeSetTimeout(() => {
+					if (notification.parentNode) {
+						document.body.removeChild(notification);
+					}
+				}, 300);
+			}, 3000);
+
+			return timeoutId;
+		}
+
+		function simulateAsyncOperation(ms) {
+			return new Promise(resolve => {
+				const timeoutId = setTimeout(resolve, ms);
+				activeTimeouts.push(timeoutId);
+			});
+		}
+
+		function handleLogout() {
+			isLoggedIn = false;
+			currentUsername = '';
+
+			if (clearLogin()) {
+				cleanupTimeoutsAndIntervals();
+
+				if (cachedElements.loginDashboardBtn) {
+					cachedElements.loginDashboardBtn.textContent = 'Login';
+					cachedElements.loginDashboardBtn.setAttribute('aria-label', 'Login to Riverside');
+				}
+
+				showPage('home');
+
+				showSuccessMessage('Logged out successfully');
+			}
+		}
+
+		async function handleLaunchLoader() {
+			const btn = document.getElementById('launch-loader-btn');
+			if (!btn) return;
+
+			const originalText = btn.textContent;
+
+			btn.textContent = 'Launching...';
+			btn.disabled = true;
+
+			await simulateAsyncOperation(2000);
+
+			btn.textContent = 'Loader Active';
+			btn.classList.add('success');
+
+			showSuccessMessage('Riverside loader launched successfully!');
+
+			safeSetTimeout(() => {
+				btn.textContent = originalText;
+				btn.disabled = false;
+				btn.classList.remove('success');
+			}, 3000);
+		}
+
+		async function handleCheckUpdates() {
+			const btn = document.getElementById('check-updates-btn');
+			if (!btn) return;
+
+			const originalText = btn.textContent;
+
+			btn.textContent = 'Checking...';
+			btn.disabled = true;
+
+			await simulateAsyncOperation(1500);
+
+			const updateAvailable = Math.random() > 0.5;
+
+			if (updateAvailable) {
+				showSuccessMessage('Update v2.2.0 is available! Download from the Downloads page.');
+				btn.textContent = 'Update Available';
+				btn.classList.add('update-available');
+			} else {
+				showSuccessMessage('You are using the latest version of Riverside.');
+				btn.textContent = 'Up to Date';
+				btn.classList.add('up-to-date');
+			}
+
+			safeSetTimeout(() => {
+				btn.textContent = originalText;
+				btn.disabled = false;
+				btn.classList.remove('update-available', 'up-to-date');
+			}, 3000);
+		}
+
+		async function simulateDownload(version) {
+			const btn = event.target;
+			const originalText = btn.textContent;
+
+			btn.textContent = 'Downloading...';
+			btn.disabled = true;
+
+			await simulateAsyncOperation(2000);
+
+			btn.textContent = 'Downloaded!';
+			btn.classList.add('success');
+
+			showSuccessMessage(`${version} downloaded successfully!`);
+
+			safeSetTimeout(() => {
+				btn.textContent = originalText;
+				btn.disabled = false;
+				btn.classList.remove('success');
+			}, 3000);
+		}
+
+		function initializeMobileMenu() {
+			if (!cachedElements.mobileMenuToggle || !cachedElements.navLinks) return;
+
+			let isMenuOpen = false;
+
+			cachedElements.mobileMenuToggle.addEventListener('click', () => {
+				isMenuOpen = !isMenuOpen;
+
+				cachedElements.mobileMenuToggle.setAttribute('aria-expanded', isMenuOpen);
+				cachedElements.navLinks.setAttribute('aria-hidden', !isMenuOpen);
+
+				if (isMenuOpen) {
+					cachedElements.navLinks.style.maxHeight = cachedElements.navLinks.scrollHeight + 'px';
+					cachedElements.mobileMenuToggle.classList.add('active');
+				} else {
+					cachedElements.navLinks.style.maxHeight = '0';
+					cachedElements.mobileMenuToggle.classList.remove('active');
+				}
+			});
+
+			const navLinksItems = cachedElements.navLinks.querySelectorAll('a');
+			navLinksItems.forEach(link => {
+				link.addEventListener('click', () => {
+					if (isMenuOpen) {
+						isMenuOpen = false;
+						cachedElements.navLinks.style.maxHeight = '0';
+						cachedElements.mobileMenuToggle.classList.remove('active');
+						cachedElements.mobileMenuToggle.setAttribute('aria-expanded', false);
+						cachedElements.navLinks.setAttribute('aria-hidden', true);
+					}
+				});
+			});
+		}
+
+		function handleResize() {
+			if (window.innerWidth > 768 && cachedElements.navLinks) {
+				cachedElements.navLinks.style.maxHeight = '';
+				cachedElements.mobileMenuToggle.classList.remove('active');
+				cachedElements.mobileMenuToggle.setAttribute('aria-expanded', false);
+				cachedElements.navLinks.setAttribute('aria-hidden', false);
+			}
+		}
+
+		function debounce(func, wait) {
+			let timeout;
+			return function executedFunction(...args) {
+				const later = () => {
+					clearTimeout(timeout);
+					func(...args);
+				};
+				clearTimeout(timeout);
+				timeout = setTimeout(later, wait);
+				activeTimeouts.push(timeout);
+			};
+		}
+
+		function initializeKeyboardShortcuts() {
+			document.addEventListener('keydown', (e) => {
+				if (e.target.tagName === 'INPUT' ||
+					e.target.tagName === 'TEXTAREA' ||
+					e.target.isContentEditable) {
+					return;
+				}
+
+				if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+					e.preventDefault();
+					if (isLoggedIn) {
+						showPage('dashboard');
+					} else {
+						openLoginModal();
+					}
+				}
+
+				if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
+					e.preventDefault();
+					if (isLoggedIn) {
+						showPage('downloads');
+					} else {
+						openLoginModal();
+					}
+				}
+
+				if (e.key === 'Escape') {
+					if (cachedElements.loginModal &&
+						cachedElements.loginModal.style.display === 'flex') {
+						closeLoginModal();
+					}
+				}
+
+				if (e.altKey && e.key === 't') {
+					e.preventDefault();
+					if (cachedElements.themeToggle) {
+						cachedElements.themeToggle.click();
+					}
+				}
+
+				if (e.key >= '1' && e.key <= '5') {
+					const pages = ['home', 'features', 'downloads', 'support', 'dashboard'];
+					const pageIndex = parseInt(e.key) - 1;
+
+					if (pages[pageIndex] === 'dashboard' && !isLoggedIn) {
+						openLoginModal();
+					} else {
+						showPage(pages[pageIndex]);
+					}
+				}
+			});
+		}
+
+		document.addEventListener('DOMContentLoaded', () => {
+			initializeFAQ();
+			initializeTheme();
+			initializeMobileMenu();
+			initializeKeyboardShortcuts();
+			setupNavigation();
+			setupEventListeners();
+
+			const debouncedResize = debounce(handleResize, 250);
+			window.addEventListener('resize', debouncedResize);
+			handleResize();
+
+			if (checkLoginStatus()) {
+				showPage('dashboard');
+			} else {
+				showPage('home');
+			}
+
+			safeSetTimeout(() => {
+				console.log('Riverside client initialized successfully');
+			}, 100);
+		});
+
+		window.addEventListener('beforeunload', cleanupTimeoutsAndIntervals);
+		window.addEventListener('pagehide', cleanupTimeoutsAndIntervals);
+
+		window.addEventListener('error', (e) => {
+			console.error('Unhandled error:', e.error);
+		});
+
+		window.addEventListener('unhandledrejection', (e) => {
+			console.error('Unhandled promise rejection:', e.reason);
+			e.preventDefault();
+		});
+
+	</script>
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
