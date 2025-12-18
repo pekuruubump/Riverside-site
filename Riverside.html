@@ -437,7 +437,7 @@
         }
     }, delay);
     
-    // Store the timeout ID for later cleanup
+    
     activeTimeouts.add(timeoutId);
     return timeoutId;
 }
@@ -502,7 +502,7 @@
         if (current >= target) {
             element.textContent = Math.round(target).toLocaleString();
             clearInterval(timer);
-            // Remove the timer ID from the Set
+            
             activeIntervals.delete(timer);
         } else {
             element.textContent = Math.floor(current).toLocaleString();
@@ -1009,7 +1009,7 @@
 		function simulateAsyncOperation(ms) {
 			return new Promise(resolve => {
 				const timeoutId = setTimeout(resolve, ms);
-				activeTimeouts.push(timeoutId); // Store ID
+				activeTimeouts.push(timeoutId); 
                 return timeoutId;
 
 			});
