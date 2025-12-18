@@ -5,7 +5,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 	<title>Riverside - Premium Minecraft Client</title>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -412,16 +411,16 @@
 
 		let isLoggedIn = false;
 		let currentUsername = '';
-		let activeTimeouts = [];
-		let activeIntervals = [];
+		let activeTimeouts = new Set();
+        let activeIntervals = new Set();
 
 
 		function cleanupTimeoutsAndIntervals() {
-			activeTimeouts.forEach(timeout => clearTimeout(timeout));
-			activeIntervals.forEach(interval => clearInterval(interval));
-			activeTimeouts = [];
-			activeIntervals = [];
-		}
+        activeTimeouts.forEach(timeout => clearTimeout(timeout));
+        activeIntervals.forEach(interval => clearInterval(interval));
+        activeTimeouts.clear();
+        activeIntervals.clear();
+}
 
 
 		function safeSetTimeout(func, delay) {
@@ -444,17 +443,18 @@
 }
 
 		function safeSetInterval(func, delay) {
-			const intervalId = setInterval(() => {
-				try {
-					func();
-				} catch (error) {
-					console.error('Interval function error:', error);
-					clearInterval(intervalId);
-				}
-			}, delay);
-			activeIntervals.push(intervalId);
-			return intervalId;
-		}
+    const intervalId = setInterval(() => {
+        try {
+            func();
+        } catch (error) {
+            console.error('Interval function error:', error);
+            clearInterval(intervalId);
+            activeIntervals.delete(intervalId);
+        }
+    }, delay);
+    activeIntervals.add(intervalId);
+    return intervalId;
+}
 
 
 		function initializeTheme() {
@@ -493,21 +493,22 @@
 
 
 		function animateCounter(element, target) {
-			if (!element) return;
+    if (!element) return;
 
-			let current = 0;
-			const increment = target / 50;
-			const timer = safeSetInterval(() => {
-				current += increment;
-				if (current >= target) {
-					element.textContent = Math.round(target).toLocaleString();
-					clearInterval(timer);
-					activeIntervals = activeIntervals.filter(id => id !== timer);
-				} else {
-					element.textContent = Math.floor(current).toLocaleString();
-				}
-			}, 30);
-		}
+    let current = 0;
+    const increment = target / 50;
+    const timer = safeSetInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = Math.round(target).toLocaleString();
+            clearInterval(timer);
+            // Remove the timer ID from the Set
+            activeIntervals.delete(timer);
+        } else {
+            element.textContent = Math.floor(current).toLocaleString();
+        }
+    }, 30);
+}
 
 
 		function initializeFAQ() {
@@ -1008,7 +1009,9 @@
 		function simulateAsyncOperation(ms) {
 			return new Promise(resolve => {
 				const timeoutId = setTimeout(resolve, ms);
-				activeTimeouts.push(timeoutId);
+				activeTimeouts.push(timeoutId); // Store ID
+                return timeoutId;
+
 			});
 		}
 
@@ -1236,10 +1239,10 @@
 			}, 100);
         });
 
-		window.addEventListener('pagehide', cleanup);
+		window.addEventListener('pagehide', cleanupTimeoutsAndIntervals);
         window.addEventListener('beforeunload', () => {
-        cleanup();
-		});
+        cleanupTimeoutsAndIntervals();
+});
 		window.addEventListener('error', (e) => {
 			console.error('Unhandled error:', e.error);
 		});
