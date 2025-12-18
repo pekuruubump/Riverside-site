@@ -421,17 +421,23 @@
 
 
 		function safeSetTimeout(func, delay) {
-			const timeoutId = setTimeout(() => {
-				try {
-					func();
-				} catch (error) {
-					console.error('Timeout function error:', error);
-				}
-				activeTimeouts = activeTimeouts.filter(id => id !== timeoutId);
-			}, delay);
-			activeTimeouts.push(timeoutId);
-			return timeoutId;
-		}
+            const timeoutId = setTimeout(() => {
+        try {
+            func();
+        } catch (error) {
+            console.error('Timeout error:', error);
+            
+        throw error;
+        } finally {
+            
+            activeTimeouts.delete(timeoutId);
+        }
+    }, delay);
+    
+    // Store the timeout ID for later cleanup
+    activeTimeouts.add(timeoutId);
+    return timeoutId;
+}
 
 		function safeSetInterval(func, delay) {
 			const intervalId = setInterval(() => {
@@ -1224,11 +1230,12 @@
 			safeSetTimeout(() => {
 				console.log('Riverside client initialized successfully');
 			}, 100);
+        });
+
+		window.addEventListener('pagehide', cleanup);
+        window.addEventListener('beforeunload', () => {
+        cleanup();
 		});
-
-		window.addEventListener('beforeunload', cleanupTimeoutsAndIntervals);
-		window.addEventListener('pagehide', cleanupTimeoutsAndIntervals);
-
 		window.addEventListener('error', (e) => {
 			console.error('Unhandled error:', e.error);
 		});
