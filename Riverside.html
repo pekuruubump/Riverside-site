@@ -238,6 +238,7 @@
 
 
 			<div class="faq-section">
+			<div class="faq-question" role="button" tabindex="0"></div>
 				<h2>Frequently Asked Questions</h2>
 				<div class="faq-list">
 					<div class="faq-item">
@@ -1191,12 +1192,6 @@
 					}
 				}
 
-				if (e.key === 'Escape') {
-					if (cachedElements.loginModal &&
-						cachedElements.loginModal.style.display === 'flex') {
-						closeLoginModal();
-					}
-				}
 
 				if (e.altKey && e.key === 't') {
 					e.preventDefault();
