@@ -501,7 +501,8 @@
         current += increment;
         if (current >= target) {
             element.textContent = Math.round(target).toLocaleString();
-            clearInterval(timer);
+           clearInterval(timer);
+           activeIntervals.delete(timer);
             
             activeIntervals.delete(timer);
         } else {
@@ -1007,13 +1008,14 @@
 		}
 
 		function simulateAsyncOperation(ms) {
-			return new Promise(resolve => {
-				const timeoutId = setTimeout(resolve, ms);
-				activeTimeouts.push(timeoutId); 
-                return timeoutId;
-
-			});
-		}
+	    return new Promise(resolve => {
+		const timeoutId = setTimeout(() => {
+			activeTimeouts.delete(timeoutId);
+			resolve();
+		}, ms);
+		activeTimeouts.add(timeoutId);
+	});
+}
 
 		function handleLogout() {
 			isLoggedIn = false;
@@ -1086,9 +1088,9 @@
 			}, 3000);
 		}
 
-		async function simulateDownload(version) {
-			const btn = event.target;
-			const originalText = btn.textContent;
+		async function simulateDownload(version, btn) {
+	        const originalText = btn.textContent;
+		
 
 			btn.textContent = 'Downloading...';
 			btn.disabled = true;
@@ -1159,7 +1161,7 @@
 				};
 				clearTimeout(timeout);
 				timeout = setTimeout(later, wait);
-				activeTimeouts.push(timeout);
+				activeTimeouts.add(timeout);
 			};
 		}
 
