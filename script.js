@@ -251,16 +251,16 @@ const cachedElements = {
 			});
 
 			document.querySelectorAll('.download-btn').forEach(btn => {
-				btn.addEventListener('click', function(e) {
-					e.preventDefault();
-					if (isLoggedIn) {
-						const version = this.getAttribute('data-version');
-						simulateDownload(version, this);
-					} else {
-						openLoginModal();
-					}
-				});
-			});
+                 btn.addEventListener('click', function(e) {
+                     e.preventDefault();
+                     if (isLoggedIn) {
+                          const version = this.getAttribute('data-version');
+                          simulateDownload(version, this); 
+                    } else {
+                         openLoginModal();
+        }
+    });
+});
 
 			document.querySelectorAll('.support-btn').forEach(btn => {
 				btn.addEventListener('click', function(e) {
