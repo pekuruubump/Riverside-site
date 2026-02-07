@@ -110,7 +110,7 @@ function animateCounter(element, target) {
             clearInterval(timer);
             activeIntervals.delete(timer);
 
-            activeIntervals.delete(timer);
+            
         } else {
             element.textContent = Math.floor(current).toLocaleString();
         }
@@ -229,12 +229,11 @@ function updateUIForLoggedInUser() {
 
 function navigationHandler(e) {
     e.preventDefault();
-    const page = this.getAttribute('data-page');
+    const page = e.currentTarget.getAttribute('data-page');
     if (page) {
         showPage(page);
     }
 }
-
 function setupNavigation() {
     if (cachedElements.navLinkItems) {
         cachedElements.navLinkItems.forEach(link => {
@@ -763,11 +762,11 @@ function debounce(func, wait) {
     return function executedFunction(...args) {
         const later = () => {
             clearTimeout(timeout);
+            activeTimeouts.delete(timeout);
             func(...args);
         };
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
-        activeTimeouts.add(timeout);
     };
 }
 
