@@ -4,12 +4,10 @@ If you fork, remix, or use a significant portion of this repository, please cred
 
 ---
 
-This project can be used as a **cheat-sheet website template** — ideal for:
+This project can be used as a **cheat-sheet website template**  ideal for:
 - Demos and mockups
 - Building interactive cheat-sheets
 - Learning front-end development by example
-
-Feel free to explore, experiment, and adapt it to your own needs.
 
 ---
 
