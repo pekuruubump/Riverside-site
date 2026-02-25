@@ -1,42 +1,48 @@
-## Riverside.moe  site
-
-*hey, read this before doing anything.*
-
-If you fork, remix or use significant portion of  this repo, please credit me somewhere obvious.
-
-*keep in mind that this project may still contain bugs, and some parts of the code might be a bit messy or confusing, im constantly improving it.*
-
-*you also may use this as a* **cheat-site template (kinda)**, *meaning: it's great for demos, mock cheat-sheets, or learning how to code yourself.*
-
-changes pushed to this repo are provisional not final and stable version, until I publish an official release, that means features, UI, and text may be tweaked, removed, or replaced while I test ideas. I advise you to wait until I post to releases for the stable, “finished” version.
 
 
-## Downloading the Project
+---
 
-### Option 1: Using Git (Recommended)
-```bash
-git clone https://github.com/pekuruubump/Riverside-site.git
-cd Riverside-site
-```
-### Option 2: Download ZIP
-Go to the [Releases](https://github.com/pekuruubump/Riverside-site/releases) page
+#  Riverside Site  About & Usage Guide
 
-Download the latest release files
+If you fork, remix, or use a significant portion of this repository, please credit me in an obvious place. Appreciate it!
 
-Extract the files to your desired location!
+>  **Note**: This project is still in active development. Some parts of the code may be messy or incomplete — I'm constantly improving it.
+
+---
+
+##  What is this?
+
+This project can be used as a **cheat-sheet website template** — ideal for:
+- Demos and mockups
+- Building interactive cheat-sheets
+- Learning front-end development by example
+
+Feel free to explore, experiment, and adapt it to your own needs.
+
+---
+
+##  Development Status
+
+Changes pushed to this repo are **provisional** — not final or stable.  
+Features, UI, and content may be tweaked, removed, or replaced as I test new ideas.
+
+If you're looking for a stable, “finished” version, I recommend waiting until I publish an official release.  
+ [Check the Releases page](https://github.com/pekuruubump/Riverside-site/releases) for stable versions.
+
+---
+
+## 📌 Version Support
+
+| Version    | Status              | Notes                          |
+|------------|---------------------|--------------------------------|
+| v9.01      | ❌ Not supported    | Deprecated / unstable          |
+| v9.02      | ⚠️ Partial support  | Minor fixes available (untill 02/24/2026)          |
+| v9.03      | ✅ Supported        | Latest stable (up-to-date)     |
 
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
-[![github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=pekuruubump)](https://github.com/ashutosh00710/github-readme-activity-graph)
+##  Found a bug?
 
+If something breaks or behaves unexpectedly, it might be due to ongoing development. Feel free to open an issue or suggest improvements.
 
-
-
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-> WARNING, THIS REPO WAS RENAMED TO RIVERSIDE.MOE IN 18.11.2025 
-
-
-
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
