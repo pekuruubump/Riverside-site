@@ -1,4 +1,4 @@
-If you fork, remix, or use a significant portion of this repository, please credit me in an obvious place. Appreciate it!
+If you fork, remix, or use a significant portion of this repository, please credit me in an obvious place. 
 
 >  **Note**: This project is still in active development. Some parts of the code may be messy or incomplete — I'm constantly improving it.
 
