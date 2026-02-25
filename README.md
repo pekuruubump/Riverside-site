@@ -4,8 +4,6 @@ If you fork, remix, or use a significant portion of this repository, please cred
 
 ---
 
-##  What is this?
-
 This project can be used as a **cheat-sheet website template** — ideal for:
 - Demos and mockups
 - Building interactive cheat-sheets
@@ -15,8 +13,6 @@ Feel free to explore, experiment, and adapt it to your own needs.
 
 ---
 
-##  Development Status
-
 Changes pushed to this repo are **provisional** — not final or stable.  
 Features, UI, and content may be tweaked, removed, or replaced as I test new ideas.
 
@@ -24,8 +20,6 @@ If you're looking for a stable, “finished” version, I recommend waiting unti
  [Check the Releases page](https://github.com/pekuruubump/Riverside-site/releases) for stable versions.
 
 ---
-
-##  Version Support
 
 | Version    | Status              | Notes                          |
 |------------|---------------------|--------------------------------|
@@ -35,8 +29,6 @@ If you're looking for a stable, “finished” version, I recommend waiting unti
 
 
 ---
-
-##  Found a bug?
 
 If something breaks or behaves unexpectedly, it might be due to ongoing development. Feel free to open an issue or suggest improvements.
 
