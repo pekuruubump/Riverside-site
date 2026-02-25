@@ -25,13 +25,13 @@ If you're looking for a stable, “finished” version, I recommend waiting unti
 
 ---
 
-## 📌 Version Support
+##  Version Support
 
 | Version    | Status              | Notes                          |
 |------------|---------------------|--------------------------------|
-| v9.01      | ❌ Not supported    | Deprecated / unstable          |
-| v9.02      | ⚠️ Partial support  | Minor fixes available (untill 02/24/2026)          |
-| v9.03      | ✅ Supported        | Latest stable (up-to-date)     |
+| v9.01      |  Not supported    | Deprecated / unstable          |
+| v9.02      |  Partial support  | Minor fixes available (untill 02/24/2026)          |
+| v9.03      |  Supported        | Latest stable (up-to-date)     |
 
 
 ---
