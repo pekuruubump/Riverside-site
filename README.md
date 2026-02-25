@@ -1,7 +1,5 @@
 
 
----
-
 #  Riverside Site  About & Usage Guide
 
 If you fork, remix, or use a significant portion of this repository, please credit me in an obvious place. Appreciate it!
