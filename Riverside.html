@@ -18,7 +18,7 @@
                 <div class="logo">
                     riverside.moe
                 </div>
-                <ul class="nav-links">
+                <ul class="nav-links" id="nav-links" aria-hidden="false">
                     <li><a href="#" class="nav-link" data-page="home">Home</a></li>
                     <li><a href="#" class="nav-link" data-page="features">Features</a></li>
                     <li><a href="#" class="nav-link" id="downloads-link" data-page="downloads">Downloads</a></li>
@@ -39,15 +39,6 @@
             </nav>
         </div>
     </header>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobile-menu">
-        <a href="#" class="mobile-menu-link" data-page="home">Home</a>
-        <a href="#" class="mobile-menu-link" data-page="features">Features</a>
-        <a href="#" class="mobile-menu-link" data-page="downloads">Downloads</a>
-        <a href="#" class="mobile-menu-link" data-page="support">Support</a>
-        <a href="#" class="mobile-menu-link" data-page="dashboard">Dashboard</a>
-    </div>
 
     <!-- Notification Container -->
     <div id="notification-container" class="notification-container"></div>
@@ -334,8 +325,8 @@
                 <button type="submit" class="submit-btn">Login</button>
                 <div class="error-message" id="login-error" style="display: none" role="alert" aria-live="assertive"></div>
             </form>
-            <div class="demo-credentials" style="margin-top: 15px; padding: 10px; background: #f5f5f5; border-radius: 5px; font-size: 0.9em">
-                <p style="margin: 0; color: #666">Demo credentials: admin / admin</p>
+            <div class="demo-credentials">
+                <p>Demo credentials: <strong>admin / admin</strong></p>
             </div>
         </div>
     </div>
