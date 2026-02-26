@@ -63,6 +63,18 @@
     --info-bg: rgba(59, 130, 246, 0.1);
     --error-color: #ef4444;
     --error-bg: rgba(239, 68, 68, 0.1);
+    
+    /* z-index layers */
+    --z-negative: -1;
+    --z-elevate: 1;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal-backdrop: 400;
+    --z-modal: 500;
+    --z-popover: 600;
+    --z-tooltip: 700;
+    --z-toast: 800;
 }
 
 /* light theme - for when the dark mode gets too heavy */
@@ -116,6 +128,8 @@ body {
     overflow-x: hidden;
     transition: background-color var(--transition-slow) var(--transition-timing),
                 color var(--transition-slow) var(--transition-timing);
+    position: relative;
+    z-index: var(--z-elevate);
 }
 
 /* fancy background effects - makes the site feel alive */
@@ -128,7 +142,7 @@ body::before {
         radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.07) 0%, transparent 50%),
         radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
     pointer-events: none; 
-    z-index: -2;
+    z-index: var(--z-negative);
     animation: gradientFloat 20s ease-in-out infinite alternate;
 }
 
@@ -141,7 +155,7 @@ body::after {
         radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     background-size: 40px 40px;
     pointer-events: none; 
-    z-index: -1;
+    z-index: var(--z-negative);
     opacity: 0.3;
 }
 
@@ -208,7 +222,7 @@ mark {
     display: none;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
     will-change: opacity, transform; 
 }
 
@@ -224,13 +238,14 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: var(--z-fixed);
     padding: 1rem 0;
     background: var(--glass-effect);
     backdrop-filter: var(--blur-backdrop);
     -webkit-backdrop-filter: var(--blur-backdrop);
     border-bottom: 1px solid var(--border-color);
-    transition: all var(--transition-speed) var(--transition-timing);
+    transition: background-color var(--transition-speed) var(--transition-timing),
+                border-color var(--transition-speed) var(--transition-timing);
 }
 
 .navbar {
@@ -254,6 +269,7 @@ header {
     list-style: none;
     gap: 2.5rem;
     align-items: center;
+    transition: max-height var(--transition-speed) var(--transition-timing);
 }
 
 .nav-link {
@@ -302,7 +318,9 @@ header {
     border-radius: var(--border-radius-full);
     padding: 0.5rem;
     cursor: pointer;
-    transition: all var(--transition-speed) var(--transition-timing);
+    transition: background-color var(--transition-speed) var(--transition-timing),
+                border-color var(--transition-speed) var(--transition-timing),
+                color var(--transition-speed) var(--transition-timing);
     color: var(--text-secondary);
     display: flex;
     align-items: center;
@@ -316,7 +334,6 @@ header {
     color: var(--text-primary);
     border-color: var(--border-color-hover);
 }
-
 
 .mobile-menu-toggle {
     display: none;
@@ -337,7 +354,8 @@ header {
     height: 2px;
     background: var(--text-primary);
     border-radius: 2px;
-    transition: all var(--transition-speed) var(--transition-timing);
+    transition: transform var(--transition-speed) var(--transition-timing),
+                opacity var(--transition-speed) var(--transition-timing);
     display: block;
 }
 
@@ -361,7 +379,10 @@ header {
     color: var(--accent-primary);
     font-weight: 600;
     cursor: pointer;
-    transition: all var(--transition-speed) var(--transition-timing);
+    transition: background-color var(--transition-speed) var(--transition-timing),
+                color var(--transition-speed) var(--transition-timing),
+                transform var(--transition-speed) var(--transition-timing),
+                box-shadow var(--transition-speed) var(--transition-timing);
 }
 
 .login-btn:hover {
@@ -383,7 +404,11 @@ header {
     text-decoration: none;
     border: none;
     cursor: pointer;
-    transition: all var(--transition-speed) var(--transition-timing);
+    transition: background-color var(--transition-speed) var(--transition-timing),
+                color var(--transition-speed) var(--transition-timing),
+                transform var(--transition-speed) var(--transition-timing),
+                box-shadow var(--transition-speed) var(--transition-timing),
+                border-color var(--transition-speed) var(--transition-timing);
     position: relative;
     overflow: hidden;
     white-space: nowrap;
@@ -499,7 +524,7 @@ header {
 .hero-content {
     max-width: 800px;
     position: relative;
-    z-index: 1;
+    z-index: var(--z-elevate);
 }
 
 .hero h1 {
@@ -533,7 +558,7 @@ header {
     background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
     filter: blur(100px);
     opacity: 0.4;
-    z-index: 0;
+    z-index: var(--z-negative);
     animation: pulse 8s ease-in-out infinite alternate;
     pointer-events: none;
 }
@@ -548,7 +573,7 @@ header {
     background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
     filter: blur(80px);
     opacity: 0.3;
-    z-index: 0;
+    z-index: var(--z-negative);
     animation: pulse 12s ease-in-out infinite alternate-reverse;
     pointer-events: none;
 }
@@ -577,7 +602,10 @@ header {
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     padding: 2rem;
-    transition: all var(--transition-speed) var(--transition-timing);
+    transition: transform var(--transition-speed) var(--transition-timing),
+                border-color var(--transition-speed) var(--transition-timing),
+                box-shadow var(--transition-speed) var(--transition-timing),
+                background-color var(--transition-speed) var(--transition-timing);
     position: relative;
     overflow: hidden;
     text-align: center;
@@ -702,11 +730,13 @@ header {
 
 .faq-toggle {
     font-size: 1.5rem;
+    font-weight: 600;
     transition: transform var(--transition-speed) var(--transition-timing);
 }
 
 .faq-item.active .faq-toggle {
-    transform: rotate(45deg);
+    transform: rotate(0deg);
+    content: '−';
 }
 
 .faq-answer {
@@ -714,7 +744,9 @@ header {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    transition: all var(--transition-speed) var(--transition-timing);
+    transition: padding var(--transition-speed) var(--transition-timing),
+                max-height var(--transition-speed) var(--transition-timing),
+                opacity var(--transition-speed) var(--transition-timing);
 }
 
 .faq-item.active .faq-answer {
@@ -749,7 +781,9 @@ header {
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    transition: all var(--transition-speed) var(--transition-timing);
+    transition: transform var(--transition-speed) var(--transition-timing),
+                border-color var(--transition-speed) var(--transition-timing),
+                box-shadow var(--transition-speed) var(--transition-timing);
 }
 
 .stat-card:hover {
@@ -835,6 +869,22 @@ header {
     flex-wrap: wrap;
 }
 
+/* recent activity */
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.activity-item {
+    padding: 0.75rem 1rem;
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-sm);
+    border-left: 3px solid var(--accent-secondary);
+    color: var(--text-secondary);
+}
+
 /* login modal */
 .modal {
     position: fixed;
@@ -845,7 +895,7 @@ header {
     display: none;
     align-items: center;
     justify-content: center;
-    z-index: 2000;
+    z-index: var(--z-modal);
     animation: fadeIn var(--transition-speed) var(--transition-timing);
 }
 
@@ -878,7 +928,8 @@ header {
     cursor: pointer;
     padding: 0.5rem;
     border-radius: var(--border-radius-sm);
-    transition: all var(--transition-speed) var(--transition-timing);
+    transition: color var(--transition-speed) var(--transition-timing),
+                background-color var(--transition-speed) var(--transition-timing);
     width: 40px;
     height: 40px;
     display: flex;
@@ -921,7 +972,9 @@ header {
     color: var(--text-primary);
     font-size: 1rem;
     font-family: inherit;
-    transition: all var(--transition-speed) var(--transition-timing);
+    transition: border-color var(--transition-speed) var(--transition-timing),
+                box-shadow var(--transition-speed) var(--transition-timing),
+                background-color var(--transition-speed) var(--transition-timing);
 }
 
 .form-control:focus {
@@ -941,7 +994,9 @@ header {
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
-    transition: all var(--transition-speed) var(--transition-timing);
+    transition: transform var(--transition-speed) var(--transition-timing),
+                box-shadow var(--transition-speed) var(--transition-timing),
+                opacity var(--transition-speed) var(--transition-timing);
 }
 
 .submit-btn:hover:not(:disabled) {
@@ -1007,7 +1062,7 @@ footer {
     padding: 1rem 2rem;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-lg);
-    z-index: 3000;
+    z-index: var(--z-toast);
     animation: slideIn 0.3s ease-out forwards;
     font-weight: 500;
     max-width: 400px;
@@ -1144,7 +1199,7 @@ footer {
     inset: -1px;
     background: var(--gradient-primary);
     border-radius: inherit;
-    z-index: -1;
+    z-index: var(--z-negative);
     opacity: 0.5;
 }
 
@@ -1195,7 +1250,7 @@ footer {
     color: var(--accent-primary);
 }
 
-/* bil stail */
+/* mobile styles */
 @media (max-width: 768px) {
     html {
         font-size: 14px;
@@ -1217,7 +1272,7 @@ footer {
         font-size: 3rem;
     }
     
-    /* we meed mnile menu */
+    /* we need mobile menu */
     .mobile-menu-toggle {
         display: flex !important;
     }
@@ -1234,12 +1289,12 @@ footer {
         gap: 0;
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.3s var(--transition-timing);
+        transition: max-height var(--transition-speed) var(--transition-timing);
         border-bottom: 1px solid var(--border-color);
-        z-index: 999;
+        z-index: var(--z-dropdown);
     }
     
-    .nav-links.active {
+    .nav-links[aria-hidden="false"] {
         max-height: 400px;
         padding: 1rem;
     }
@@ -1354,4 +1409,3 @@ footer {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-primary);
 }
-
