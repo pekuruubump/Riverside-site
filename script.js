@@ -690,11 +690,11 @@
             if (!elements.activityList) return;
             
             const activities = [
-                'Loader initialized',
-                'Anti-cheat bypass updated',
-                'New module: KillAura v2',
-                'Config synchronized',
-                'Session validated'
+                'Added Setting ("Wait Time", "Ticks it should wait before starting to break") to "Nuker"',
+                'Added Priority modes "Health & Absorption", "Health & Hurt Time" to Aim Assist',
+                'New release published: nightly',
+                'Added wait time before attacking on aura to get less flags',
+                'Updated Killaura'
             ];
             
             elements.activityList.innerHTML = activities.map(activity => 
