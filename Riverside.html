@@ -1,373 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-Content-Type-Options" content="nosniff">
-		<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-		<title>Riverside - Premium Minecraft Client</title>
-		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; connect-src 'self'; font-src 'self' https://fonts.gstatic.com;">
-		<link rel="stylesheet" href="style.css">
-		<script src="script.js" defer></script>
-	</head>
-	<body>
-		<header>
-			<div class="container">
-				<nav class="navbar">
-					<div class="logo">
-riverside.moe
-</div>
-					<ul class="nav-links" aria-hidden="false">
-						<li><a href="#" class="nav-link" data-page="home">Home</a></li>
-						<li><a href="#" class="nav-link" data-page="features">Features</a></li>
-						<li><a href="#" class="nav-link" id="downloads-link" data-page="downloads">Downloads</a></li>
-						<li><a href="#" class="nav-link" data-page="support">Support</a></li>
-						<li><a href="#" class="nav-link" data-page="dashboard">Dashboard</a></li>
-					</ul>
-					<div class="navbar-actions">
-						<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-<span class="theme-icon">🌙</span>
-</button>
-						<button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
-<span></span>
-<span></span>
-<span></span>
-</button>
-						<button class="login-btn" id="login-dashboard-btn">Login</button>
-					</div>
-				</nav>
-			</div>
-		</header>
-		<section id="home" class="page-content active">
-			<div class="hero">
-				<div class="container">
-					<h1>Riverside Client</h1>
-					<p>
-						Experience Minecraft With Premium Client With 
-						<mark>Ghost</mark>
-						And 
-						<mark>Blatant</mark>
-						Modules.
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <title>Riverside - Premium Minecraft Client</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; connect-src 'self'; font-src 'self' https://fonts.gstatic.com;">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    riverside.moe
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="features">Features</a></li>
+                    <li><a href="#" class="nav-link" id="downloads-link" data-page="downloads">Downloads</a></li>
+                    <li><a href="#" class="nav-link" data-page="support">Support</a></li>
+                    <li><a href="#" class="nav-link" data-page="dashboard">Dashboard</a></li>
+                </ul>
+                <div class="navbar-actions">
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <button class="login-btn" id="login-dashboard-btn">Login</button>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-					</p>
-					<div class="hero-btns">
-<a href="#" class="btn btn-primary" data-page="features">Explore Features</a>
-<a href="#" class="btn btn-secondary" id="downloads-hero-btn">Download Now</a>
-</div>
-				</div>
-			</div>
-			<div class="features">
-				<div class="container">
-					<h2 class="section-title">Why Choose Riverside?</h2>
-					<div class="features-grid">
-						<div class="feature-card">
-							<div class="feature-icon">
-⭐
-</div>
-							<h3>High Performance</h3>
-							<p>
-Optimized code ensures minimal impact on your game performance while providing all the features you need.
-</p>
-						</div>
-						<div class="feature-card">
-							<div class="feature-icon">
-🛡️
-</div>
-							<h3>Undetectable</h3>
-							<p>
-Advanced obfuscation techniques and regular updates keep you safe from detection systems.
-</p>
-						</div>
-						<div class="feature-card">
-							<div class="feature-icon">
-👍
-</div>
-							<h3>Regular Updates</h3>
-							<p>
-Our team works constantly to provide updates for the latest Minecraft versions and new features.
-</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<section id="features" class="page-content">
-			<div class="container">
-				<h1>Features</h1>
-				<p>
-Riverside offers a comprehensive set of features designed to enhance your Minecraft experience.
-</p>
-				<div class="features-grid" style="margin-top: 50px">
-					<div class="feature-card">
-						<div class="feature-icon">
-🎯
-</div>
-						<h3>Combat Modules</h3>
-						<p>
-Advanced PVP utilities including KillAura, AutoClicker, Reach, and Velocity.
-</p>
-					</div>
-					<div class="feature-card">
-						<div class="feature-icon">
-🚶
-</div>
-						<h3>Movement Enhancements</h3>
-						<p>
-Fly, Speed, NoSlow, and other movement modules.
-</p>
-					</div>
-					<div class="feature-card">
-						<div class="feature-icon">
-👁️
-</div>
-						<h3>Visual Improvements</h3>
-						<p>
-ESP, Tracers, Nametags, and other visual aids.
-</p>
-					</div>
-					<div class="feature-card">
-						<div class="feature-icon">
-⚙️
-</div>
-						<h3>Utility Modules</h3>
-						<p>
-Inventory management, AutoTool, ChestStealer, and other.
-</p>
-					</div>
-					<div class="feature-card">
-						<div class="feature-icon">
-🌍
-</div>
-						<h3>World Exploration</h3>
-						<p>
-X-Ray, CaveFinder, and other modules.
-</p>
-					</div>
-					<div class="feature-card">
-						<div class="feature-icon">
-🔧
-</div>
-						<h3>Customization</h3>
-						<p>
-Fully customizable GUI, keybinds, and settings to tailor the client to your preferences.
-</p>
-					</div>
-				</div>
-			</div>
-		</section>
-		<section id="downloads" class="page-content">
-			<div class="container">
-				<div id="downloads-restricted">
-					<div class="restricted-icon">
-🔒
-</div>
-					<h1>Downloads Restricted</h1>
-					<p>You need to be logged in to access the downloads section.</p>
-					<p>Please log in to download Riverside and access all premium features.</p>
-					<button class="btn btn-primary" style="margin-top: 30px" id="downloads-login-btn">Login to Access Downloads</button>
-				</div>
-				<div id="downloads-authenticated" style="display: none">
-					<h1>Downloads</h1>
-					<p>Download the latest version of Riverside for your Minecraft version.</p>
-					<div class="features-grid" style="margin-top: 50px">
-						<div class="feature-card">
-							<div class="feature-icon">👈</div>
-							<h3>Riverside v2.1.4</h3>
-							<p>Compatible with Minecraft 1.8.9</p>
-							<button class="btn btn-primary download-btn" style="margin-top: 20px; width: 100%" data-version="v2.1.4">Download</button>
-						</div>
-						<div class="feature-card">
-							<div class="feature-icon">👈</div>
-							<h3>Riverside v2.0.9</h3>
-							<p>Compatible with Minecraft 1.20.1</p>
-							<button class="btn btn-primary download-btn" style="margin-top: 20px; width: 100%" data-version="v2.0.9">Download</button>
-						</div>
-					</div>
-					<div class="installation-guide" style="margin-top: 50px; background-color: var(--bg-card); padding: 30px; border-radius: 10px">
-						<h3>Installation Guide</h3>
-						<ol style="margin-top: 15px; padding-left: 20px">
-							<li>Download the Riverside client for your Minecraft version</li>
-							<li>Make sure you have Java 8 or higher installed</li>
-							<li>Run the installer and follow the on-screen instructions</li>
-							<li>Launch Minecraft and select the Riverside profile</li>
-							<li>Log in with your credentials and enjoy!</li>
-						</ol>
-					</div>
-				</div>
-			</div>
-		</section>
-		<section id="support" class="page-content">
-			<div class="container">
-				<h1>Support</h1>
-				<p>Need help with Riverside? Check out our resources below or contact our support team.</p>
-				<div class="features-grid" style="margin-top: 50px">
-					<div class="feature-card">
-						<div class="feature-icon">📚</div>
-						<h3>Documentation</h3>
-						<p>Comprehensive guides and tutorials for all Riverside features and settings.</p>
-						<button class="btn btn-primary support-btn" style="margin-top: 20px; width: 100%">View Documentation</button>
-					</div>
-					<div class="feature-card">
-						<div class="feature-icon">❓</div>
-						<h3>FAQ</h3>
-						<p>Answers to frequently asked questions about installation, usage, and troubleshooting.</p>
-						<button class="btn btn-primary support-btn" style="margin-top: 20px; width: 100%">View FAQ</button>
-					</div>
-					<div class="feature-card">
-						<div class="feature-icon">💬</div>
-						<h3>Contact Support</h3>
-						<p>Can't find what you're looking for? Contact our support team for assistance.</p>
-						<button class="btn btn-primary support-btn" style="margin-top: 20px; width: 100%">Contact Us</button>
-					</div>
-				</div>
-				<div class="faq-section">
-					
-					<h2>Frequently Asked Questions</h2>
-					<div class="faq-list">
-						<div class="faq-item">
-							<div class="faq-question">
-<span>Is Riverside detectable by server anti-cheats?</span>
-<span class="faq-toggle">+</span>
-</div>
-							<div class="faq-answer">
-								<p>Riverside uses advanced obfuscation techniques to avoid detection. However, no client can guarantee 100% undetectability on all servers. We recommend using our ghost modules on servers with strict anti-cheat systems.</p>
-							</div>
-						</div>
-						<div class="faq-item">
-							<div class="faq-question">
-<span>What Minecraft versions are supported?</span>
-<span class="faq-toggle">+</span>
-</div>
-							<div class="faq-answer">
-								<p>We currently support Minecraft 1.7.10, 1.8.9, 1.12.2, 1.16.5, 1.18.2, 1.19.4, and 1.20.1. Check our downloads page for the latest supported versions.</p>
-							</div>
-						</div>
-						<div class="faq-item">
-							<div class="faq-question">
-<span>How often is Riverside updated?</span>
-<span class="faq-toggle">+</span>
-</div>
-							<div class="faq-answer">
-								<p>We release updates regularly to add new features, improve performance, and maintain compatibility with the latest Minecraft versions. Major updates typically occur every 2-4 weeks.</p>
-							</div>
-						</div>
-						<div class="faq-item">
-							<div class="faq-question">
-<span>Is there a free trial available?</span>
-<span class="faq-toggle">+</span>
-</div>
-							<div class="faq-answer">
-								<p>Yes! We offer a 3-day free trial for new users. You can access all premium features during the trial period to test if Riverside meets your needs.</p>
-							</div>
-						</div>
-						<div class="faq-item">
-							<div class="faq-question">
-<span>Can I use Riverside on multiple computers?</span>
-<span class="faq-toggle">+</span>
-</div>
-							<div class="faq-answer">
-								<p>Your subscription allows you to use Riverside on up to 2 devices simultaneously. If you need more devices, please contact our support team.</p>
-							</div>
-						</div>
-						<div class="faq-item">
-							<div class="faq-question">
-<span>What payment methods do you accept?</span>
-<span class="faq-toggle">+</span>
-</div>
-							<div class="faq-answer">
-								<p>We accept credit/debit cards, PayPal, and various cryptocurrencies. All payments are processed securely through our payment partners.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<section id="dashboard" class="page-content dashboard">
-			<div class="container">
-				<div class="dashboard-header">
-					<h1>Welcome, <span id="username-display"></span></h1>
-					<p> riverside.moe loader dashboard </p>
-				</div>
-				<div class="quick-stats">
-					<div class="stat-card">
-						<div class="stat-icon">👥</div>
-						<div class="stat-info">
-<span class="stat-value" id="online-users">1,247</span>
-<span class="stat-label">Users Online</span>
-</div>
-					</div>
-					<div class="stat-card">
-						<div class="stat-icon">⚡</div>
-						<div class="stat-info">
-<span class="stat-value" id="loads-today">892</span>
-<span class="stat-label">Loads Today</span>
-</div>
-					</div>
-				</div>
-				<div class="status-panel">
-					<h2 style="margin-bottom: 20px">Status Panel</h2>
-					<div class="status-item">
-<span class="status-label">Loader Status:</span>
-<span class="status-value status-ready">Ready</span>
-</div>
-					<div class="status-item">
-<span class="status-label">Last Update:</span>
-<span class="status-value" id="last-update">Loading...</span>
-</div>
-					<div class="status-item">
-<span class="status-label">Detection Status:</span>
-<span class="status-value status-clean">Clean</span>
-</div>
-					<div class="status-item">
-<span class="status-label">Subscription:</span>
-<span class="status-value status-ready">Active</span>
-</div>
-				</div>
-				<div class="loader-actions">
-					<button class="btn btn-primary" id="launch-loader-btn">Launch Loader</button>
-					<button class="btn btn-secondary" id="check-updates-btn">Check for Updates</button>
-					<button class="btn btn-secondary" id="logout-btn">Logout</button>
-				</div>
-			</div>
-		</section>
-		<div class="modal" id="login-modal" aria-hidden="true" aria-labelledby="login-title" role="dialog" style="display: none">
-			<div class="modal-content">
-				<button class="close-modal" id="close-login" aria-label="Close login modal" tabindex="0">&times;</button>
-				<h2 id="login-title">Login to Riverside</h2>
-				<form id="login-form" novalidate>
-					<div class="form-group">
-						<label for="username">Username</label>
-						<input type="text" id="username" class="form-control" placeholder="Enter your username" required autocomplete="username">
-					</div>
-					<div class="form-group">
-						<label for="password">Password</label>
-						<input type="password" id="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
-					</div>
-					<button type="submit" class="submit-btn">Login</button>
-					<div class="error-message" id="login-error" style="display: none" role="alert" aria-live="assertive"></div>
-				</form>
-				<div class="demo-credentials" style="margin-top: 15px; padding: 10px; background: #f5f5f5; border-radius: 5px; font-size: 0.9em">
-					<p style="margin: 0; color: #666">Demo credentials: admin / admin</p>
-				</div>
-			</div>
-		</div>
-		<footer>
-			<div class="container">
-				<div class="footer-links">
-<a href="#" data-page="home">Home</a>
-<a href="#" data-page="features">Features</a>
-<a href="#" data-page="downloads">Downloads</a>
-<a href="#" data-page="support">Support</a>
-<a href="#">Privacy Policy</a>
-<a href="#">Terms of Service</a>
-</div>
-				<p class="copyright">© 2026 Riverside. All rights reserved. </p>  <!-- did i fucking forgot to edit this
-				                                                                   and make a release with this outdated
-				                                                                   date and comment? im so retarded 
-				                                                                   -->
-			</div>
-		</footer>
-	</body>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#" class="mobile-menu-link" data-page="home">Home</a>
+        <a href="#" class="mobile-menu-link" data-page="features">Features</a>
+        <a href="#" class="mobile-menu-link" data-page="downloads">Downloads</a>
+        <a href="#" class="mobile-menu-link" data-page="support">Support</a>
+        <a href="#" class="mobile-menu-link" data-page="dashboard">Dashboard</a>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification-container" class="notification-container"></div>
+
+    <section id="home" class="page-content active">
+        <div class="hero">
+            <div class="container">
+                <h1>Riverside Client</h1>
+                <p>
+                    Experience Minecraft With Premium Client With 
+                    <mark>Ghost</mark>
+                    And 
+                    <mark>Blatant</mark>
+                    Modules.
+                </p>
+                <div class="hero-btns">
+                    <a href="#" class="btn btn-primary" data-page="features">Explore Features</a>
+                    <a href="#" class="btn btn-secondary" id="downloads-hero-btn" data-page="downloads">Download Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="features">
+            <div class="container">
+                <h2 class="section-title">Why Choose Riverside?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⭐</div>
+                        <h3>High Performance</h3>
+                        <p>Optimized code ensures minimal impact on your game performance while providing all the features you need.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Undetectable</h3>
+                        <p>Advanced obfuscation techniques and regular updates keep you safe from detection systems.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👍</div>
+                        <h3>Regular Updates</h3>
+                        <p>Our team works constantly to provide updates for the latest Minecraft versions and new features.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="page-content">
+        <div class="container">
+            <h1>Features</h1>
+            <p>Riverside offers a comprehensive set of features designed to enhance your Minecraft experience.</p>
+            <div class="features-grid" style="margin-top: 50px">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Combat Modules</h3>
+                    <p>Advanced PVP utilities including KillAura, AutoClicker, Reach, and Velocity.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚶</div>
+                    <h3>Movement Enhancements</h3>
+                    <p>Fly, Speed, NoSlow, and other movement modules.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👁️</div>
+                    <h3>Visual Improvements</h3>
+                    <p>ESP, Tracers, Nametags, and other visual aids.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Utility Modules</h3>
+                    <p>Inventory management, AutoTool, ChestStealer, and other.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>World Exploration</h3>
+                    <p>X-Ray, CaveFinder, and other modules.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Customization</h3>
+                    <p>Fully customizable GUI, keybinds, and settings to tailor the client to your preferences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="downloads" class="page-content">
+        <div class="container">
+            <div id="downloads-restricted">
+                <div class="restricted-icon">🔒</div>
+                <h1>Downloads Restricted</h1>
+                <p>You need to be logged in to access the downloads section.</p>
+                <p>Please log in to download Riverside and access all premium features.</p>
+                <button class="btn btn-primary" style="margin-top: 30px" id="downloads-login-btn">Login to Access Downloads</button>
+            </div>
+            <div id="downloads-authenticated" style="display: none">
+                <h1>Downloads</h1>
+                <p>Download the latest version of Riverside for your Minecraft version.</p>
+                <div class="features-grid" style="margin-top: 50px">
+                    <div class="feature-card">
+                        <div class="feature-icon">👈</div>
+                        <h3>Riverside v2.1.4</h3>
+                        <p>Compatible with Minecraft 1.8.9</p>
+                        <button class="btn btn-primary download-btn" style="margin-top: 20px; width: 100%" data-version="v2.1.4">Download</button>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👈</div>
+                        <h3>Riverside v2.0.9</h3>
+                        <p>Compatible with Minecraft 1.20.1</p>
+                        <button class="btn btn-primary download-btn" style="margin-top: 20px; width: 100%" data-version="v2.0.9">Download</button>
+                    </div>
+                </div>
+                <div class="installation-guide" style="margin-top: 50px; background-color: var(--bg-card); padding: 30px; border-radius: 10px">
+                    <h3>Installation Guide</h3>
+                    <ol style="margin-top: 15px; padding-left: 20px">
+                        <li>Download the Riverside client for your Minecraft version</li>
+                        <li>Make sure you have Java 8 or higher installed</li>
+                        <li>Run the installer and follow the on-screen instructions</li>
+                        <li>Launch Minecraft and select the Riverside profile</li>
+                        <li>Log in with your credentials and enjoy!</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="support" class="page-content">
+        <div class="container">
+            <h1>Support</h1>
+            <p>Need help with Riverside? Check out our resources below or contact our support team.</p>
+            <div class="features-grid" style="margin-top: 50px">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Documentation</h3>
+                    <p>Comprehensive guides and tutorials for all Riverside features and settings.</p>
+                    <button class="btn btn-primary support-btn" style="margin-top: 20px; width: 100%">View Documentation</button>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">❓</div>
+                    <h3>FAQ</h3>
+                    <p>Answers to frequently asked questions about installation, usage, and troubleshooting.</p>
+                    <button class="btn btn-primary support-btn" style="margin-top: 20px; width: 100%">View FAQ</button>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Contact Support</h3>
+                    <p>Can't find what you're looking for? Contact our support team for assistance.</p>
+                    <button class="btn btn-primary support-btn" style="margin-top: 20px; width: 100%">Contact Us</button>
+                </div>
+            </div>
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Is Riverside detectable by server anti-cheats?</span>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Riverside uses advanced obfuscation techniques to avoid detection. However, no client can guarantee 100% undetectability on all servers. We recommend using our ghost modules on servers with strict anti-cheat systems.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What Minecraft versions are supported?</span>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We currently support Minecraft 1.7.10, 1.8.9, 1.12.2, 1.16.5, 1.18.2, 1.19.4, and 1.20.1. Check our downloads page for the latest supported versions.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How often is Riverside updated?</span>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We release updates regularly to add new features, improve performance, and maintain compatibility with the latest Minecraft versions. Major updates typically occur every 2-4 weeks.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Is there a free trial available?</span>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! We offer a 3-day free trial for new users. You can access all premium features during the trial period to test if Riverside meets your needs.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Can I use Riverside on multiple computers?</span>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Your subscription allows you to use Riverside on up to 2 devices simultaneously. If you need more devices, please contact our support team.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What payment methods do you accept?</span>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We accept credit/debit cards, PayPal, and various cryptocurrencies. All payments are processed securely through our payment partners.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboard" class="page-content dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Welcome, <span id="username-display">Guest</span></h1>
+                <p>riverside.moe loader dashboard</p>
+            </div>
+            <div class="quick-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="online-users">0</span>
+                        <span class="stat-label">Users Online</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="loads-today">0</span>
+                        <span class="stat-label">Loads Today</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="total-downloads">0</span>
+                        <span class="stat-label">Total Downloads</span>
+                    </div>
+                </div>
+            </div>
+            <div class="status-panel">
+                <h2 style="margin-bottom: 20px">Status Panel</h2>
+                <div class="status-item">
+                    <span class="status-label">Loader Status:</span>
+                    <span class="status-value status-ready">Ready</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Last Update:</span>
+                    <span class="status-value" id="last-update">2024-01-15</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Detection Status:</span>
+                    <span class="status-value status-clean">Clean</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Subscription:</span>
+                    <span class="status-value status-ready">Active</span>
+                </div>
+            </div>
+            <div class="loader-actions">
+                <button class="btn btn-primary" id="launch-loader-btn">Launch Loader</button>
+                <button class="btn btn-secondary" id="check-updates-btn">Check for Updates</button>
+                <button class="btn btn-secondary" id="logout-btn">Logout</button>
+            </div>
+            <div id="recent-activity" class="recent-activity" style="margin-top: 30px;">
+                <h3>Recent Activity</h3>
+                <div class="activity-list"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal" id="login-modal" aria-hidden="true" aria-labelledby="login-title" role="dialog" style="display: none">
+        <div class="modal-content">
+            <button class="close-modal" id="close-login" aria-label="Close login modal" tabindex="0">&times;</button>
+            <h2 id="login-title">Login to Riverside</h2>
+            <form id="login-form" novalidate>
+                <div class="form-group">
+                    <label for="login-username">Username</label>
+                    <input type="text" id="login-username" class="form-control" placeholder="Enter your username" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+                <div class="error-message" id="login-error" style="display: none" role="alert" aria-live="assertive"></div>
+            </form>
+            <div class="demo-credentials" style="margin-top: 15px; padding: 10px; background: #f5f5f5; border-radius: 5px; font-size: 0.9em">
+                <p style="margin: 0; color: #666">Demo credentials: admin / admin</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#" data-page="home">Home</a>
+                <a href="#" data-page="features">Features</a>
+                <a href="#" data-page="downloads">Downloads</a>
+                <a href="#" data-page="support">Support</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <p class="copyright">© 2026 Riverside. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
 </html>
-
