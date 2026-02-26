@@ -76,7 +76,10 @@
         downloadsAuthenticated: document.getElementById('downloads-authenticated'),
         
         // FAQ
-        faqItems: document.querySelectorAll('.faq-item')
+        faqItems: document.querySelectorAll('.faq-item'),
+        
+        // Download buttons (will be populated dynamically)
+        downloadBtns: []
     };
 
     // helper functions
@@ -160,10 +163,27 @@
 
         formatNumber(num) {
             return Math.round(num).toLocaleString();
+        },
+        
+        // New: Validate password strength
+        validatePasswordStrength(password) {
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasNumbers = /\d/.test(password);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            
+            return {
+                isValid: password.length >= 8 && hasUpperCase && hasLowerCase && hasNumbers,
+                hasUpperCase,
+                hasLowerCase,
+                hasNumbers,
+                hasSpecialChar,
+                length: password.length
+            };
         }
     };
 
-    // dark/light mode stuff
+    // dark/light mode stuff 
     const themeManager = {
         init() {
             const savedTheme = localStorage.getItem(CONFIG.localStorageKeys.theme) || 'dark';
@@ -174,10 +194,10 @@
         applyTheme(theme) {
             if (theme === 'light') {
                 document.body.classList.add('light-theme');
-                if (elements.themeIcon) elements.themeIcon.textContent = '☀️';
+                if (elements.themeIcon) elements.themeIcon.textContent = '🌙'; // Moon for light mode
             } else {
                 document.body.classList.remove('light-theme');
-                if (elements.themeIcon) elements.themeIcon.textContent = '🌙';
+                if (elements.themeIcon) elements.themeIcon.textContent = '☀️'; // Sun for dark mode
             }
         },
 
@@ -199,12 +219,17 @@
     const authManager = {
         init() {
             this.checkLoginStatus();
+            
+            setInterval(() => this.checkLoginStatus(), 60000); // Check every minute
         },
 
         checkLoginStatus() {
             try {
                 const savedLogin = localStorage.getItem(CONFIG.localStorageKeys.login);
-                if (!savedLogin) return false;
+                if (!savedLogin) {
+                    if (state.isLoggedIn) this.handleLogout();
+                    return false;
+                }
 
                 const loginData = JSON.parse(savedLogin);
                 if (!loginData.username || !loginData.timestamp) return false;
@@ -214,12 +239,15 @@
                 const hoursSinceLogin = (now - loginTime) / (1000 * 60 * 60);
 
                 if (hoursSinceLogin < CONFIG.loginSessionDuration) {
-                    state.isLoggedIn = true;
-                    state.currentUsername = loginData.username;
-                    this.updateUIForLoggedInUser();
+                    if (!state.isLoggedIn) {
+                        state.isLoggedIn = true;
+                        state.currentUsername = loginData.username;
+                        this.updateUIForLoggedInUser();
+                    }
                     return true;
                 } else {
                     this.clearLogin();
+                    if (state.isLoggedIn) this.handleLogout();
                 }
             } catch (e) {
                 console.error('Error checking login status:', e);
@@ -261,12 +289,22 @@
                 elements.loginDashboardBtn.textContent = 'Dashboard';
                 elements.loginDashboardBtn.setAttribute('aria-label', 'Go to dashboard');
             }
+            
+            
+            if (state.currentPage === 'downloads') {
+                pageManager.handleDownloadsPage();
+            }
         },
 
         resetUIForLoggedOutUser() {
             if (elements.loginDashboardBtn) {
                 elements.loginDashboardBtn.textContent = 'Login';
                 elements.loginDashboardBtn.setAttribute('aria-label', 'Login to Riverside');
+            }
+            
+            
+            if (state.currentPage === 'downloads') {
+                pageManager.handleDownloadsPage();
             }
         },
 
@@ -293,6 +331,13 @@
                 notificationManager.showError(`Password must be at least ${CONFIG.minPasswordLength} characters`);
                 return false;
             }
+
+            // someone pls implement ts
+            // const strengthCheck = utils.validatePasswordStrength(sanitizedPassword);
+            // if (!strengthCheck.isValid) {
+            //     notificationManager.showError('Password must be at least 8 characters with uppercase, lowercase, and numbers');
+            //     return false;
+            // }
 
             return true;
         },
@@ -345,7 +390,7 @@
         }
     };
 
-    // page navigation
+    // page navigation 
     const pageManager = {
         validPages: ['home', 'features', 'downloads', 'support', 'dashboard'],
 
@@ -374,8 +419,12 @@
                 link.addEventListener('click', (e) => this.handleNavigation(e));
             });
 
-            document.querySelectorAll('.download-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => this.handleDownloadClick(e));
+           
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('download-btn')) {
+                    e.preventDefault();
+                    this.handleDownloadClick(e);
+                }
             });
 
             document.querySelectorAll('.support-btn').forEach(btn => {
@@ -394,8 +443,8 @@
         handleDownloadClick(e) {
             e.preventDefault();
             if (state.isLoggedIn) {
-                const version = e.currentTarget.getAttribute('data-version');
-                downloadManager.simulateDownload(version, e.currentTarget);
+                const version = e.target.getAttribute('data-version');
+                downloadManager.simulateDownload(version, e.target);
             } else {
                 modalManager.openLoginModal();
             }
@@ -427,6 +476,7 @@
                 return;
             }
 
+           
             if (pageId === 'downloads') {
                 this.handleDownloadsPage();
             }
@@ -437,9 +487,10 @@
                 state.currentPage = pageId;
 
                 if (pageId === 'dashboard' && state.isLoggedIn) {
+                    
                     utils.safeSetTimeout(() => {
                         dashboardManager.initialize();
-                    }, 500);
+                    }, 300);
                 }
             }
 
@@ -451,6 +502,7 @@
             mobileMenuManager.closeMenu();
         },
 
+       
         handleDownloadsPage() {
             if (elements.downloadsRestricted && elements.downloadsAuthenticated) {
                 if (state.isLoggedIn) {
@@ -463,10 +515,16 @@
             }
         },
 
+        
         transitionToPage(targetPage) {
             const currentPage = document.querySelector('.page-content.active');
 
             if (currentPage && currentPage !== targetPage) {
+                // Ensure target page is visible for transition
+                targetPage.style.display = 'block';
+                targetPage.style.opacity = '0';
+                targetPage.style.transform = 'translateY(20px)';
+                
                 currentPage.style.opacity = '0';
                 currentPage.style.transform = 'translateY(20px)';
 
@@ -476,14 +534,16 @@
                     currentPage.style.opacity = '';
                     currentPage.style.transform = '';
 
-                    targetPage.style.display = 'block';
-                    targetPage.style.opacity = '0';
-                    targetPage.style.transform = 'translateY(20px)';
-
                     utils.safeSetTimeout(() => {
                         targetPage.classList.add('active');
                         targetPage.style.opacity = '1';
                         targetPage.style.transform = 'translateY(0)';
+                        
+                        // Clean up inline styles after transition
+                        utils.safeSetTimeout(() => {
+                            targetPage.style.opacity = '';
+                            targetPage.style.transform = '';
+                        }, CONFIG.animationDurations.pageTransition);
                     }, 50);
                 }, CONFIG.animationDurations.pageTransition);
             } else if (!currentPage) {
@@ -493,7 +553,7 @@
         }
     };
 
-    // modal popup handling
+    // modal popup handling 
     const modalManager = {
         init() {
             this.setupEventListeners();
@@ -545,8 +605,12 @@
                     if (elements.usernameInput) elements.usernameInput.focus();
                 }, 100);
 
-                document.addEventListener('keydown', this.handleEscapeKey.bind(this));
-                document.addEventListener('keydown', this.trapTabKey.bind(this));
+               
+                this.handleEscapeKey = this.handleEscapeKey.bind(this);
+                this.trapTabKey = this.trapTabKey.bind(this);
+                
+                document.addEventListener('keydown', this.handleEscapeKey);
+                document.addEventListener('keydown', this.trapTabKey);
             }
         },
 
@@ -565,12 +629,12 @@
             if (elements.usernameInput) elements.usernameInput.value = '';
             if (elements.passwordInput) elements.passwordInput.value = '';
 
-            if (state.lastFocusedElement) {
+            if (state.lastFocusedElement && state.lastFocusedElement.focus) {
                 state.lastFocusedElement.focus();
             }
 
-            document.removeEventListener('keydown', this.handleEscapeKey.bind(this));
-            document.removeEventListener('keydown', this.trapTabKey.bind(this));
+            document.removeEventListener('keydown', this.handleEscapeKey);
+            document.removeEventListener('keydown', this.trapTabKey);
         },
 
         handleEscapeKey(e) {
@@ -579,8 +643,9 @@
             }
         },
 
+        
         trapTabKey(e) {
-            if (e.key !== 'Tab' || !elements.loginModal) return;
+            if (e.key !== 'Tab' || !elements.loginModal || elements.loginModal.style.display !== 'flex') return;
 
             const focusableElements = elements.loginModal.querySelectorAll(
                 'button:not([disabled]), [href], input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -627,9 +692,10 @@
         }
     };
 
-    // dashboard stats and stuff
+    // dashboard stats and stuff 
     const dashboardManager = {
         initialize() {
+            // Clear existing intervals
             state.dashboardIntervals.forEach(interval => {
                 utils.clearSafeInterval(interval);
             });
@@ -651,11 +717,14 @@
             if (!element) return;
 
             let current = 0;
-            const increment = target / 50;
+            const steps = 50;
+            const increment = target / steps;
+            let step = 0;
             
             const intervalId = utils.safeSetInterval(() => {
+                step++;
                 current += increment;
-                if (current >= target) {
+                if (step >= steps) {
                     element.textContent = utils.formatNumber(target);
                     utils.clearSafeInterval(intervalId);
                 } else {
@@ -674,10 +743,11 @@
         }
     };
 
-    // download simulation
+    // download simulation 
     const downloadManager = {
         async simulateDownload(version, button) {
             const originalText = button.textContent;
+            const originalDisabled = button.disabled;
 
             button.textContent = 'Downloading...';
             button.disabled = true;
@@ -691,7 +761,7 @@
 
             utils.safeSetTimeout(() => {
                 button.textContent = originalText;
-                button.disabled = false;
+                button.disabled = originalDisabled;
                 button.classList.remove('success');
             }, 3000);
         }
@@ -771,7 +841,7 @@
         }
     };
 
-    // faq accordion
+    // faq accordion 
     const faqManager = {
         init() {
             if (!elements.faqItems.length) return;
@@ -791,7 +861,12 @@
                     question.setAttribute('aria-controls', answerId);
                 }
 
-                question.addEventListener('click', () => this.toggleFAQ(item));
+                
+                question.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.toggleFAQ(item);
+                });
+                
                 question.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
@@ -806,8 +881,9 @@
             const question = item.querySelector('.faq-question');
             const toggle = item.querySelector('.faq-toggle');
 
+            // Close all other FAQs
             elements.faqItems.forEach(faqItem => {
-                if (faqItem !== item) {
+                if (faqItem !== item && faqItem.classList.contains('active')) {
                     faqItem.classList.remove('active');
                     const faqToggle = faqItem.querySelector('.faq-toggle');
                     const faqQuestion = faqItem.querySelector('.faq-question');
@@ -816,6 +892,7 @@
                 }
             });
 
+            // Toggle current FAQ
             if (!isActive) {
                 item.classList.add('active');
                 if (toggle) toggle.textContent = '−';
@@ -828,12 +905,15 @@
         }
     };
 
-    // mobile menu
+    // mobile menu 
     const mobileMenuManager = {
         init() {
             if (!elements.mobileMenuToggle || !elements.navLinks) return;
 
-            elements.mobileMenuToggle.addEventListener('click', () => this.toggleMenu());
+            elements.mobileMenuToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.toggleMenu();
+            });
 
             const navLinksItems = elements.navLinks.querySelectorAll('a');
             navLinksItems.forEach(link => {
@@ -850,6 +930,7 @@
             
             if (elements.mobileMenuToggle) {
                 elements.mobileMenuToggle.setAttribute('aria-expanded', state.isMobileMenuOpen);
+                elements.mobileMenuToggle.classList.toggle('active', state.isMobileMenuOpen);
             }
             
             if (elements.navLinks) {
@@ -857,10 +938,10 @@
                 
                 if (state.isMobileMenuOpen) {
                     elements.navLinks.style.maxHeight = elements.navLinks.scrollHeight + 'px';
-                    elements.mobileMenuToggle.classList.add('active');
+                    elements.navLinks.classList.add('active');
                 } else {
                     elements.navLinks.style.maxHeight = '0';
-                    elements.mobileMenuToggle.classList.remove('active');
+                    elements.navLinks.classList.remove('active');
                 }
             }
         },
@@ -877,13 +958,17 @@
                 if (elements.navLinks) {
                     elements.navLinks.style.maxHeight = '0';
                     elements.navLinks.setAttribute('aria-hidden', true);
+                    elements.navLinks.classList.remove('active');
                 }
             }
         },
 
         handleResize() {
-            if (window.innerWidth > CONFIG.breakpoints.mobile && elements.navLinks) {
-                elements.navLinks.style.maxHeight = '';
+            if (window.innerWidth > CONFIG.breakpoints.mobile) {
+                if (elements.navLinks) {
+                    elements.navLinks.style.maxHeight = '';
+                    elements.navLinks.classList.remove('active');
+                }
                 if (elements.mobileMenuToggle) {
                     elements.mobileMenuToggle.classList.remove('active');
                     elements.mobileMenuToggle.setAttribute('aria-expanded', false);
@@ -896,7 +981,7 @@
         }
     };
 
-    // notifications
+    // notifications 
     const notificationManager = {
         showSuccess(message) {
             this.removeExistingNotifications();
@@ -915,6 +1000,7 @@
         },
 
         showError(message) {
+            // For form errors
             if (elements.loginError) {
                 elements.loginError.textContent = message;
                 elements.loginError.style.display = 'block';
@@ -925,6 +1011,20 @@
                         elements.loginError.style.animation = '';
                     }
                 }, 500);
+            } else {
+                // For general errors, show as notification
+                this.removeExistingNotifications();
+                const notification = this.createNotification(message, 'error');
+                document.body.appendChild(notification);
+
+                utils.safeSetTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease-out forwards';
+                    utils.safeSetTimeout(() => {
+                        if (notification.parentNode) {
+                            document.body.removeChild(notification);
+                        }
+                    }, 300);
+                }, CONFIG.animationDurations.notificationDuration);
             }
         },
 
@@ -947,19 +1047,21 @@
         }
     };
 
-    // keyboard shortcuts
+    // keyboard shortcuts 
     const keyboardManager = {
         init() {
             document.addEventListener('keydown', (e) => this.handleKeydown(e));
         },
 
         handleKeydown(e) {
+            // Don't trigger if user is typing in an input
             if (e.target.tagName === 'INPUT' || 
                 e.target.tagName === 'TEXTAREA' || 
                 e.target.isContentEditable) {
                 return;
             }
 
+            // Ctrl/Cmd + K for login/dashboard
             if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
                 e.preventDefault();
                 if (state.isLoggedIn) {
@@ -969,30 +1071,25 @@
                 }
             }
 
+            // Ctrl/Cmd + D for downloads
             if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
                 e.preventDefault();
-                if (state.isLoggedIn) {
-                    pageManager.showPage('downloads');
-                } else {
-                    modalManager.openLoginModal();
-                }
+                pageManager.showPage('downloads');
             }
 
+            // Alt + T for theme toggle
             if (e.altKey && e.key === 't') {
                 e.preventDefault();
                 themeManager.toggleTheme();
             }
 
-            if (e.key >= '1' && e.key <= '5') {
+            // Number keys for navigation (1-5)
+            if (e.key >= '1' && e.key <= '5' && !e.ctrlKey && !e.altKey && !e.metaKey) {
                 e.preventDefault();
                 const pages = ['home', 'features', 'downloads', 'support', 'dashboard'];
                 const pageIndex = parseInt(e.key) - 1;
                 
-                if (pages[pageIndex] === 'dashboard' && !state.isLoggedIn) {
-                    modalManager.openLoginModal();
-                } else {
-                    pageManager.showPage(pages[pageIndex]);
-                }
+                pageManager.showPage(pages[pageIndex]);
             }
         }
     };
@@ -1009,6 +1106,15 @@
         loaderManager.init();
         authManager.init();
         pageManager.init();
+
+        
+        const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+        if (!metaThemeColor) {
+            const meta = document.createElement('meta');
+            meta.name = 'theme-color';
+            meta.content = getComputedStyle(document.documentElement).getPropertyValue('--bg-primary');
+            document.head.appendChild(meta);
+        }
 
         utils.safeSetTimeout(() => {
             console.log('Riverside client initialized successfully');
