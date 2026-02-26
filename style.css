@@ -1,5 +1,5 @@
 :root {
-    /* dark theme colors - cyberpunk vibes */
+    /* dark theme colors  */
     --bg-primary: #0a0a0f;
     --bg-secondary: #11111d;
     --bg-tertiary: #161624;
@@ -1354,3 +1354,4 @@ footer {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-primary);
 }
+
