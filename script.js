@@ -23,7 +23,7 @@
         }
     };
 
-    // keep track of everything
+    // Keep track of everything
     const state = {
         isLoggedIn: false,
         currentUsername: '',
@@ -35,11 +35,11 @@
         lastFocusedElement: null
     };
 
-    // grab all the important elements from the page
+    // Grab all the important elements from the page
     const elements = {
         // Navigation
         mobileMenuToggle: document.getElementById('mobile-menu-toggle'),
-        navLinks: document.querySelector('.nav-links'),
+        navLinks: document.getElementById('nav-links'),
         navLinkItems: document.querySelectorAll('.nav-link'),
         
         // Theme
@@ -53,8 +53,8 @@
         // Forms
         loginForm: document.getElementById('login-form'),
         loginError: document.getElementById('login-error'),
-        usernameInput: document.getElementById('username'),
-        passwordInput: document.getElementById('password'),
+        usernameInput: document.getElementById('login-username'),
+        passwordInput: document.getElementById('login-password'),
         
         // Buttons
         loginDashboardBtn: document.getElementById('login-dashboard-btn'),
@@ -70,6 +70,8 @@
         loadsToday: document.getElementById('loads-today'),
         totalDownloads: document.getElementById('total-downloads'),
         lastUpdate: document.getElementById('last-update'),
+        recentActivity: document.getElementById('recent-activity'),
+        activityList: document.querySelector('.activity-list'),
         
         // Page sections
         downloadsSection: document.getElementById('downloads'),
@@ -80,7 +82,7 @@
         faqItems: document.querySelectorAll('.faq-item')
     };
 
-    // helper functions
+    // Helper functions
     const utils = {
         safeSetTimeout(func, delay) {
             const timeoutId = setTimeout(() => {
@@ -143,16 +145,16 @@
 
         simulateAsyncOperation(ms) {
             return new Promise(resolve => {
-                const timeoutId = this.safeSetTimeout(resolve, ms);
+                this.safeSetTimeout(resolve, ms);
             });
         },
 
-        ssanitizeInput(input) {
-             if (!input) return '';
-             const div = document.createElement('div');
-             div.textContent = input;
+        sanitizeInput(input) {
+            if (!input) return '';
+            const div = document.createElement('div');
+            div.textContent = input;
             return div.textContent;
-},
+        },
 
         hasDangerousPatterns(input) {
             const dangerousPatterns = [
@@ -166,7 +168,7 @@
         }
     };
 
-    // dark/light mode stuff
+    // Dark/light mode stuff
     const themeManager = {
         init() {
             const savedTheme = localStorage.getItem(CONFIG.localStorageKeys.theme) || 'dark';
@@ -198,7 +200,7 @@
         }
     };
 
-    // login/logout handling
+    // Login/logout handling
     const authManager = {
         init() {
             this.checkLoginStatus();
@@ -307,7 +309,7 @@
 
             await utils.simulateAsyncOperation(CONFIG.animationDurations.loginDelay);
 
-            // hardcoded for demo, would be replaced with real auth
+            // Hardcoded for demo, would be replaced with real auth
             if (username === 'admin' && password === 'admin') {
                 state.isLoggedIn = true;
                 state.currentUsername = username;
@@ -348,7 +350,7 @@
         }
     };
 
-    // page navigation
+    // Page navigation
     const pageManager = {
         validPages: ['home', 'features', 'downloads', 'support', 'dashboard'],
 
@@ -440,6 +442,8 @@
                 state.currentPage = pageId;
 
                 if (pageId === 'dashboard' && state.isLoggedIn) {
+                    // Clear any existing dashboard intervals before initializing new ones
+                    dashboardManager.cleanupIntervals();
                     utils.safeSetTimeout(() => {
                         dashboardManager.initialize();
                     }, 500);
@@ -496,7 +500,7 @@
         }
     };
 
-    // modal popup handling
+    // Modal popup handling
     const modalManager = {
         init() {
             this.setupEventListeners();
@@ -630,25 +634,30 @@
         }
     };
 
-    // dashboard stats and stuff
+    // Dashboard stats and stuff
     const dashboardManager = {
-        initialize() {
+        cleanupIntervals() {
             state.dashboardIntervals.forEach(interval => {
                 utils.clearSafeInterval(interval);
             });
             state.dashboardIntervals.clear();
+        },
 
+        initialize() {
+            this.cleanupIntervals();
             this.initializeStats();
             this.updateLastUpdateTime();
+            this.updateRecentActivity();
         },
 
         initializeStats() {
             const onlineUsers = Math.floor(Math.random() * 2000) + 1000;
             const loadsToday = Math.floor(Math.random() * 1000) + 500;
             const totalDownloads = Math.floor(Math.random() * 50000) + 10000;
+            
             this.animateCounter(elements.onlineUsers, onlineUsers);
             this.animateCounter(elements.loadsToday, loadsToday);
-           this.animateCounter(elements.totalDownloads, totalDownloads);
+            this.animateCounter(elements.totalDownloads, totalDownloads);
         },
 
         animateCounter(element, target) {
@@ -675,10 +684,26 @@
                 const now = new Date();
                 elements.lastUpdate.textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
             }
+        },
+
+        updateRecentActivity() {
+            if (!elements.activityList) return;
+            
+            const activities = [
+                'Loader initialized',
+                'Anti-cheat bypass updated',
+                'New module: KillAura v2',
+                'Config synchronized',
+                'Session validated'
+            ];
+            
+            elements.activityList.innerHTML = activities.map(activity => 
+                `<div class="activity-item">${activity}</div>`
+            ).join('');
         }
     };
 
-    // download simulation
+    // Download simulation
     const downloadManager = {
         async simulateDownload(version, button) {
             const originalText = button.textContent;
@@ -701,7 +726,7 @@
         }
     };
 
-    // loader stuff
+    // Loader stuff
     const loaderManager = {
         init() {
             this.setupEventListeners();
@@ -775,7 +800,7 @@
         }
     };
 
-    // faq accordion
+    // FAQ accordion
     const faqManager = {
         init() {
             if (!elements.faqItems.length) return;
@@ -832,7 +857,7 @@
         }
     };
 
-    // mobile menu
+    // Mobile menu
     const mobileMenuManager = {
         init() {
             if (!elements.mobileMenuToggle || !elements.navLinks) return;
@@ -900,7 +925,7 @@
         }
     };
 
-    // notifications
+    // Notifications
     const notificationManager = {
         showSuccess(message) {
             this.removeExistingNotifications();
@@ -929,6 +954,20 @@
                         elements.loginError.style.animation = '';
                     }
                 }, 500);
+            } else {
+                // Fallback toast for errors outside login modal
+                this.removeExistingNotifications();
+                const notification = this.createNotification(message, 'error');
+                document.body.appendChild(notification);
+
+                utils.safeSetTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease-out forwards';
+                    utils.safeSetTimeout(() => {
+                        if (notification.parentNode) {
+                            document.body.removeChild(notification);
+                        }
+                    }, 300);
+                }, CONFIG.animationDurations.notificationDuration);
             }
         },
 
@@ -951,7 +990,7 @@
         }
     };
 
-    // keyboard shortcuts
+    // Keyboard shortcuts
     const keyboardManager = {
         init() {
             document.addEventListener('keydown', (e) => this.handleKeydown(e));
@@ -1001,7 +1040,7 @@
         }
     };
 
-    // let's get this party started
+    // Let's get this party started
     function init() {
         console.log('Riverside client initializing...');
 
