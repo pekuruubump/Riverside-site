@@ -20,6 +20,10 @@
         },
         breakpoints: {
             mobile: 768
+        },
+        dashboard: {
+            activityUpdateInterval: 30000, // 30 seconds
+            maxActivityItems: 10
         }
     };
 
@@ -165,6 +169,44 @@
 
         formatNumber(num) {
             return Math.round(num).toLocaleString();
+        },
+
+        // Safe localStorage set with quota handling
+        safeLocalStorageSet(key, value) {
+            try {
+                const stringValue = typeof value === 'string' ? value : JSON.stringify(value);
+                localStorage.setItem(key, stringValue);
+                return true;
+            } catch (e) {
+                if (e.name === 'QuotaExceededError') {
+                    this.clearOldStorageData();
+                    try {
+                        localStorage.setItem(key, stringValue);
+                        return true;
+                    } catch (retryError) {
+                        console.error('Still unable to save to localStorage:', retryError);
+                        notificationManager.showError('Unable to save session data');
+                        return false;
+                    }
+                }
+                console.error('localStorage error:', e);
+                return false;
+            }
+        },
+
+        clearOldStorageData() {
+            const keysToRemove = [
+                CONFIG.localStorageKeys.theme, // optional keep
+                'temporary-data',
+                'cached-stats'
+            ];
+            keysToRemove.forEach(key => {
+                try {
+                    if (key !== CONFIG.localStorageKeys.login) {
+                        localStorage.removeItem(key);
+                    }
+                } catch (e) {}
+            });
         }
     };
 
@@ -239,8 +281,10 @@
                     username: username,
                     timestamp: new Date().toISOString()
                 };
-                localStorage.setItem(CONFIG.localStorageKeys.login, JSON.stringify(loginData));
-                return true;
+                return utils.safeLocalStorageSet(
+                    CONFIG.localStorageKeys.login,
+                    JSON.stringify(loginData)
+                );
             } catch (e) {
                 console.error('Failed to save login:', e);
                 return false;
@@ -307,31 +351,42 @@
                 return false;
             }
 
-            await utils.simulateAsyncOperation(CONFIG.animationDurations.loginDelay);
+            const submitBtn = elements.loginForm?.querySelector('.submit-btn');
 
-            // Hardcoded for demo, would be replaced with real auth
-            if (username === 'admin' && password === 'admin') {
-                state.isLoggedIn = true;
-                state.currentUsername = username;
-                
-                if (this.saveLogin(username)) {
-                    this.updateUIForLoggedInUser();
-                    modalManager.closeLoginModal();
-                    notificationManager.showSuccess('Login successful! Welcome back, ' + username);
+            try {
+                await utils.simulateAsyncOperation(CONFIG.animationDurations.loginDelay);
+
+                if (username === 'admin' && password === 'admin') {
+                    state.isLoggedIn = true;
+                    state.currentUsername = username;
                     
-                    utils.safeSetTimeout(() => {
-                        pageManager.showPage('dashboard');
-                    }, 500);
-                    
-                    return true;
+                    if (this.saveLogin(username)) {
+                        this.updateUIForLoggedInUser();
+                        modalManager.closeLoginModal();
+                        notificationManager.showSuccess('Login successful! Welcome back, ' + username);
+                        
+                        utils.safeSetTimeout(() => {
+                            pageManager.showPage('dashboard');
+                        }, 500);
+                        
+                        return true;
+                    } else {
+                        throw new Error('Failed to save login session');
+                    }
                 } else {
-                    notificationManager.showError('Error saving login session. Please try again.');
+                    notificationManager.showError('Invalid username or password');
+                    if (elements.passwordInput) {
+                        elements.passwordInput.value = '';
+                        elements.passwordInput.focus();
+                    }
                 }
-            } else {
-                notificationManager.showError('Invalid username or password');
-                if (elements.passwordInput) {
-                    elements.passwordInput.value = '';
-                    elements.passwordInput.focus();
+            } catch (error) {
+                console.error('Login error:', error);
+                notificationManager.showError('An error occurred during login. Please try again.');
+                
+                if (submitBtn) {
+                    submitBtn.textContent = 'Login';
+                    submitBtn.disabled = false;
                 }
             }
             return false;
@@ -357,8 +412,12 @@
         init() {
             this.setupNavigation();
             
-            if (authManager.checkLoginStatus()) {
-                this.showPage('dashboard');
+            const isLoggedIn = authManager.checkLoginStatus();
+            const hash = window.location.hash.substring(1);
+            const validHash = this.validPages.includes(hash);
+            
+            if (validHash) {
+                this.showPage(hash);
             } else {
                 this.showPage('home');
             }
@@ -442,13 +501,15 @@
                 state.currentPage = pageId;
 
                 if (pageId === 'dashboard' && state.isLoggedIn) {
-                    // Clear any existing dashboard intervals before initializing new ones
                     dashboardManager.cleanupIntervals();
                     utils.safeSetTimeout(() => {
                         dashboardManager.initialize();
                     }, 500);
                 }
             }
+
+            // Update URL hash
+            window.location.hash = pageId;
 
             window.scrollTo({
                 top: 0,
@@ -544,16 +605,37 @@
             state.lastFocusedElement = document.activeElement;
             
             if (elements.loginModal) {
+                // Close mobile menu if open
+                if (mobileMenuManager && state.isMobileMenuOpen) {
+                    mobileMenuManager.closeMenu();
+                }
+
                 elements.loginModal.style.display = 'flex';
                 elements.loginModal.setAttribute('aria-hidden', 'false');
                 document.body.style.overflow = 'hidden';
 
-                utils.safeSetTimeout(() => {
-                    if (elements.usernameInput) elements.usernameInput.focus();
-                }, 100);
+                const focusableElements = elements.loginModal.querySelectorAll(
+                    'button:not([disabled]), [href], input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])'
+                );
+                
+                if (focusableElements.length > 0) {
+                    const firstElement = focusableElements[0];
+                    const lastElement = focusableElements[focusableElements.length - 1];
 
-                document.addEventListener('keydown', this.handleEscapeKey.bind(this));
-                document.addEventListener('keydown', this.trapTabKey.bind(this));
+                    utils.safeSetTimeout(() => {
+                        if (elements.usernameInput) elements.usernameInput.focus();
+                    }, 100);
+
+                    // Remove existing listeners and add improved trap
+                    document.removeEventListener('keydown', this.handleEscapeKey.bind(this));
+                    document.removeEventListener('keydown', this.trapTabKey.bind(this));
+
+                    this.boundHandleEscape = this.handleEscapeKey.bind(this);
+                    this.boundTrapTab = (e) => this.improvedTrapTabKey(e, firstElement, lastElement);
+
+                    document.addEventListener('keydown', this.boundHandleEscape);
+                    document.addEventListener('keydown', this.boundTrapTab);
+                }
             }
         },
 
@@ -572,12 +654,14 @@
             if (elements.usernameInput) elements.usernameInput.value = '';
             if (elements.passwordInput) elements.passwordInput.value = '';
 
-            if (state.lastFocusedElement) {
-                state.lastFocusedElement.focus();
+            if (state.lastFocusedElement && state.lastFocusedElement.focus) {
+                utils.safeSetTimeout(() => {
+                    state.lastFocusedElement.focus();
+                }, 50);
             }
 
-            document.removeEventListener('keydown', this.handleEscapeKey.bind(this));
-            document.removeEventListener('keydown', this.trapTabKey.bind(this));
+            document.removeEventListener('keydown', this.boundHandleEscape);
+            document.removeEventListener('keydown', this.boundTrapTab);
         },
 
         handleEscapeKey(e) {
@@ -587,27 +671,18 @@
         },
 
         trapTabKey(e) {
-            if (e.key !== 'Tab' || !elements.loginModal) return;
+            // Kept for compatibility but not used directly
+        },
 
-            const focusableElements = elements.loginModal.querySelectorAll(
-                'button:not([disabled]), [href], input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])'
-            );
+        improvedTrapTabKey(e, firstElement, lastElement) {
+            if (e.key !== 'Tab') return;
             
-            if (focusableElements.length === 0) return;
-
-            const firstElement = focusableElements[0];
-            const lastElement = focusableElements[focusableElements.length - 1];
-
-            if (e.shiftKey) {
-                if (document.activeElement === firstElement) {
-                    lastElement.focus();
-                    e.preventDefault();
-                }
-            } else {
-                if (document.activeElement === lastElement) {
-                    firstElement.focus();
-                    e.preventDefault();
-                }
+            if (e.shiftKey && document.activeElement === firstElement) {
+                e.preventDefault();
+                lastElement.focus();
+            } else if (!e.shiftKey && document.activeElement === lastElement) {
+                e.preventDefault();
+                firstElement.focus();
             }
         },
 
@@ -636,6 +711,14 @@
 
     // Dashboard stats and stuff
     const dashboardManager = {
+        activityTemplates: [
+            { action: 'downloaded', version: 'v2.1.4', user: 'Player_{0}' },
+            { action: 'launched', version: 'v2.0.9', user: 'Creeper_{0}' },
+            { action: 'updated to', version: 'v2.1.4', user: 'Steve_{0}' },
+            { action: 'logged in from', location: 'US', user: 'Alex_{0}' },
+            { action: 'reported bug #', bugId: '{0}', user: 'Herobrine_{0}' }
+        ],
+
         cleanupIntervals() {
             state.dashboardIntervals.forEach(interval => {
                 utils.clearSafeInterval(interval);
@@ -648,6 +731,13 @@
             this.initializeStats();
             this.updateLastUpdateTime();
             this.updateRecentActivity();
+            
+            // Set up periodic activity updates
+            const intervalId = utils.safeSetInterval(() => {
+                this.addRandomActivity();
+            }, CONFIG.dashboard.activityUpdateInterval);
+            
+            state.dashboardIntervals.add(intervalId);
         },
 
         initializeStats() {
@@ -689,6 +779,7 @@
         updateRecentActivity() {
             if (!elements.activityList) return;
             
+            // Initial static activities
             const activities = [
                 'Added Setting ("Wait Time", "Ticks it should wait before starting to break") to "Nuker"',
                 'Added Priority modes "Health & Absorption", "Health & Hurt Time" to Aim Assist',
@@ -700,6 +791,44 @@
             elements.activityList.innerHTML = activities.map(activity => 
                 `<div class="activity-item">${activity}</div>`
             ).join('');
+        },
+
+        addRandomActivity() {
+            if (!elements.activityList) return;
+            
+            const template = this.activityTemplates[
+                Math.floor(Math.random() * this.activityTemplates.length)
+            ];
+            const randomNum = Math.floor(Math.random() * 1000);
+            const randomUser = template.user.replace('{0}', randomNum);
+            
+            let activityText;
+            if (template.version) {
+                activityText = `${randomUser} ${template.action} ${template.version}`;
+            } else if (template.location) {
+                activityText = `${randomUser} ${template.action} ${template.location}`;
+            } else if (template.bugId) {
+                const bugId = Math.floor(Math.random() * 100);
+                activityText = `${randomUser} ${template.action}${bugId}`;
+            } else {
+                activityText = `${randomUser} performed an action`;
+            }
+            
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            activityText = `[${timeStr}] ${activityText}`;
+            
+            const activityElement = document.createElement('div');
+            activityElement.className = 'activity-item';
+            activityElement.textContent = activityText;
+            activityElement.style.animation = 'slideIn 0.3s ease-out';
+            
+            elements.activityList.insertBefore(activityElement, elements.activityList.firstChild);
+            
+            const items = elements.activityList.children;
+            if (items.length > CONFIG.dashboard.maxActivityItems) {
+                elements.activityList.removeChild(items[items.length - 1]);
+            }
         }
     };
 
@@ -707,22 +836,42 @@
     const downloadManager = {
         async simulateDownload(version, button) {
             const originalText = button.textContent;
+            const originalDisabled = button.disabled;
 
-            button.textContent = 'Downloading...';
-            button.disabled = true;
+            try {
+                button.textContent = 'Downloading...';
+                button.disabled = true;
 
-            await utils.simulateAsyncOperation(CONFIG.animationDurations.downloadDelay);
+                await utils.simulateAsyncOperation(CONFIG.animationDurations.downloadDelay);
 
-            button.textContent = 'Downloaded!';
-            button.classList.add('success');
+                if (Math.random() > 0.95) {
+                    throw new Error('Download failed - server timeout');
+                }
 
-            notificationManager.showSuccess(`${version} downloaded successfully!`);
+                button.textContent = 'Downloaded!';
+                button.classList.add('success');
 
-            utils.safeSetTimeout(() => {
-                button.textContent = originalText;
-                button.disabled = false;
-                button.classList.remove('success');
-            }, 3000);
+                notificationManager.showSuccess(`${version} downloaded successfully!`);
+
+                utils.safeSetTimeout(() => {
+                    button.textContent = originalText;
+                    button.disabled = false;
+                    button.classList.remove('success');
+                }, 3000);
+                
+            } catch (error) {
+                console.error('Download error:', error);
+                notificationManager.showError(`Download failed: ${error.message}`);
+                
+                button.textContent = 'Failed';
+                button.classList.add('error');
+                
+                utils.safeSetTimeout(() => {
+                    button.textContent = originalText;
+                    button.disabled = originalDisabled;
+                    button.classList.remove('error');
+                }, 3000);
+            }
         }
     };
 
@@ -927,10 +1076,20 @@
 
     // Notifications
     const notificationManager = {
-        showSuccess(message) {
-            this.removeExistingNotifications();
+        _displayToast(message, type) {
+            const existingNotifications = document.querySelectorAll('.notification');
+            existingNotifications.forEach(notification => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            });
 
-            const notification = this.createNotification(message, 'success');
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.setAttribute('role', 'alert');
+            notification.setAttribute('aria-live', 'polite');
+            notification.textContent = message;
+
             document.body.appendChild(notification);
 
             utils.safeSetTimeout(() => {
@@ -943,8 +1102,15 @@
             }, CONFIG.animationDurations.notificationDuration);
         },
 
+        showSuccess(message) {
+            this._displayToast(message, 'success');
+        },
+
         showError(message) {
-            if (elements.loginError) {
+            if (elements.loginError && 
+                elements.loginModal && 
+                elements.loginModal.style.display === 'flex') {
+                
                 elements.loginError.textContent = message;
                 elements.loginError.style.display = 'block';
                 elements.loginError.style.animation = 'shake 0.5s';
@@ -955,38 +1121,16 @@
                     }
                 }, 500);
             } else {
-                // Fallback toast for errors outside login modal
-                this.removeExistingNotifications();
-                const notification = this.createNotification(message, 'error');
-                document.body.appendChild(notification);
-
-                utils.safeSetTimeout(() => {
-                    notification.style.animation = 'slideOut 0.3s ease-out forwards';
-                    utils.safeSetTimeout(() => {
-                        if (notification.parentNode) {
-                            document.body.removeChild(notification);
-                        }
-                    }, 300);
-                }, CONFIG.animationDurations.notificationDuration);
+                this._displayToast(message, 'error');
             }
         },
 
-        createNotification(message, type) {
-            const notification = document.createElement('div');
-            notification.className = `notification notification-${type}`;
-            notification.setAttribute('role', 'alert');
-            notification.setAttribute('aria-live', 'polite');
-            notification.textContent = message;
-            return notification;
+        showWarning(message) {
+            this._displayToast(message, 'warning');
         },
 
-        removeExistingNotifications() {
-            const existingNotifications = document.querySelectorAll('.notification');
-            existingNotifications.forEach(notification => {
-                if (notification.parentNode) {
-                    notification.parentNode.removeChild(notification);
-                }
-            });
+        showInfo(message) {
+            this._displayToast(message, 'info');
         }
     };
 
